@@ -1,0 +1,3 @@
+# Staking Polygon
+
+A practical guide to Staking Polygon: compare custodial, non-custodial and liquid staking, weigh slashing and smart-contract risk, understand the POL migration, and learn how to start safely.

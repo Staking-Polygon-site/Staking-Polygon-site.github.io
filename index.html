@@ -1,962 +1,1310 @@
-<!DOCTYPE html><html lang="en" data-scrapbook-source="https://polygon-bridge-chain.github.io/" data-scrapbook-create="20260109134542614" data-scrapbook-title="Polygon Bridge — Secure Cross-Chain Transfers on Polygon Chain"><head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <!-- SEO / EEAT Meta Tags -->
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-
-  <title>Staking Polygon (POL) — Rewards, APY/APR, Validators, Calculator, Safety & Troubleshooting (2026)</title>
-  <meta name="description" content="Staking Polygon (POL) guide (2026): how Polygon staking works, rewards and real yield, APY vs APR, how to stake step-by-step, validator list criteria, minimum POL, calculator framework, best practices, risks, safety checks, comparisons vs liquid staking, and troubleshooting. Includes KPIs, runbook, and a deep FAQ.">
-  <meta name="author" content="Crypto Finance Experts">
-  <link rel="canonical" href="https://staking-polygon.example.com/">
-
-  <!-- Favicon (use your local file) -->
-  <link rel="icon" type="image/png" href="polygon-logo-png_seeklogo-527156.png">
-
-  <!-- Open Graph -->
-  <meta property="og:type" content="article">
-  <meta property="og:url" content="https://staking-polygon.example.com/">
-  <meta property="og:title" content="Staking Polygon (POL) — Rewards, APY/APR, Validators, Calculator, Safety & Troubleshooting (2026)">
-  <meta property="og:description" content="Practical Staking Polygon (POL) guide: rewards, APY/APR, validator selection, safety checklist, calculator framework, and troubleshooting.">
-  <meta property="og:image" content="cover.png">
-
-  <!-- Twitter Card -->
-  <meta property="twitter:card" content="summary_large_image">
-  <meta property="twitter:url" content="https://staking-polygon.example.com/">
-  <meta property="twitter:title" content="Staking Polygon (POL) — Rewards, APY/APR, Validators, Calculator, Safety & Troubleshooting (2026)">
-  <meta property="twitter:description" content="Deep Polygon staking guide: yield drivers, validator criteria, minimum POL, best practices, and risks in 2025–2026.">
-  <meta property="twitter:image" content="cover.png">
-
-  <style>
-    :root{
-      /* Black–Purple Theme */
-      --primary:#A855F7;       /* purple-500 */
-      --primary-600:#9333EA;   /* purple-600 */
-      --primary-700:#7E22CE;   /* purple-700 */
-      --accent:#22D3EE;        /* cyan accent for tiny highlights */
-
-      --ink:#F8FAFC;           /* near-white text */
-      --muted:#A1A1AA;         /* zinc-400 */
-      --muted-2:#71717A;       /* zinc-500 */
-
-      --bg:#070712;            /* deep black/purple */
-      --panel:#0B0B18;
-      --panel-2:#0F0F24;
-      --line:rgba(255,255,255,.10);
-
-      --ok:#22C55E;
-      --warn:#F59E0B;
-      --error:#EF4444;
-
-      --shadow: 0 18px 44px rgba(0,0,0,.55);
-      --radius:14px;
-      --radius-sm:10px;
-      --radius-lg:22px;
-      --gap:1.25rem;
-      --gap-lg:2rem;
-    }
-
-    *{box-sizing:border-box}
-    html,body{height:100%}
-    body{
-      margin:0;
-      font-family: system-ui, -apple-system, Segoe UI, Roboto, Inter, Arial, sans-serif;
-      color:var(--muted);
-      background:
-        radial-gradient(900px 600px at 15% 0%, rgba(168,85,247,.22), transparent 60%),
-        radial-gradient(900px 600px at 90% 10%, rgba(34,211,238,.10), transparent 60%),
-        radial-gradient(900px 600px at 55% 85%, rgba(126,34,206,.16), transparent 60%),
-        linear-gradient(180deg, #050510 0%, #070712 45%, #050510 100%);
-      line-height:1.65;
-      -webkit-font-smoothing:antialiased;
-      -moz-osx-font-smoothing:grayscale;
-    }
-
-    a{color:var(--primary); text-decoration:none}
-    a:hover{text-decoration:underline}
-
-    img{max-width:100%; height:auto; display:block}
-    .container{max-width:1100px; margin:0 auto; padding:0 1.25rem}
-
-    h1,h2,h3,h4{color:var(--ink); line-height:1.25; margin:0 0 .6rem}
-    h1{
-      font-size:clamp(2rem,4.5vw,3.1rem);
-      font-weight:950;
-      letter-spacing:.2px;
-    }
-    h2{
-      font-size:clamp(1.35rem,2.8vw,2rem);
-      margin-top:2.2rem;
-      padding-top:.6rem;
-      border-top:1px solid var(--line);
-    }
-    h3{font-size:clamp(1.05rem,2.2vw,1.3rem); color:#EDE9FE}
-
-    p,li,td,th{font-size:1rem}
-    .lead{font-size:1.125rem; color:#E5E7EB}
-    .muted{color:var(--muted)}
-    .muted-2{color:var(--muted-2)}
-
-    header.hero{
-      padding: clamp(2rem,6vw,4rem) 0;
-      background:
-        radial-gradient(700px 420px at 18% 10%, rgba(168,85,247,.25), transparent 60%),
-        radial-gradient(700px 420px at 90% 20%, rgba(34,211,238,.12), transparent 60%),
-        linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,0) 55%);
-      border-bottom:1px solid var(--line);
-    }
-
-    .hero-grid{
-      display:grid;
-      gap:var(--gap-lg);
-      grid-template-columns:1fr;
-      align-items:stretch;
-    }
-
-    .hero-card{
-      background: linear-gradient(180deg, rgba(15,15,36,.82), rgba(11,11,24,.68));
-      border:1px solid var(--line);
-      border-radius:var(--radius-lg);
-      padding:clamp(1rem,3vw,1.75rem);
-      box-shadow:var(--shadow);
-      backdrop-filter: blur(8px);
-    }
-
-    .brand-row{display:flex; align-items:center; gap:.9rem; margin-bottom:.75rem}
-    .brand-logo{
-      width:54px;
-      height:54px;
-      border-radius:14px;
-      border:1px solid var(--line);
-      background:rgba(255,255,255,.06);
-      padding:.35rem;
-      object-fit:contain;
-      box-shadow: 0 10px 22px rgba(0,0,0,.35);
-      flex:0 0 auto;
-    }
-
-    .cta{
-      display:inline-block;
-      margin-top:1rem;
-      background:linear-gradient(180deg, var(--primary), var(--primary-700));
-      color:white;
-      padding:.9rem 1.4rem;
-      border-radius:12px;
-      font-weight:900;
-      letter-spacing:.2px;
-      box-shadow:0 14px 32px rgba(168,85,247,.28);
-      border:1px solid rgba(255,255,255,.10);
-    }
-    .cta:hover{filter:brightness(1.05); text-decoration:none}
-    .cta.secondary{
-      background:transparent;
-      border:1px solid var(--line);
-      color:var(--ink);
-      margin-left:.75rem;
-      box-shadow:none;
-    }
-
-    .note{
-      border-left:3px solid var(--primary);
-      padding:.75rem 1rem;
-      background:rgba(168,85,247,.10);
-      border-radius:10px;
-      color:#E5E7EB;
-    }
-
-    .hero-media{
-      width:100%;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      margin-top: 18px;
-    }
-    .hero-img{
-      width:100%;
-      height:auto;
-      object-fit:contain;
-      max-height:520px;
-      border-radius:var(--radius-lg);
-      border:1px solid var(--line);
-      background:rgba(255,255,255,.04);
-      box-shadow:var(--shadow);
-      padding:.25rem;
-    }
-
-    .content-media{
-      width:100%;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      margin-top: 14px;
-    }
-    .content-img{
-      width:100%;
-      height:auto;
-      object-fit:contain;
-      max-height:420px;
-      border-radius:var(--radius);
-      border:1px solid var(--line);
-      background:rgba(255,255,255,.04);
-      box-shadow:var(--shadow);
-      padding:.25rem;
-    }
-
-    section.step-guide{padding: clamp(2rem,6vw,3.5rem) 0}
-    .steps{display:grid; gap:var(--gap); grid-template-columns:1fr;}
-    .step{
-      background:linear-gradient(180deg, rgba(15,15,36,.78), rgba(11,11,24,.62));
-      border:1px solid var(--line);
-      border-radius:var(--radius);
-      padding:1.2rem;
-      box-shadow: 0 12px 26px rgba(0,0,0,.45);
-      transition:transform .2s ease, box-shadow .2s ease;
-    }
-    .step:hover{transform:translateY(-4px); box-shadow:0 18px 34px rgba(0,0,0,.55)}
-    .step .icon{
-      width:54px;height:54px;border-radius:50%;
-      display:inline-grid; place-items:center;
-      background:rgba(168,85,247,.18);
-      margin-bottom:.6rem;
-      color:#EDE9FE;
-      font-weight:950;
-      border:1px solid rgba(255,255,255,.10);
-    }
-
-    main .card{
-      background:linear-gradient(180deg, rgba(15,15,36,.70), rgba(11,11,24,.58));
-      border:1px solid var(--line);
-      border-radius:var(--radius);
-      padding:1.25rem;
-      margin:1.25rem 0;
-      box-shadow: 0 12px 26px rgba(0,0,0,.45);
-    }
-
-    .grid-2{display:grid; gap:var(--gap); grid-template-columns:1fr;}
-    .pillbar{
-      display:flex; flex-wrap:wrap; gap:.6rem;
-      margin:.75rem 0 0;
-    }
-    .pill{
-      border:1px solid var(--line);
-      background:rgba(255,255,255,.05);
-      padding:.4rem .65rem;
-      border-radius:999px;
-      font-weight:800;
-      color:#E5E7EB;
-      box-shadow:none;
-    }
-
-    .toc{
-      border:1px solid var(--line);
-      background:linear-gradient(180deg, rgba(168,85,247,.10), rgba(255,255,255,.02));
-      border-radius:var(--radius);
-      padding:1rem;
-    }
-    .toc strong{color:#F1F5F9}
-    .toc ul{margin:.5rem 0 0; padding-left:1.1rem}
-    .toc li{margin:.25rem 0}
-    .toc a{font-weight:800}
-
-    table{width:100%; border-collapse:collapse; overflow:hidden; border-radius:12px}
-    th,td{padding:.9rem; border-bottom:1px solid var(--line)}
-    th{
-      background:rgba(168,85,247,.10);
-      color:#F8FAFC;
-      text-align:left
-    }
-    tr.highlight{background:rgba(168,85,247,.08)}
-    tr:hover{background:rgba(255,255,255,.03)}
-
-    .ok{color:var(--ok)} .warn{color:var(--warn)} .err{color:var(--error)}
-
-    .eeat{
-      background:linear-gradient(180deg, rgba(168,85,247,.10), rgba(255,255,255,.02));
-      border:1px solid var(--line);
-      border-radius:var(--radius);
-      padding:1.25rem;
-      box-shadow: 0 12px 26px rgba(0,0,0,.45);
-    }
-
-    .faq-item{border-bottom:1px solid var(--line); padding: .9rem 0}
-    .faq-button{
-      all:unset; display:flex; justify-content:space-between; align-items:center;
-      width:100%; cursor:pointer; padding:.3rem 0;
-    }
-    .faq-button:focus-visible{outline:2px solid var(--primary)}
-    .faq-button h3{margin:0; font-weight:950}
-    .faq-content{max-height:0; overflow:hidden; transition:max-height .25s ease}
-    .faq-content.open{padding-top:.6rem}
-    .faq-plus{font-weight:950; color:#EDE9FE}
-
-    .cta-center{
-      display:flex;
-      justify-content:center;
-      margin-top: 1rem;
-    }
-    .cta-center .cta{margin-top:0}
-
-    .badge-row{
-      display:flex; flex-wrap:wrap; gap:.6rem;
-      margin:.9rem 0 0;
-    }
-    .badge{
-      border:1px solid var(--line);
-      background:rgba(34,211,238,.06);
-      padding:.35rem .6rem;
-      border-radius:999px;
-      font-weight:900;
-      color:#E5E7EB;
-    }
-
-    .callout-grid{
-      display:grid;
-      gap:var(--gap);
-      grid-template-columns:1fr;
-      margin-top: .75rem;
-    }
-    .mini{
-      background:rgba(255,255,255,.03);
-      border:1px solid var(--line);
-      border-radius:var(--radius);
-      padding:1rem;
-    }
-    .mini h3{margin-bottom:.35rem}
-    .kpi-badges{
-      display:flex; flex-wrap:wrap; gap:.55rem; margin-top:.5rem;
-    }
-    .kpi-badges span{
-      border:1px solid rgba(168,85,247,.22);
-      background:rgba(168,85,247,.07);
-      color:#EDE9FE;
-      padding:.3rem .55rem;
-      border-radius:999px;
-      font-weight:900;
-      font-size:.9rem;
-    }
-
-    @media (min-width: 860px){
-      .hero-grid{grid-template-columns: 1fr;}
-      .steps{grid-template-columns: repeat(4, 1fr)}
-      .grid-2{grid-template-columns: 1fr 1fr}
-      .callout-grid{grid-template-columns: 1fr 1fr}
-    }
-  </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Staking Polygon — Custodial, Non-Custodial & Liquid Options Compared</title>
+<meta name="description" content="A practical guide to Staking Polygon: compare custodial, non-custodial and liquid staking, weigh slashing and smart-contract risk, understand the POL migration, and learn how to start safely.">
+<link rel="canonical" href="https://staking-polygon-site.github.io/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Staking Polygon: The Complete Guide">
+<meta property="og:url" content="https://staking-polygon-site.github.io/">
+<meta property="og:image" content="https://staking-polygon-site.github.io/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Staking Polygon: The Complete Guide">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&family=Outfit:wght@500;600;700&display=swap">
+<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebSite", "@id": "https://staking-polygon-site.github.io/#website", "url": "https://staking-polygon-site.github.io/", "name": "Staking Polygon — Custodial, Non-Custodial & Liquid Options Compared"}, {"@type": "WebPage", "@id": "https://staking-polygon-site.github.io/#webpage", "url": "https://staking-polygon-site.github.io/", "name": "Staking Polygon — Custodial, Non-Custodial & Liquid Options Compared", "isPartOf": {"@id": "https://staking-polygon-site.github.io/#website"}, "description": "A practical guide to Staking Polygon: compare custodial, non-custodial and liquid staking, weigh slashing and smart-contract risk, understand the POL migration, and learn how to start safely.", "datePublished": "2026-10-10", "dateModified": "2026-10-10"}, {"@type": "SoftwareApplication", "name": "Staking Polygon", "applicationCategory": "FinanceApplication", "operatingSystem": "Web", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://staking-polygon-site.github.io/"}, {"@type": "ListItem", "position": 2, "name": "Staking"}, {"@type": "ListItem", "position": 3, "name": "Staking Polygon"}]}, {"@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "What does staking Polygon actually mean?", "acceptedAnswer": {"@type": "Answer", "text": "It means locking POL tokens behind a validator so that validator can take part in securing the Polygon network, in exchange for a share of the rewards the protocol pays out to that validator and its delegators."}}, {"@type": "Question", "name": "Is custodial or non-custodial staking better for Polygon?", "acceptedAnswer": {"@type": "Answer", "text": "Custodial staking through an exchange is simpler but hands control of your tokens to a third party; non-custodial delegation keeps your POL in your own wallet but puts the responsibility of choosing a reliable validator on you."}}, {"@type": "Question", "name": "What is liquid staking and how does it differ?", "acceptedAnswer": {"@type": "Answer", "text": "Liquid staking mints a receipt token representing your staked POL, which you can trade or use elsewhere in DeFi while the underlying position stays locked. It adds smart-contract and peg risk that plain delegation does not carry."}}, {"@type": "Question", "name": "Can I lose money staking Polygon?", "acceptedAnswer": {"@type": "Answer", "text": "Yes, mainly through a validator being slashed for downtime or misbehavior, through a custodial platform's own failure, or through smart-contract or peg risk in a liquid staking protocol. Choosing a validator or platform with a solid track record reduces but does not eliminate this."}}, {"@type": "Question", "name": "Do I need to migrate MATIC to POL before staking?", "acceptedAnswer": {"@type": "Answer", "text": "Generally yes. Polygon's staking contracts now run on POL, so MATIC holders typically need to complete the migration before they can delegate on the current system."}}, {"@type": "Question", "name": "How long does it take to unstake on Polygon?", "acceptedAnswer": {"@type": "Answer", "text": "Non-custodial delegation uses a checkpoint-based cooldown that usually takes several days before your POL becomes transferable again. Liquid staking receipt tokens can instead be sold on the open market without waiting for that cooldown."}}, {"@type": "Question", "name": "Where can I check a validator's real performance?", "acceptedAnswer": {"@type": "Answer", "text": "A network explorer such as PolygonScan shows live stake and activity for a given validator, which is a more direct check than relying on a platform's own marketing claims about uptime or commission."}}]}]}</script>
+<style>
+:root{--bg:#0D0F0A;--surface:#181C12;--text:#EEF2E6;--muted:#95997F;--accent:#A3E635;--accent-ink:#111600;--radius:13px;--display:"Outfit";--body:"Figtree"}
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 2rem;
+  background: var(--bg);
+  -webkit-text-size-adjust: 100%;
+}
+body {
+  margin: 0;
+  min-width: 280px;
+  color: var(--text);
+  background: var(--bg);
+  font-family: var(--body);
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+  overflow-wrap: break-word;
+}
+::selection {
+  color: var(--accent-ink);
+  background: var(--accent);
+}
+a {
+  color: var(--accent);
+  text-decoration-thickness: .075em;
+  text-underline-offset: .2em;
+  transition: color .18s ease, background .18s ease, border-color .18s ease;
+}
+a:hover {
+  color: var(--text);
+}
+a:focus-visible,
+summary:focus-visible,
+[tabindex]:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 5px;
+  border-radius: calc(var(--radius) * .35);
+}
+img,
+svg,
+video {
+  max-width: 100%;
+  vertical-align: middle;
+}
+img,
+video {
+  height: auto;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin-top: 0;
+  color: var(--text);
+  font-family: var(--display);
+  font-weight: 650;
+  line-height: 1.2;
+  text-wrap: balance;
+}
+p,
+ul,
+ol,
+dl,
+figure,
+blockquote {
+  margin-top: 0;
+}
+[hidden] {
+  display: none !important;
+}
+.c62e276 {
+  width: min(100% - 6rem, 1240px);
+  margin-inline: auto;
+}
+.cdb6b55 {
+  position: absolute;
+  z-index: 20;
+  top: 1rem;
+  left: 1rem;
+  padding: .75rem 1.15rem;
+  transform: translateY(-180%);
+  border-radius: var(--radius);
+  color: var(--accent-ink);
+  background: var(--accent);
+  font-weight: 600;
+}
+.cdb6b55:focus {
+  transform: translateY(0);
+}
+.c11e0a4 {
+  position: relative;
+  z-index: 1;
+  border-bottom: 1px solid color-mix(in srgb, var(--text) 10%, var(--bg));
+  background: var(--bg);
+}
+.ca8c6d7 {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+  min-height: 88px;
+  padding-block: 1rem;
+}
+.c7c9140 {
+  display: inline-flex;
+  align-items: center;
+  gap: .75rem;
+  color: var(--text);
+  font-family: var(--display);
+  font-size: 1.2rem;
+  font-weight: 650;
+  letter-spacing: -.04em;
+}
+.ce7b99a {
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  border: 1px solid color-mix(in srgb, var(--accent) 30%, var(--surface));
+  border-radius: calc(var(--radius) * .55);
+  color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 8%, var(--surface));
+}
+.ce7b99a svg {
+  width: 19px;
+  height: 19px;
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.c976efe {
+  display: inline-flex;
+  align-items: center;
+  gap: .8rem;
+  padding: .5rem 0;
+  color: var(--text);
+  font-size: .9rem;
+  font-weight: 600;
+  text-decoration: none;
+}
+.c976efe:hover {
+  color: var(--accent);
+}
+.c163931 {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  border-bottom: 1px solid color-mix(in srgb, var(--accent) 15%, var(--bg));
+  background:
+    radial-gradient(ellipse at 95% 12%, color-mix(in srgb, var(--accent) 14%, transparent), color-mix(in srgb, var(--accent) 0%, transparent) 62%),
+    linear-gradient(130deg, var(--surface), color-mix(in srgb, var(--accent) 5%, var(--bg)) 70%, var(--bg));
+}
+.c163931::after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  width: 520px;
+  height: 520px;
+  right: -240px;
+  bottom: -310px;
+  border: 1px solid color-mix(in srgb, var(--accent) 15%, transparent);
+  border-radius: 50%;
+  box-shadow: 0 0 0 65px color-mix(in srgb, var(--accent) 3%, transparent), 0 0 0 130px color-mix(in srgb, var(--accent) 2%, transparent);
+  pointer-events: none;
+}
+.c543082 {
+  padding-block: 1.6rem 5rem;
+}
+.c194967 {
+  margin-bottom: 3.8rem;
+  color: var(--muted);
+  font-size: .8rem;
+  line-height: 1.6;
+}
+.c66e047 {
+  display: inline;
+  color: var(--muted);
+  font-family: var(--body);
+  font-size: inherit;
+  text-decoration: none;
+}
+.c66e047 a,
+a.c66e047 {
+  color: var(--muted);
+  text-decoration: none;
+}
+.c66e047 a:hover,
+a.c66e047:hover {
+  color: var(--accent);
+  text-decoration: underline;
+}
+.c194967 ol,
+.c194967 ul,
+ol.c66e047,
+ul.c66e047 {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: .45rem .7rem;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+.c194967 li {
+  display: inline;
+}
+.c194967 [aria-current="page"] {
+  color: var(--text);
+}
+.c6ae318 {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: .8rem;
+  margin-bottom: 1.35rem;
+  color: var(--accent);
+  font-size: .875rem;
+  font-weight: 600;
+}
+.ca0297e {
+  padding-block: .3rem;
+}
+.c76fdb0 {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 36px;
+  max-width: 180px;
+  padding: .4rem .65rem;
+  border: 1px solid color-mix(in srgb, var(--text) 9%, var(--surface));
+  border-radius: calc(var(--radius) * .6);
+  background: var(--surface);
+  box-shadow: 0 3px 10px color-mix(in srgb, var(--text) 4%, transparent);
+  color: var(--text);
+  font-size: .8rem;
+  line-height: 1;
+}
+.c76fdb0:empty {
+  display: none;
+}
+.c76fdb0 img,
+.c76fdb0 svg {
+  display: block;
+  width: auto;
+  max-width: 148px;
+  height: 24px;
+  object-fit: contain;
+}
+.c163931 h1 {
+  max-width: 1050px;
+  margin: 0 0 1.5rem;
+  font-family: var(--display);
+  font-size: clamp(2.7rem, 5.7vw, 5.1rem);
+  font-weight: 600;
+  line-height: 1.06;
+  letter-spacing: -.055em;
+  overflow-wrap: anywhere;
+}
+.c163931 h1 em {
+  color: var(--accent);
+  font-style: normal;
+}
+.c163931 h1 a {
+  color: inherit;
+}
+.c4fa7fb {
+  max-width: 760px;
+  margin: 0 0 2.1rem;
+  color: var(--muted);
+  font-size: clamp(1.05rem, 1.6vw, 1.22rem);
+  line-height: 1.75;
+  text-wrap: pretty;
+}
+.c057b9a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.7rem;
+  min-height: 54px;
+  padding: .85rem 1.35rem;
+  border: 1px solid var(--accent);
+  border-radius: var(--radius);
+  color: var(--accent-ink);
+  background: var(--accent);
+  box-shadow: 0 6px 18px color-mix(in srgb, var(--accent) 18%, transparent);
+  font-family: var(--body);
+  font-size: .95rem;
+  font-weight: 650;
+  line-height: 1.4;
+  text-decoration: none;
+  transition: background .2s ease, box-shadow .2s ease, transform .2s ease;
+}
+.c057b9a:hover {
+  color: var(--accent-ink);
+  background: color-mix(in srgb, var(--accent) 92%, var(--text));
+  box-shadow: 0 9px 24px color-mix(in srgb, var(--accent) 24%, transparent);
+  transform: translateY(-2px);
+}
+.cf89071 {
+  font-family: var(--body);
+  font-size: 1.25em;
+  line-height: 1;
+}
+.c608dd1 {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1rem;
+  margin-block: 1.5rem 4.5rem;
+}
+.caa51ad {
+  min-width: 0;
+  padding: 1.2rem 1.35rem;
+  border: 1px solid color-mix(in srgb, var(--text) 9%, var(--surface));
+  border-radius: var(--radius);
+  background: var(--surface);
+  box-shadow: 0 3px 12px color-mix(in srgb, var(--text) 3%, transparent);
+}
+.caa51ad strong {
+  display: block;
+  margin-bottom: .2rem;
+  color: var(--text);
+  font-family: var(--display);
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1.4;
+  letter-spacing: -.02em;
+}
+.caa51ad span {
+  display: block;
+  color: var(--muted);
+  font-size: .8rem;
+  line-height: 1.5;
+}
+.c898bf2 {
+  display: grid;
+  grid-template-columns: 235px minmax(0, 1fr);
+  align-items: start;
+  gap: clamp(2.5rem, 5vw, 5rem);
+  padding-bottom: 4.5rem;
+}
+.ce7160e {
+  position: sticky;
+  top: 2rem;
+  min-width: 0;
+  max-height: calc(100dvh - 4rem);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-width: thin;
+  scrollbar-color: color-mix(in srgb, var(--muted) 35%, var(--surface)) var(--surface);
+  padding: .3rem .75rem 1rem .25rem;
+}
+.c5b58a4 {
+  margin: 0 0 1.1rem;
+  color: var(--text);
+  font-family: var(--display);
+  font-size: .95rem;
+  font-weight: 650;
+  letter-spacing: -.02em;
+}
+.ca445f9 {
+  display: grid;
+  gap: .3rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.ca445f9 li {
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+}
+.c08ea51 {
+  position: relative;
+  display: block;
+  padding: .7rem .9rem .7rem 1.1rem;
+  border-inline-start: 2px solid color-mix(in srgb, var(--muted) 18%, var(--bg));
+  border-radius: 0 calc(var(--radius) * .55) calc(var(--radius) * .55) 0;
+  color: var(--muted);
+  font-family: var(--body);
+  font-size: .85rem;
+  font-weight: 450;
+  line-height: 1.5;
+  text-decoration: none;
+  overflow-wrap: anywhere;
+}
+.c08ea51:hover {
+  border-inline-start-color: color-mix(in srgb, var(--accent) 45%, var(--bg));
+  color: var(--text);
+  background: color-mix(in srgb, var(--accent) 5%, var(--bg));
+}
+.c08ea51[aria-current="location"] {
+  border-inline-start-color: var(--accent);
+  color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 9%, var(--bg));
+  font-weight: 650;
+}
+.c58fa84 {
+  margin: 1.65rem 0 0;
+  padding: 1.2rem 0 0;
+  border-top: 1px solid color-mix(in srgb, var(--text) 10%, var(--bg));
+  color: var(--muted);
+  font-size: .78rem;
+  line-height: 1.65;
+}
+.cc3d40d {
+  min-width: 0;
+}
+.ce5e5b5 {
+  padding: clamp(1.3rem, 3vw, 2.3rem);
+  margin-bottom: 3.75rem;
+  border: 1px solid color-mix(in srgb, var(--accent) 18%, var(--surface));
+  border-top: 3px solid var(--accent);
+  border-radius: var(--radius);
+  background: var(--surface);
+  box-shadow: 0 10px 35px color-mix(in srgb, var(--text) 5%, transparent);
+  scroll-margin-top: 2rem;
+}
+.c38b386 {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: .5rem 1.5rem;
+  justify-content: space-between;
+  margin-bottom: 1.4rem;
+}
+.c38b386 h2 {
+  margin: 0;
+  font-size: clamp(1.45rem, 2.3vw, 1.85rem);
+  letter-spacing: -.04em;
+}
+.c38b386 p {
+  margin: 0;
+  color: var(--muted);
+  font-size: .8rem;
+}
+.c3d6ced {
+  min-width: 0;
+  overflow-x: auto;
+  scrollbar-width: thin;
+  scrollbar-color: var(--muted) var(--surface);
+}
+.c6097eb {
+  width: 100%;
+  border-collapse: collapse;
+  color: var(--text);
+  font-family: var(--body);
+  font-size: .925rem;
+  line-height: 1.6;
+  text-align: left;
+}
+.c6097eb caption {
+  padding: 0 0 1rem;
+  color: var(--muted);
+  font-size: .85rem;
+  text-align: left;
+}
+.c6097eb th,
+.c6097eb td {
+  padding: 1.05rem .85rem;
+  border-bottom: 1px solid color-mix(in srgb, var(--text) 9%, var(--surface));
+  vertical-align: top;
+  overflow-wrap: anywhere;
+}
+.c6097eb th {
+  width: 37%;
+  color: var(--muted);
+  font-weight: 500;
+}
+.c6097eb thead th {
+  color: var(--text);
+  background: color-mix(in srgb, var(--accent) 5%, var(--surface));
+  font-weight: 650;
+}
+.c6097eb td {
+  font-weight: 550;
+}
+.c6097eb tr > :first-child {
+  padding-left: 0;
+}
+.c6097eb tr > :last-child {
+  padding-right: 0;
+}
+.c6097eb tbody:last-child tr:last-child > *,
+.c6097eb > tr:last-child > * {
+  border-bottom: 0;
+}
+.c6097eb td p:last-child,
+.c6097eb th p:last-child {
+  margin-bottom: 0;
+}
+.cf7e669 {
+  min-width: 0;
+}
+.cb495ac {
+  min-width: 0;
+  margin: 0 0 3.4rem;
+  scroll-margin-top: 2rem;
+}
+.cb495ac + .cb495ac {
+  padding-top: 2.8rem;
+  border-top: 1px solid color-mix(in srgb, var(--text) 11%, var(--bg));
+}
+.ca1f5a5 {
+  margin: 0 0 1.25rem;
+  color: var(--text);
+  font-family: var(--display);
+  font-size: clamp(1.65rem, 2.8vw, 2.35rem);
+  font-weight: 600;
+  line-height: 1.22;
+  letter-spacing: -.045em;
+}
+.c2d8e58 {
+  color: var(--text);
+  font-family: var(--body);
+  font-size: 1rem;
+  line-height: 1.85;
+  overflow-wrap: anywhere;
+}
+.c2d8e58 > :last-child {
+  margin-bottom: 0;
+}
+.c2d8e58 p {
+  margin: 0 0 1.3rem;
+  text-wrap: pretty;
+}
+.c2d8e58 h3 {
+  margin: 2rem 0 .9rem;
+  font-size: clamp(1.2rem, 2vw, 1.45rem);
+  font-weight: 600;
+  line-height: 1.35;
+  letter-spacing: -.025em;
+}
+.c2d8e58 h4,
+.c2d8e58 h5,
+.c2d8e58 h6 {
+  margin: 1.6rem 0 .75rem;
+  font-size: 1.075rem;
+  line-height: 1.4;
+}
+.c2d8e58 h3:first-child,
+.c2d8e58 h4:first-child {
+  margin-top: 0;
+}
+.c2d8e58 strong,
+.c4d355f strong {
+  color: var(--text);
+  font-weight: 650;
+}
+.c2d8e58 ul,
+.c2d8e58 ol,
+.c4d355f ul,
+.c4d355f ol {
+  margin: 1.2rem 0 1.6rem;
+  padding-left: 1.5rem;
+}
+.c2d8e58 li,
+.c4d355f li {
+  padding-left: .4rem;
+  margin-block: .55rem;
+}
+.c2d8e58 li::marker,
+.c4d355f li::marker {
+  color: var(--accent);
+  font-weight: 600;
+}
+.c2d8e58 li > ul,
+.c2d8e58 li > ol {
+  margin-block: .5rem;
+}
+.c2d8e58 li p {
+  margin-bottom: .6rem;
+}
+.c2d8e58 blockquote {
+  margin: 1.8rem 0;
+  padding: 1.3rem 1.5rem;
+  border-inline-start: 3px solid var(--accent);
+  border-radius: 0 var(--radius) var(--radius) 0;
+  background: color-mix(in srgb, var(--accent) 6%, var(--surface));
+  color: var(--text);
+  font-size: 1.05rem;
+}
+.c2d8e58 blockquote > :last-child {
+  margin-bottom: 0;
+}
+.c2d8e58 blockquote cite {
+  display: block;
+  margin-top: .9rem;
+  color: var(--muted);
+  font-size: .85rem;
+  font-style: normal;
+}
+.c2d8e58 table {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  margin: 1.7rem 0;
+  overflow-x: auto;
+  border: 1px solid color-mix(in srgb, var(--text) 12%, var(--surface));
+  border-radius: var(--radius);
+  border-spacing: 0;
+  background: var(--surface);
+  font-family: var(--body);
+  font-size: .875rem;
+  line-height: 1.65;
+  text-align: left;
+  scrollbar-width: thin;
+  scrollbar-color: var(--muted) var(--surface);
+}
+.c2d8e58 table caption {
+  padding: .9rem 1rem;
+  color: var(--muted);
+  font-size: .82rem;
+  text-align: left;
+}
+.c2d8e58 th,
+.c2d8e58 td {
+  min-width: 125px;
+  padding: 1rem 1.15rem;
+  border-bottom: 1px solid color-mix(in srgb, var(--text) 9%, var(--surface));
+  vertical-align: top;
+}
+.c2d8e58 th {
+  color: var(--text);
+  background: color-mix(in srgb, var(--accent) 7%, var(--surface));
+  font-weight: 650;
+}
+.c2d8e58 tbody tr:nth-child(even) {
+  background: color-mix(in srgb, var(--text) 2%, var(--surface));
+}
+.c2d8e58 tbody:last-child tr:last-child > * {
+  border-bottom: 0;
+}
+.c2d8e58 td > :last-child,
+.c2d8e58 th > :last-child {
+  margin-bottom: 0;
+}
+.c2d8e58 figure {
+  margin: 1.8rem 0;
+}
+.c2d8e58 figure img {
+  display: block;
+  border-radius: var(--radius);
+}
+.c2d8e58 figcaption {
+  margin-top: .7rem;
+  color: var(--muted);
+  font-size: .8rem;
+  line-height: 1.6;
+}
+.c2d8e58 code,
+.c4d355f code {
+  padding: .1em .35em;
+  border-radius: calc(var(--radius) * .25);
+  background: color-mix(in srgb, var(--accent) 7%, var(--surface));
+  color: var(--text);
+  font-family: var(--body);
+  font-size: .9em;
+}
+.c2d8e58 pre {
+  overflow-x: auto;
+  padding: 1.2rem;
+  border: 1px solid color-mix(in srgb, var(--text) 10%, var(--surface));
+  border-radius: var(--radius);
+  background: var(--surface);
+  color: var(--text);
+  font-family: var(--body);
+  font-size: .875rem;
+  line-height: 1.7;
+}
+.c2d8e58 pre code {
+  padding: 0;
+  background: var(--surface);
+}
+.c2d8e58 hr {
+  margin: 2rem 0;
+  border: 0;
+  border-top: 1px solid color-mix(in srgb, var(--text) 12%, var(--bg));
+}
+.c2d8e58 dt {
+  margin-top: 1.1rem;
+  color: var(--text);
+  font-weight: 650;
+}
+.c2d8e58 dd {
+  margin: .4rem 0 1rem;
+  color: var(--muted);
+}
+.c9a8c5e {
+  padding-top: 2.75rem;
+  border-top: 1px solid color-mix(in srgb, var(--text) 11%, var(--bg));
+  scroll-margin-top: 2rem;
+}
+.c9a8c5e > .ca1f5a5 {
+  margin-bottom: 1.65rem;
+}
+.cf38d54 {
+  margin: 0 0 .8rem;
+  border: 1px solid color-mix(in srgb, var(--text) 11%, var(--surface));
+  border-radius: var(--radius);
+  background: var(--surface);
+  box-shadow: 0 3px 12px color-mix(in srgb, var(--text) 3%, transparent);
+  overflow: clip;
+  transition: border-color .2s ease, box-shadow .2s ease;
+}
+.cf38d54:hover {
+  border-color: color-mix(in srgb, var(--accent) 35%, var(--surface));
+}
+.cf38d54[open] {
+  border-color: color-mix(in srgb, var(--accent) 35%, var(--surface));
+  box-shadow: 0 6px 20px color-mix(in srgb, var(--text) 4%, transparent);
+}
+.c9815a3 {
+  position: relative;
+  display: block;
+  padding: 1.35rem 3.8rem 1.35rem 1.4rem;
+  color: var(--text);
+  font-family: var(--display);
+  font-size: 1.025rem;
+  font-weight: 600;
+  line-height: 1.5;
+  letter-spacing: -.015em;
+  list-style: none;
+  cursor: pointer;
+}
+.c9815a3::-webkit-details-marker {
+  display: none;
+}
+.c9815a3::after {
+  content: "+";
+  position: absolute;
+  top: 1.3rem;
+  right: 1.35rem;
+  display: grid;
+  place-items: center;
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--accent) 9%, var(--surface));
+  color: var(--accent);
+  font-family: var(--body);
+  font-size: 1.15rem;
+  font-weight: 400;
+  line-height: 1;
+}
+.cf38d54[open] > .c9815a3::after {
+  content: "−";
+}
+.cf38d54 > .c9815a3:focus-visible {
+  outline-offset: -5px;
+}
+.c4d355f {
+  padding: 0 1.4rem 1.45rem;
+  color: var(--muted);
+  font-family: var(--body);
+  font-size: .95rem;
+  line-height: 1.8;
+}
+.c4d355f > :first-child {
+  margin-top: 0;
+}
+.c4d355f > :last-child {
+  margin-bottom: 0;
+}
+.c4d355f p {
+  margin-bottom: 1rem;
+}
+.c624544 {
+  padding-block: 3rem 3.6rem;
+  border-top: 1px solid color-mix(in srgb, var(--text) 10%, var(--bg));
+  background: color-mix(in srgb, var(--surface) 70%, var(--bg));
+  scroll-margin-top: 2rem;
+}
+.cac0660 {
+  display: grid;
+  grid-template-columns: 235px minmax(0, 1fr);
+  gap: clamp(2.5rem, 5vw, 5rem);
+}
+.cc7b2bf h2 {
+  margin-bottom: .7rem;
+  font-size: 1.4rem;
+  letter-spacing: -.035em;
+}
+.cc7b2bf p {
+  margin: 0;
+  color: var(--muted);
+  font-size: .85rem;
+  line-height: 1.7;
+}
+.c72ee5b {
+  min-width: 0;
+}
+.cbf7085 {
+  display: grid;
+  gap: .7rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-family: var(--body);
+}
+.cf80e89 {
+  display: block;
+  min-width: 0;
+  padding: 1rem 1.2rem;
+  border: 1px solid color-mix(in srgb, var(--text) 9%, var(--surface));
+  border-radius: calc(var(--radius) * .75);
+  background: var(--surface);
+  color: var(--muted);
+  font-family: var(--body);
+  font-size: .875rem;
+  line-height: 1.7;
+  overflow-wrap: anywhere;
+}
+.cf80e89 a,
+a.cf80e89 {
+  color: var(--text);
+  text-decoration-color: color-mix(in srgb, var(--accent) 35%, var(--surface));
+  text-underline-offset: .25em;
+}
+.cf80e89 a:hover,
+a.cf80e89:hover {
+  color: var(--accent);
+  text-decoration-color: var(--accent);
+}
+.cf80e89 p {
+  margin: .4rem 0 0;
+}
+.cf80e89 small {
+  color: var(--muted);
+  font-size: .8rem;
+}
+.cd90b31 {
+  border-top: 1px solid color-mix(in srgb, var(--text) 10%, var(--bg));
+  background: var(--bg);
+}
+.c7b2c5f {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem 2rem;
+  min-height: 100px;
+  padding-block: 1.5rem;
+}
+.cac5500 {
+  color: var(--text);
+  font-family: var(--display);
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: -.025em;
+}
+.c579311 {
+  margin: 0;
+  color: var(--muted);
+  font-size: .8rem;
+}
+.c579311 span {
+  color: var(--text);
+}
+@media (min-width: 1500px) {
+  .c543082 {
+    padding-bottom: 6rem;
+  }
+  .c194967 {
+    margin-bottom: 4.5rem;
+  }
+  .c898bf2 {
+    gap: 5.5rem;
+  }
+  .cac0660 {
+    gap: 5.5rem;
+  }
+}
+@media (max-width: 1050px) {
+  .c62e276 {
+    width: calc(100% - 3rem);
+  }
+  .c898bf2,
+  .cac0660 {
+    grid-template-columns: 190px minmax(0, 1fr);
+    gap: 2.25rem;
+  }
+  .c608dd1 {
+    gap: .75rem;
+  }
+  .caa51ad {
+    padding: 1rem;
+  }
+  .c08ea51 {
+    font-size: .8rem;
+  }
+}
+@media (max-width: 760px) {
+  html {
+    scroll-padding-top: 1rem;
+  }
+  .ca8c6d7 {
+    min-height: 72px;
+  }
+  .c543082 {
+    padding-block: 1.25rem 3.25rem;
+  }
+  .c194967 {
+    margin-bottom: 2.6rem;
+  }
+  .c163931 h1 {
+    max-width: 100%;
+    font-size: clamp(2.45rem, 7.4vw, 3.6rem);
+    letter-spacing: -.045em;
+  }
+  .c4fa7fb {
+    font-size: 1.05rem;
+  }
+  .c608dd1 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    margin-block: 1.2rem 2.5rem;
+  }
+  .c898bf2 {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 2.3rem;
+    padding-bottom: 3rem;
+  }
+  .ce7160e {
+    position: static;
+    max-height: none;
+    padding: 1.2rem;
+    border: 1px solid color-mix(in srgb, var(--text) 10%, var(--surface));
+    border-radius: var(--radius);
+    background: var(--surface);
+  }
+  .c5b58a4 {
+    margin-bottom: .8rem;
+  }
+  .ca445f9 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: .4rem .8rem;
+  }
+  .c08ea51 {
+    height: 100%;
+    padding-block: .7rem;
+    font-size: .825rem;
+  }
+  .c58fa84 {
+    display: none;
+  }
+  .ce5e5b5 {
+    margin-bottom: 2.5rem;
+  }
+  .cb495ac {
+    margin-bottom: 2.6rem;
+  }
+  .cb495ac + .cb495ac {
+    padding-top: 2.2rem;
+  }
+  .cac0660 {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 1.5rem;
+  }
+  .c624544 {
+    padding-block: 2.5rem;
+  }
+  .cb495ac,
+  .ce5e5b5,
+  .c9a8c5e,
+  .c624544 {
+    scroll-margin-top: 1rem;
+  }
+}
+@media (max-width: 440px) {
+  .c62e276 {
+    width: calc(100% - 2rem);
+  }
+  .ca8c6d7 {
+    gap: 1rem;
+  }
+  .c7c9140 {
+    gap: .5rem;
+    font-size: 1.05rem;
+  }
+  .c976efe {
+    gap: .45rem;
+    font-size: .8rem;
+  }
+  .c6ae318 {
+    gap: .65rem;
+    margin-bottom: 1.1rem;
+  }
+  .c163931 h1 {
+    font-size: 2.5rem;
+  }
+  .c057b9a {
+    width: 100%;
+    justify-content: space-between;
+  }
+  .caa51ad {
+    padding: .9rem;
+  }
+  .caa51ad strong {
+    font-size: .9rem;
+  }
+  .caa51ad span {
+    font-size: .75rem;
+  }
+  .ca445f9 {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .ce5e5b5 {
+    padding: 1.15rem;
+  }
+  .c6097eb {
+    font-size: .85rem;
+  }
+  .c6097eb th,
+  .c6097eb td {
+    padding-block: .9rem;
+    padding-inline: .5rem;
+  }
+  .c2d8e58 {
+    font-size: .95rem;
+    line-height: 1.8;
+  }
+  .c2d8e58 blockquote {
+    padding: 1rem 1.1rem;
+  }
+  .c9815a3 {
+    padding: 1.1rem 3rem 1.1rem 1.1rem;
+    font-size: .95rem;
+  }
+  .c9815a3::after {
+    top: 1.1rem;
+    right: .9rem;
+  }
+  .c4d355f {
+    padding: 0 1.1rem 1.2rem;
+    font-size: .9rem;
+  }
+  .c7b2c5f {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: .6rem;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    transition: none !important;
+  }
+  .c057b9a:hover {
+    transform: none;
+  }
+}
+@media print {
+  body {
+    background: var(--surface);
+    font-size: 10pt;
+  }
+  .c62e276 {
+    width: 100%;
+  }
+  .c11e0a4,
+  .cdb6b55,
+  .c057b9a,
+  .ce7160e,
+  .c163931::after {
+    display: none;
+  }
+  .c163931 {
+    background: var(--surface);
+  }
+  .c543082 {
+    padding-block: 1rem 2rem;
+  }
+  .c194967 {
+    margin-bottom: 1.5rem;
+  }
+  .c163931 h1 {
+    font-size: 32pt;
+  }
+  .c608dd1 {
+    margin-bottom: 2rem;
+  }
+  .c898bf2,
+  .cac0660 {
+    display: block;
+  }
+  .ce5e5b5,
+  .caa51ad,
+  .cf38d54 {
+    box-shadow: none;
+  }
+  .ca1f5a5,
+  .c2d8e58 h3 {
+    break-after: avoid;
+  }
+  .cf38d54,
+  .cf80e89,
+  .c2d8e58 tr {
+    break-inside: avoid;
+  }
+  .cc7b2bf {
+    margin-bottom: 1rem;
+  }
+}
+</style>
 </head>
-
 <body>
-
-<header class="hero" role="banner">
-  <div class="container hero-grid">
-    <div class="hero-card" aria-label="Intro">
-      <div class="brand-row">
-        <img class="brand-logo" src="polygon-logo-png_seeklogo-527156.png" alt="Staking Polygon logo">
-        <div>
-          <div class="muted" style="font-weight:900; letter-spacing:.2px;">Operational Guide</div>
-          <div class="muted-2" style="font-size:.95rem;">Rewards • APY/APR • Validators • Calculator • Safety</div>
-        </div>
-      </div>
-
-      <h1>Staking Polygon (POL)</h1>
-      <p class="lead">
-        This is a practical, security-first guide to <strong>Staking Polygon (POL)</strong>: how staking works end-to-end,
-        what drives rewards, how to compare <strong>APY vs APR</strong>, how to choose validators, how to estimate yield with
-        a calculator framework, and how to avoid the common mistakes that cause lost time (or lost funds).
-      </p>
-
-
-      <div class="cta-center">
-        <a href="https://staking-polygon.com/" class="cta" aria-label="Open Polygon Staking (placeholder)">Open Polygon Staking</a>
-      </div>
-
-      <div class="note" style="margin-top:1rem;">
-        <strong>Quick rule:</strong> If you’re staking meaningful size, do a small test delegation first,
-        then scale in. Staking is operational: validator choice, unbonding rules, and wallet hygiene matter.
-      </div>
+<a class="cdb6b55" href="#guide-main">Skip to guide</a>
+<header class="c11e0a4">
+  <div class="c62e276 ca8c6d7">
+    <div class="c7c9140">
+      <span class="ce7b99a" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 5.5h6a3 3 0 0 1 2 1 3 3 0 0 1 2-1h6v14h-6a3 3 0 0 0-2 1 3 3 0 0 0-2-1H4zM12 6.5v14M7 9h2M15 9h2M7 12h2M15 12h2"/></svg></span>
+      <span>The guide</span>
     </div>
-
-    <div class="hero-media" aria-hidden="true">
-      <!-- First top image -->
-      <img class="hero-img" src="snimok-ekrana-2022-01-25-v-16.10.24.png" alt="Staking Polygon overview visual">
-    </div>
+    <a class="c976efe" href="dashboard/">Open app <span class="cf89071" aria-hidden="true">↗</span></a>
   </div>
 </header>
-
-<section class="step-guide" aria-labelledby="how-works">
-  <div class="container">
-    <h2 id="how-works">Staking Polygon (POL): How the Workflow Works (Choose → Delegate → Earn → Unstake)</h2>
-    <div class="steps" role="list">
-      <article class="step" role="listitem">
-        <div class="icon">①</div>
-        <h3>Choose a staking method (native vs liquid staking)</h3>
-        <p>
-          Decide if you want native delegation (more “direct”, but with lock/unbond rules) or liquid staking
-          (more flexibility, but extra smart-contract and peg/liquidity considerations).
-        </p>
-      </article>
-      <article class="step" role="listitem">
-        <div class="icon">②</div>
-        <h3>Select validators (the real risk/return lever)</h3>
-        <p>
-          Your validator choice drives uptime risk, slashing exposure, commission drag, and reliability.
-          “Highest APY” is not a strategy if the operator is unstable or opaque.
-        </p>
-      </article>
-      <article class="step" role="listitem">
-        <div class="icon">③</div>
-        <h3>Delegate and track rewards (net yield matters)</h3>
-        <p>
-          Rewards are not just “APR”: net yield depends on commission, compounding cadence, and any extra
-          fees/constraints. Track realized outcomes, not only quotes.
-        </p>
-      </article>
-      <article class="step" role="listitem">
-        <div class="icon">④</div>
-        <h3>Unstake safely (timelines, claims, and mistakes)</h3>
-        <p>
-          The exit path is part of the plan: understand unbonding delays, claim steps, and how long capital is illiquid.
-          Most “stuck” issues come from missing exit steps or network mismatch.
-        </p>
-      </article>
-    </div>
+<section class="c163931" aria-labelledby="guide-title">
+  <div class="c62e276 c543082">
+    <nav class="c194967" aria-label="Breadcrumb"><nav class="c66e047" aria-label="Breadcrumb"><a href="dashboard/">Home</a> <span>/</span> <span>Staking</span> <span>/</span> <span>Staking Polygon</span></nav></nav>
+    <div class="c6ae318"><span class="ca0297e">A closer look</span><span class="c76fdb0"><img src="assets/tokens/polygon.svg" alt="Polygon" width="28" height="28"></span></div>
+    <h1 id="guide-title">Staking <em>Polygon</em>: A Safety-First Guide</h1>
+    <p class="c4fa7fb">Staking Polygon turns an idle POL balance into a productive one: you commit tokens to a validator that helps secure the network, and in return you receive a share of the rewards the protocol pays out. The decision is not just whether to stake but how — through an exchange that custodies your tokens, through a wallet that delegates directly on-chain, or through a liquid staking protocol that hands you a tradable receipt token. Each path carries a different mix of convenience, control and risk, and this guide walks through all three before touching on the mechanics of starting.</p>
+    <a class="c057b9a" href="dashboard/">Open dashboard <span class="cf89071" aria-hidden="true">↗</span></a>
   </div>
 </section>
-
-<main class="container" role="main">
-
-  <section class="card toc" aria-label="Table of Contents">
-    <strong>On this page (Staking Polygon):</strong>
-    <ul>
-      <li><a href="#overview">Staking Polygon overview (what it is & who it’s for)</a></li>
-      <li><a href="#rewards">Polygon staking rewards: what drives yield</a></li>
-      <li><a href="#apy-apr">Polygon staking APY / APR: how to compare correctly</a></li>
-      <li><a href="#how-to">How to stake Polygon (POL): step-by-step tutorial</a></li>
-      <li><a href="#calculator">Polygon staking calculator: estimation framework</a></li>
-      <li><a href="#validators">Polygon validator list: selection checklist</a></li>
-      <li><a href="#minimum">Polygon staking minimum POL required</a></li>
-      <li><a href="#yield">Polygon staking yield: compounding & net return</a></li>
-      <li><a href="#review">Staking Polygon review: legit, trust, and what to watch</a></li>
-      <li><a href="#safety">Is staking Polygon safe? risks & rewards</a></li>
-      <li><a href="#comparison">Staking Polygon comparison vs liquid staking</a></li>
-      <li><a href="#best-practices">Best way to stake Polygon: best practices</a></li>
-      <li><a href="#troubleshooting">Troubleshooting & common issues</a></li>
-      <li><a href="#eeat">Sources & references</a></li>
-      <li><a href="#faq">FAQ</a></li>
-    </ul>
-  </section>
-
-  <section class="card" id="overview">
-    <h2>Staking Polygon Overview: What It Is, and Why People Stake POL</h2>
-    <p>
-      <strong>Staking Polygon (POL)</strong> generally means committing POL to help secure network operations (directly or via delegation),
-      earning rewards in return. The trade-off is simple: you exchange liquidity and operational attention
-      (validator selection + rules) for yield and network participation.
-    </p>
-
-    <div class="callout-grid" role="list">
-      <div class="mini" role="listitem">
-        <h3>Best use-case</h3>
-        <p class="muted">
-          Long-term holders who want yield and can tolerate lock/unbond timelines.
-        </p>
-        <div class="kpi-badges">
-          <span>Long-term</span><span>Yield-focused</span><span>Risk-managed</span>
-        </div>
-      </div>
-
-      <div class="mini" role="listitem">
-        <h3>Main constraints</h3>
-        <p class="muted">
-          Unbonding delay, validator/operator risk, and the need for careful wallet hygiene.
-        </p>
-        <div class="kpi-badges">
-          <span>Illiquidity</span><span>Operator risk</span><span>Process matters</span>
-        </div>
-      </div>
-    </div>
-
-    <div class="note" style="margin-top:1rem;">
-      <strong>Operational truth:</strong> the “best” staking setup is the one you can exit safely.
-      Always plan the unstake path before you stake.
-    </div>
-
-    <div class="content-media">
-      <!-- Second image -->
-      <img class="content-img" src="poly2.png" alt="Staking Polygon checklist visual">
-    </div>
-  </section>
-
-  <section class="card" id="rewards">
-    <h2>Polygon Staking Rewards: What Drives Rewards and Why They Change</h2>
-    <p>
-      <strong>Polygon staking rewards</strong> vary over time. Your realized outcome depends on network conditions and
-      your validator’s behavior (commission, uptime, performance), plus how you compound.
-    </p>
-    <ul>
-      <li><strong>Validator commission:</strong> your rewards are reduced by the operator’s cut.</li>
-      <li><strong>Uptime/performance:</strong> instability reduces rewards and can increase risk.</li>
-      <li><strong>Compounding cadence:</strong> auto-compound vs manual compounding changes net APY.</li>
-      <li><strong>Operational fees:</strong> some paths require extra transactions (claim/compound/unstake).</li>
-    </ul>
-
-    <div class="note">
-      <strong>Rule:</strong> Treat quoted yield as “gross”. Track net yield after commission + fees + missed time (downtime/unbond).
-    </div>
-  </section>
-
-  <section class="card" id="apy-apr">
-    <h2>Polygon Staking APY / APR: How to Compare Without Getting Tricked</h2>
-    <p>
-      <strong>APR</strong> is typically the “simple rate” (no compounding assumption).
-      <strong>APY</strong> includes a compounding assumption (and can be misleading if compounding isn’t realistic or fees are ignored).
-    </p>
-
-    <table aria-label="APY vs APR comparison">
-      <thead>
-        <tr>
-          <th>Term</th>
-          <th>What it implies</th>
-          <th>Common mistake</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr class="highlight">
-          <td>APR</td>
-          <td>Simple annual rate (no compounding)</td>
-          <td>Assuming APR = final outcome (it ignores compounding and fees)</td>
-        </tr>
-        <tr>
-          <td>APY</td>
-          <td>Annualized rate with compounding assumption</td>
-          <td>Believing APY without checking compounding frequency + transaction costs</td>
-        </tr>
-      </tbody>
-    </table>
-
-    <div class="note">
-      <strong>Quick check:</strong> If compounding requires frequent transactions, fees can erase the “APY gap” for small balances.
-    </div>
-  </section>
-
-  <section class="card" id="how-to">
-    <h2>How to Stake Polygon (POL): Tutorial (Clean, Repeatable Workflow)</h2>
-    <ol>
-      <li><strong>Choose your method:</strong> native staking vs liquid staking (based on your liquidity needs).</li>
-      <li><strong>Prepare wallet hygiene:</strong> verify official URLs, consider hardware wallet for size, keep backups safe.</li>
-      <li><strong>Pick a validator:</strong> assess commission, uptime history, transparency, and operational reputation.</li>
-      <li><strong>Delegate a small test:</strong> verify rewards accrual and that you understand the UI and steps.</li>
-      <li><strong>Scale in:</strong> add stake in tranches to reduce operational mistakes.</li>
-      <li><strong>Track + compound:</strong> decide if compounding is worth it after fees.</li>
-      <li><strong>Plan your exit:</strong> know unbonding/claim rules before you need liquidity.</li>
-    </ol>
-
-    <div class="note">
-      <strong>Best way to stake Polygon:</strong> stable operational setup beats chasing the highest headline number.
-      Reliability + sane commission + safe process wins.
-    </div>
-  </section>
-
-  <section class="card" id="calculator">
-    <h2>Polygon Staking Calculator: A Practical Estimation Framework</h2>
-    <p>
-      A <strong>Polygon staking calculator</strong> should estimate your <em>net</em> outcome (not just a marketing APY).
-      Use this framework:
-    </p>
-
-    <table aria-label="Staking calculator inputs">
-      <thead>
-        <tr>
-          <th>Input</th>
-          <th>Meaning</th>
-          <th>Why it matters</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr class="highlight">
-          <td>Stake amount (POL)</td>
-          <td>Your principal</td>
-          <td>Determines if compounding fees are worth it</td>
-        </tr>
-        <tr>
-          <td>Gross APR</td>
-          <td>Network/validator rate before compounding</td>
-          <td>Baseline yield driver</td>
-        </tr>
-        <tr>
-          <td>Validator commission</td>
-          <td>Operator cut</td>
-          <td>Directly reduces rewards</td>
-        </tr>
-        <tr>
-          <td>Compounding frequency</td>
-          <td>Monthly/weekly/daily (if applicable)</td>
-          <td>Increases APY but may increase fees</td>
-        </tr>
-        <tr>
-          <td>Tx costs</td>
-          <td>Claim/compound/unstake fees</td>
-          <td>Can dominate small portfolios</td>
-        </tr>
-      </tbody>
-    </table>
-
-    <div class="note">
-      <strong>Calculator takeaway:</strong> For smaller balances, “set and forget” (no frequent compounding) often yields higher net results after fees.
-    </div>
-  </section>
-
-  <section class="card" id="validators">
-    <h2>Polygon Validator List: How to Choose the Right Validator</h2>
-    <p>
-      Instead of chasing “top APR”, evaluate validators like infrastructure providers.
-      A strong <strong>Polygon validator list</strong> checklist:
-    </p>
-    <ul>
-      <li><strong>Commission:</strong> reasonable and stable (avoid sudden spikes).</li>
-      <li><strong>Uptime & reliability:</strong> consistent performance matters more than hype.</li>
-      <li><strong>Transparency:</strong> clear operator identity, documentation, and communication.</li>
-      <li><strong>Risk posture:</strong> sensible security practices and operational maturity.</li>
-    </ul>
-
-    <div class="note">
-      <strong>Heuristic:</strong> Pick validators you can explain in one sentence (who they are + why you trust their operations).
-    </div>
-  </section>
-
-  <section class="card" id="minimum">
-    <h2>Polygon Staking Minimum POL Required</h2>
-    <p>
-      The <strong>Polygon staking minimum POL required</strong> depends on the staking method and platform.
-      In practice, your “real minimum” is the amount where fees don’t crush net yield and you can still afford
-      exit transactions if needed.
-    </p>
-    <ul>
-      <li><strong>Hard minimum:</strong> varies by method/platform.</li>
-      <li><strong>Practical minimum:</strong> enough POL so periodic transactions (claim/compound/unstake) don’t eat yield.</li>
-      <li><strong>Safety minimum:</strong> keep extra for network fees and recovery actions.</li>
-    </ul>
-
-    <div class="note">
-      <strong>Rule:</strong> Always keep a gas buffer; being “all-in” is how people get stuck.
-    </div>
-  </section>
-
-  <section class="card" id="yield">
-    <h2>Polygon Staking Yield: How to Think About Net Returns</h2>
-    <p>
-      <strong>Polygon staking yield</strong> should be evaluated as <em>net</em> performance: rewards minus commissions minus fees,
-      adjusted for time locked/unbonded and any downtime.
-    </p>
-
-    <h3>Net yield checklist</h3>
-    <ul>
-      <li>Gross rewards earned</li>
-      <li>Minus validator commission</li>
-      <li>Minus transaction costs (claim/compound/unstake)</li>
-      <li>Minus “lost time” (unbonding delays / operational downtime)</li>
-    </ul>
-
-    <div class="note">
-      <strong>Best practice:</strong> Track realized outcomes quarterly. If net yield is not beating your alternative (or risk feels wrong), rotate strategy.
-    </div>
-  </section>
-
-  <section class="card" id="review">
-    <h2>Staking Polygon Review: Legit, Trust, and What to Watch (2025–2026)</h2>
-    <p>
-      A <strong>Staking Polygon review</strong> should focus on predictable outcomes and safety:
-      whether the process is understandable, the validator ecosystem is mature, and the “gotchas” are manageable.
-    </p>
-
-    <div class="callout-grid">
-      <div class="mini">
-        <h3>Staking Polygon legit?</h3>
-        <p class="muted">
-          Generally, staking as a mechanism is legitimate. Your real question is: <em>which method/provider</em> and
-          <em>which validator</em> are you trusting operationally.
-        </p>
-      </div>
-      <div class="mini">
-        <h3>Staking Polygon trust</h3>
-        <p class="muted">
-          Trust is earned via transparency: clear docs, known operators, consistent performance, and a clean exit path.
-        </p>
-      </div>
-    </div>
-
-    <div class="note">
-      <strong>2025 / 2026 lens:</strong> The market rewards operational discipline. Assume attackers target approvals, fake sites, and users rushing steps.
-    </div>
-  </section>
-
-  <section class="card" id="safety">
-    <h2>Staking Polygon Safe? Risks and Rewards (What Actually Matters)</h2>
-    <p>
-      “Safe” is not binary. <strong>Staking Polygon safe</strong> depends on method risk + validator/operator risk + user mistakes.
-      You can reduce risk dramatically with hygiene and conservative choices.
-    </p>
-
-    <h3>Key risks</h3>
-    <ul>
-      <li><strong>Smart-contract risk:</strong> higher with extra layers (some liquid staking designs).</li>
-      <li><strong>Validator/operator risk:</strong> downtime, poor ops, slashing exposure.</li>
-      <li><strong>Phishing/approval risk:</strong> fake UIs and bad approvals are top avoidable loss sources.</li>
-      <li><strong>Liquidity risk:</strong> you may not be able to exit instantly (unbonding / market liquidity).</li>
-    </ul>
-
-    <div class="note">
-      <strong>Hard rule:</strong> Use bookmarks for official sites, prefer minimal approvals, and keep a separate wallet for “daily” dApp usage if you’re staking meaningful size.
-    </div>
-  </section>
-
-  <section class="card" id="comparison">
-    <h2>Staking Polygon Comparison: Native Staking vs Liquid Staking</h2>
-    <p>
-      <strong>Staking Polygon vs liquid staking</strong> is a trade-off between simplicity and flexibility.
-      Choose based on your need for liquidity and your tolerance for extra smart-contract/market risks.
-    </p>
-
-    <table aria-label="Native vs Liquid staking">
-      <thead>
-        <tr>
-          <th>Dimension</th>
-          <th>Native delegation</th>
-          <th>Liquid staking</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr class="highlight">
-          <td>Liquidity</td>
-          <td>Lower (unbonding delays)</td>
-          <td>Higher (tokenized position, depends on market)</td>
-        </tr>
-        <tr>
-          <td>Complexity</td>
-          <td>Lower</td>
-          <td>Higher (contracts + peg/liquidity)</td>
-        </tr>
-        <tr>
-          <td>Risk surface</td>
-          <td>Validator/operator + protocol rules</td>
-          <td>Native risks + smart-contract + market liquidity risks</td>
-        </tr>
-      </tbody>
-    </table>
-
-    <div class="note">
-      <strong>Decision rule:</strong> If you need quick exits, liquid staking can help—but treat it like an additional layer of risk.
-    </div>
-  </section>
-
-  <section class="card" id="best-practices">
-    <h2>Best Way to Stake Polygon: Best Practices (Simple, High-Impact)</h2>
-    <ul>
-      <li><strong>Use a hardware wallet</strong> for meaningful amounts.</li>
-      <li><strong>Delegate in tranches</strong> (test small, then scale).</li>
-      <li><strong>Prefer reputable validators</strong> with stable commission and strong ops.</li>
-      <li><strong>Keep a gas buffer</strong> for claim/unstake/recovery actions.</li>
-      <li><strong>Review allowances periodically</strong> and revoke stale permissions.</li>
-      <li><strong>Track net yield</strong> (not just headline APY).</li>
-    </ul>
-
-    <div class="note">
-      <strong>Most common mistake:</strong> users optimize for +0.5% yield and ignore the 10× bigger risk: bad ops + bad security habits.
-    </div>
-  </section>
-
-  <section class="card" id="troubleshooting">
-    <h2>Staking Polygon Troubleshooting: Common Issues, Root Causes, Fixes</h2>
-
-    <h3>“Rewards not showing”</h3>
-    <ul>
-      <li>You’re viewing the wrong network/account in the wallet.</li>
-      <li>Rewards accrue but require a claim/refresh action in the UI.</li>
-      <li>Validator has downtime or reporting lag—check on-chain data if available.</li>
-    </ul>
-
-    <h3>“Can’t unstake / withdraw”</h3>
-    <ul>
-      <li>Unbonding period is active (wait until it completes).</li>
-      <li>There is a claim/finalize step you haven’t executed.</li>
-      <li>You don’t have enough gas for the exit transaction.</li>
-    </ul>
-
-    <h3>“APY seems lower than expected”</h3>
-    <ul>
-      <li>Commission is higher than assumed.</li>
-      <li>Compounding is not happening (or fees make it not worth it).</li>
-      <li>Validator performance/uptime reduced realized rewards.</li>
-    </ul>
-
-    <div class="note">
-      <strong>Best debugging method:</strong> verify state from the chain / official dashboards first, then UI second.
-      UI can lag; on-chain data is the source of truth.
-    </div>
-  </section>
-
-  <section class="eeat" id="eeat" aria-labelledby="eeat-title">
-    <h2 id="eeat-title">Staking Polygon: Authoritative Notes & External References</h2>
-    <p>
-      Replace placeholder links with your chosen authoritative sources. Keep this block “clean” (official docs, reputable security resources,
-      and dashboards) to strengthen EEAT.
-    </p>
-
-    <h3>Polygon / Staking</h3>
-    <ul>
-      <li><a href="#" target="_blank" rel="noopener nofollow">Polygon — Official Site</a></li>
-      <li><a href="#" target="_blank" rel="noopener nofollow">Polygon Staking — Official Docs</a></li>
-      <li><a href="#" target="_blank" rel="noopener nofollow">Polygon Validators — Explorer / Dashboard</a></li>
-    </ul>
-
-    <h3>Security hygiene</h3>
-    <ul>
-      <li><a href="https://ethereum.org/guides/how-to-revoke-token-access/" target="_blank" rel="noopener nofollow">Ethereum.org — Revoke Token Approvals</a></li>
-      <li><a href="https://revoke.cash/" target="_blank" rel="noopener nofollow">Revoke.cash — Allowance Management</a></li>
-      <li><a href="https://blog.openzeppelin.com/" target="_blank" rel="noopener nofollow">OpenZeppelin — Smart Contract Security</a></li>
-      <li><a href="https://consensys.io/blog" target="_blank" rel="noopener nofollow">Consensys — Security Research</a></li>
-    </ul>
-
-    <div class="note">
-      <strong>About:</strong> Prepared by Crypto Finance Experts as a practical SEO-oriented knowledge base for <em>Staking Polygon (POL)</em>:
-      rewards, APY/APR, validators, calculator framework, safety, comparisons, and troubleshooting.
-    </div>
-  </section>
-
-  <section class="card faq-section" aria-labelledby="faq">
-    <h2 id="faq">Staking Polygon (POL): Frequently Asked Questions</h2>
-
-    <div class="faq-item">
-      <button class="faq-button" aria-expanded="false" aria-controls="f1" id="b1">
-        <h3>What is Staking Polygon (POL) and how does it work?</h3><span class="faq-plus">+</span>
-      </button>
-      <div id="f1" class="faq-content" role="region" aria-labelledby="b1">
-        <p><strong>Staking Polygon (POL)</strong> typically involves delegating POL to validators (or using a staking method that represents your stake) to earn rewards while supporting network operations.</p>
-      </div>
-    </div>
-
-    <div class="faq-item">
-      <button class="faq-button" aria-expanded="false" aria-controls="f2" id="b2">
-        <h3>Polygon staking rewards: what affects my yield?</h3><span class="faq-plus">+</span>
-      </button>
-      <div id="f2" class="faq-content" role="region" aria-labelledby="b2">
-        <p>Your net yield depends on gross rate, validator commission, validator performance/uptime, compounding behavior, and transaction costs for claim/compound/unstake actions.</p>
-      </div>
-    </div>
-
-    <div class="faq-item">
-      <button class="faq-button" aria-expanded="false" aria-controls="f3" id="b3">
-        <h3>Polygon staking APY / APR: which should I trust?</h3><span class="faq-plus">+</span>
-      </button>
-      <div id="f3" class="faq-content" role="region" aria-labelledby="b3">
-        <p>APR is a simple rate; APY assumes compounding. Trust the number that matches your actual compounding cadence and includes fees/commission in the net estimate.</p>
-      </div>
-    </div>
-
-    <div class="faq-item">
-      <button class="faq-button" aria-expanded="false" aria-controls="f4" id="b4">
-        <h3>How to stake Polygon (POL) safely?</h3><span class="faq-plus">+</span>
-      </button>
-      <div id="f4" class="faq-content" role="region" aria-labelledby="b4">
-        <p>Use official links (bookmarks), consider a hardware wallet for size, delegate a small test first, choose reputable validators, and keep a gas buffer for exits and recovery actions.</p>
-      </div>
-    </div>
-
-    <div class="faq-item">
-      <button class="faq-button" aria-expanded="false" aria-controls="f5" id="b5">
-        <h3>Staking Polygon safe, legit, and trustworthy in 2026?</h3><span class="faq-plus">+</span>
-      </button>
-      <div id="f5" class="faq-content" role="region" aria-labelledby="b5">
-        <p>Staking as a mechanism can be legitimate, but outcomes depend on method/provider risk, validator quality, and user security hygiene. Treat phishing and approvals as the top avoidable risks.</p>
-      </div>
-    </div>
-
-    <div class="faq-item">
-      <button class="faq-button" aria-expanded="false" aria-controls="f6" id="b6">
-        <h3>Polygon validator list: what matters most?</h3><span class="faq-plus">+</span>
-      </button>
-      <div id="f6" class="faq-content" role="region" aria-labelledby="b6">
-        <p>Look for stable commission, strong uptime/performance, transparency, and operational reputation. Avoid unknown operators offering eye-catching headline rates.</p>
-      </div>
-    </div>
-
-    <div class="faq-item">
-      <button class="faq-button" aria-expanded="false" aria-controls="f7" id="b7">
-        <h3>Staking Polygon vs liquid staking: which is better?</h3><span class="faq-plus">+</span>
-      </button>
-      <div id="f7" class="faq-content" role="region" aria-labelledby="b7">
-        <p>Native staking is simpler but less liquid; liquid staking may be more flexible but adds smart-contract and market liquidity/peg risks. Choose based on your need for fast exits.</p>
-      </div>
-    </div>
-
-    <div class="faq-item">
-      <button class="faq-button" aria-expanded="false" aria-controls="f8" id="b8">
-        <h3>Polygon staking calculator: what inputs do I need?</h3><span class="faq-plus">+</span>
-      </button>
-      <div id="f8" class="faq-content" role="region" aria-labelledby="b8">
-        <p>Stake amount, gross APR, validator commission, compounding frequency, and transaction costs. The goal is a net yield estimate, not a marketing APY.</p>
-      </div>
-    </div>
-
-    <div class="faq-item">
-      <button class="faq-button" aria-expanded="false" aria-controls="f9" id="b9">
-        <h3>Why can’t I unstake or withdraw right now?</h3><span class="faq-plus">+</span>
-      </button>
-      <div id="f9" class="faq-content" role="region" aria-labelledby="b9">
-        <p>Most commonly: an unbonding period is still running, a claim/finalize step is required, or you lack gas for the exit transaction.</p>
-      </div>
-    </div>
-
-  </section>
-
-</main>
-
-<footer class="container" role="contentinfo" style="padding:2rem 0; border-top:1px solid var(--line); margin-top:2rem">
-  <p class="muted">© 2026 Staking Polygon (POL) Guide. Educational content with safety-first operational focus.</p>
+<div class="c62e276">
+  <div class="c608dd1" aria-label="Guide highlights">
+    <div class="caa51ad"><strong>Key facts</strong><span>The essentials at a glance</span></div>
+    <div class="caa51ad"><strong>In depth</strong><span>Explore the details</span></div>
+    <div class="caa51ad"><strong>Questions answered</strong><span>Find a little more clarity</span></div>
+    <div class="caa51ad"><strong>Sources</strong><span>Follow the references</span></div>
+  </div>
+  <div class="c898bf2">
+    <nav class="ce7160e" aria-labelledby="toc-title">
+      <h2 class="c5b58a4" id="toc-title">On this page</h2>
+      <ul class="ca445f9" id="toc-list">
+        <li><a class="c08ea51" href="#key-facts">Key facts</a></li>
+        <li><a class="c08ea51" href="#guide-sections" data-sections-link>In depth</a></li>
+        <li><a class="c08ea51" href="#questions">Questions &amp; answers</a></li>
+        <li><a class="c08ea51" href="#sources">Sources</a></li>
+      </ul>
+      <p class="c58fa84">Read from the beginning, or jump to the details you need.</p>
+    </nav>
+    <main class="cc3d40d" id="guide-main" tabindex="-1">
+      <section class="ce5e5b5" id="key-facts" aria-labelledby="facts-title">
+        <div class="c38b386"><h2 id="facts-title">Key facts</h2><p>At a glance</p></div>
+        <div class="c3d6ced"><table class="c6097eb"><tbody><tr><th scope="row">Network</th><td>Polygon PoS — Ethereum-aligned sidechain/L2</td></tr>
+<tr><th scope="row">Staked asset</th><td>POL (migrated from MATIC)</td></tr>
+<tr><th scope="row">Consensus role</th><td>Proof-of-stake validators and delegators</td></tr>
+<tr><th scope="row">Unstaking delay</th><td>Checkpoint-based cooldown, typically several days</td></tr>
+<tr><th scope="row">Main risks</th><td>Slashing, validator downtime, smart-contract risk (liquid staking)</td></tr>
+<tr><th scope="row">Custody options</th><td>Custodial (exchange), non-custodial (direct), liquid staking</td></tr></tbody></table></div>
+      </section>
+      <div class="cf7e669" id="guide-sections"><section class="cb495ac"><h2 class="ca1f5a5">What Staking Polygon Means</h2><div class="c2d8e58"><strong>Staking Polygon means locking POL tokens behind a validator on the Polygon network so that validator can participate in consensus, and receiving a cut of the rewards the protocol distributes in exchange.</strong> The network itself does not hold your funds hostage in some mysterious vault — it simply records that your tokens back a particular validator's voting power, and that validator's performance determines whether your stake earns its full reward or loses a slice of it. Everything else in this guide — the custody models, the risks, the migration from MATIC — builds on that one mechanic. None of this requires you to run any hardware yourself; the validator does the technical work, and your role is choosing which one to trust with your tokens.<h3>Validators and delegators</h3>A validator runs the infrastructure that proposes and confirms blocks; a delegator simply points their stake at a validator without running any software. Most people staking Polygon are delegators, which is why the choice of validator — or of the platform standing in for one — matters more than any technical setup.<h3>Why Polygon needs staked POL</h3>Proof-of-stake security is only as strong as the capital backing it. The more POL that is locked behind honest validators, the costlier it becomes for any single actor to accumulate enough influence to misbehave, which is the economic logic every reward payout is funding.</div></section>
+<section class="cb495ac"><h2 class="ca1f5a5">Staking Polygon Options: Custodial, Non-Custodial, Liquid</h2><div class="c2d8e58">There are three practical routes into staking Polygon, and they differ mainly in who holds the keys and how quickly you can exit. Custodial staking through an exchange is the simplest to start but hands control of your tokens to a third party. Non-custodial delegation keeps POL in your own wallet while you point it at a validator directly, typically through the <a href="https://docs.polygon.technology/" rel="nofollow noopener" target="_blank">Polygon docs</a> staking dashboard. Liquid staking mints a receipt token representing your staked position, which stays usable elsewhere in DeFi while the underlying POL is locked. None of the three is objectively correct; the right pick depends on whether you value simplicity, direct control, or ongoing liquidity the most.<table><thead><tr><th>Model</th><th>Who holds the keys</th><th>Main trade-off</th></tr></thead><tbody><tr><td>Custodial (exchange)</td><td>The exchange</td><td>Easiest setup, but counterparty risk and withdrawal limits</td></tr><tr><td>Non-custodial (direct delegation)</td><td>You, in your own wallet</td><td>Full control, but you choose and monitor the validator yourself</td></tr><tr><td>Liquid staking</td><td>A smart contract, via a receipt token</td><td>Capital stays liquid, but adds smart-contract and peg risk</td></tr></tbody></table></div></section>
+<section class="cb495ac"><h2 class="ca1f5a5">Risks to Weigh Before Staking Polygon</h2><div class="c2d8e58">No staking method is risk-free, and the risks differ enough by model that comparing them side by side is more useful than a single blanket warning. Before committing a meaningful amount, it helps to walk through each failure mode on its own terms.<h3>Slashing and validator downtime</h3>A validator that signs conflicting blocks or goes offline for an extended stretch can be penalized, and a portion of that penalty is typically absorbed by the delegators backing it. This is why the single biggest decision in non-custodial and custodial staking alike is which validator — or which platform's chosen validator set — you trust with uptime and honest behavior.<h3>Smart-contract risk in liquid staking</h3>A liquid staking protocol adds a layer that custodial and plain non-custodial delegation do not carry: the contract minting and redeeming your receipt token. A bug, an exploit or a severe de-peg between the receipt token and the underlying asset can cost you value even if the validators behind it perform flawlessly, so the convenience of staying liquid is bought with an extra attack surface.</div></section>
+<section class="cb495ac"><h2 class="ca1f5a5">The POL Migration and Staking Polygon Today</h2><div class="c2d8e58">Polygon's staking token transitioned from MATIC to POL as part of the network's broader move toward a shared security model across multiple Polygon chains. If you are staking Polygon today, the asset behind your position is POL, and MATIC holders who have not yet migrated generally need to do so before they can delegate on the current staking contracts. You can confirm a validator's live stake and a migration contract's activity directly on <a href="https://polygonscan.com/" rel="nofollow noopener" target="_blank">PolygonScan</a> rather than relying on a third party's summary of it. The migration itself is a one-time action per wallet; once it is done, every future staking transaction simply uses POL as though it had always been the native asset.</div></section>
+<section class="cb495ac"><h2 class="ca1f5a5">How to Start Staking Polygon Safely</h2><div class="c2d8e58">Once you have picked a custody model, the actual process of staking Polygon follows a short, repeatable sequence regardless of which route you take, and skipping a step is usually what causes the few problems people actually run into.<ul><li>Decide on custodial, non-custodial or liquid staking based on how much control versus convenience you want.</li><li>If delegating directly, connect a self-custody wallet holding POL to the official staking dashboard.</li><li>Research the validator's uptime history and fee before delegating — do not pick the first name on the list.</li><li>Confirm the amount, review the commission rate, and sign the delegation transaction.</li><li>Track rewards and validator performance periodically rather than assuming nothing will change.</li></ul><h3>Choosing a validator or platform</h3>Look for a long uptime record, a reasonable commission, and — for custodial or liquid options — a platform that discloses which validators it actually uses. A background check on a validator's history, available through <a href="https://en.wikipedia.org/wiki/Polygon_(blockchain)" rel="nofollow noopener" target="_blank">Wikipedia's overview of Polygon</a> and the network's own explorer, costs a few minutes and can save a slashing headache later.<h3>Unstaking and the cooldown period</h3>Exiting a non-custodial delegation is not instant: Polygon enforces a checkpoint-based cooldown before your POL becomes transferable again, typically a matter of days. Liquid staking sidesteps this by letting you sell the receipt token on the open market instead of waiting, at the cost of depending on that market's liquidity and peg.</div></section>
+<section class="cb495ac"><h2 class="ca1f5a5">Staking Polygon Rewards and Realistic Expectations</h2><div class="c2d8e58">Reward rates for staking Polygon move with total stake participation and network emissions, so any specific percentage quoted today will drift over time rather than staying fixed. The useful comparison is not the headline yield but the yield net of commission, any platform fee on custodial or liquid products, and the opportunity cost of the cooldown period if you might need the funds back quickly. Sites tracking on-chain yields across staking and liquid-staking protocols, such as <a href="https://defillama.com/" rel="nofollow noopener" target="_blank">DefiLlama</a>, are a reasonable way to sanity-check a quoted rate against what similar protocols are actually paying. Treat any number you see as a snapshot rather than a promise, since the rate paid out next month depends on how much total stake the network attracts between now and then.</div></section>
+<section class="cb495ac"><h2 class="ca1f5a5">Staking Polygon vs Other Chains: Is It Worth It</h2><div class="c2d8e58">The case for staking Polygon rests on the same logic that applies to proof-of-stake chains generally, a model covered in general terms by <a href="https://ethereum.org/en/staking/" rel="nofollow noopener" target="_blank">ethereum.org's staking overview</a>: you are paid for taking on validator and liquidity risk rather than simply holding an asset. Whether it is worth it next to staking on another chain depends on your view of Polygon's roadmap, the commission and risk profile of the validator or platform you choose, and whether you value the liquidity a receipt token offers over the simplicity of a direct, non-custodial delegation. There is no universally correct answer — only a correct answer for how much control and liquidity you are willing to trade for yield. Reading the risk comparison earlier in this guide before committing funds is a better use of your time than chasing the single highest advertised rate.</div></section></div>
+      <section class="c9a8c5e" id="questions" aria-labelledby="questions-title">
+        <h2 class="ca1f5a5" id="questions-title">Questions &amp; answers</h2>
+        <details class="cf38d54"><summary class="c9815a3">What does staking Polygon actually mean?</summary><div class="c4d355f">It means locking POL tokens behind a validator so that validator can take part in securing the Polygon network, in exchange for a share of the rewards the protocol pays out to that validator and its delegators.</div></details>
+<details class="cf38d54"><summary class="c9815a3">Is custodial or non-custodial staking better for Polygon?</summary><div class="c4d355f">Custodial staking through an exchange is simpler but hands control of your tokens to a third party; non-custodial delegation keeps your POL in your own wallet but puts the responsibility of choosing a reliable validator on you.</div></details>
+<details class="cf38d54"><summary class="c9815a3">What is liquid staking and how does it differ?</summary><div class="c4d355f">Liquid staking mints a receipt token representing your staked POL, which you can trade or use elsewhere in DeFi while the underlying position stays locked. It adds smart-contract and peg risk that plain delegation does not carry.</div></details>
+<details class="cf38d54"><summary class="c9815a3">Can I lose money staking Polygon?</summary><div class="c4d355f">Yes, mainly through a validator being slashed for downtime or misbehavior, through a custodial platform's own failure, or through smart-contract or peg risk in a liquid staking protocol. Choosing a validator or platform with a solid track record reduces but does not eliminate this.</div></details>
+<details class="cf38d54"><summary class="c9815a3">Do I need to migrate MATIC to POL before staking?</summary><div class="c4d355f">Generally yes. Polygon's staking contracts now run on POL, so MATIC holders typically need to complete the migration before they can delegate on the current system.</div></details>
+<details class="cf38d54"><summary class="c9815a3">How long does it take to unstake on Polygon?</summary><div class="c4d355f">Non-custodial delegation uses a checkpoint-based cooldown that usually takes several days before your POL becomes transferable again. Liquid staking receipt tokens can instead be sold on the open market without waiting for that cooldown.</div></details>
+<details class="cf38d54"><summary class="c9815a3">Where can I check a validator's real performance?</summary><div class="c4d355f">A network explorer such as PolygonScan shows live stake and activity for a given validator, which is a more direct check than relying on a platform's own marketing claims about uptime or commission.</div></details>
+      </section>
+    </main>
+  </div>
+</div>
+<section class="c624544" id="sources" aria-labelledby="sources-title">
+  <div class="c62e276 cac0660">
+    <div class="cc7b2bf"><h2 id="sources-title">Sources</h2><p>References for further reading.</p></div>
+    <div class="c72ee5b"><ul class="cbf7085"><li><a class="cf80e89" href="https://docs.polygon.technology/" rel="nofollow noopener" target="_blank">Polygon documentation</a></li>
+<li><a class="cf80e89" href="https://polygonscan.com/" rel="nofollow noopener" target="_blank">PolygonScan</a></li>
+<li><a class="cf80e89" href="https://en.wikipedia.org/wiki/Polygon_(blockchain)" rel="nofollow noopener" target="_blank">Polygon — Wikipedia</a></li>
+<li><a class="cf80e89" href="https://defillama.com/" rel="nofollow noopener" target="_blank">DefiLlama</a></li></ul></div>
+  </div>
+</section>
+<footer class="cd90b31">
+  <div class="c62e276 c7b2c5f">
+    <span class="cac5500">The guide</span>
+    <p class="c579311">Last updated <span>Updated Oct 10, 2026</span></p>
+  </div>
 </footer>
-
 <script>
-  (function(){
-    const buttons = document.querySelectorAll('.faq-button');
-    buttons.forEach(btn=>{
-      btn.addEventListener('click', ()=>{
-        const expanded = btn.getAttribute('aria-expanded') === 'true';
-        const panelId = btn.getAttribute('aria-controls');
-        const panel = document.getElementById(panelId);
-        const plus = btn.querySelector('.faq-plus');
-
-        btn.setAttribute('aria-expanded', String(!expanded));
-        if(!expanded){
-          panel.classList.add('open');
-          panel.style.maxHeight = panel.scrollHeight + 'px';
-          if(plus) plus.textContent = '–';
-        }else{
-          panel.classList.remove('open');
-          panel.style.maxHeight = '0px';
-          if(plus) plus.textContent = '+';
-        }
-      });
+(() => {
+  const toc = document.getElementById('toc-list');
+  const sections = Array.from(document.querySelectorAll('#guide-sections .cb495ac'));
+  const fallback = toc.querySelector('[data-sections-link]');
+  const fragment = document.createDocumentFragment();
+  sections.forEach((section, index) => {
+    if (!section.id) {
+      const base = `guide-section-${index + 1}`;
+      let id = base;
+      let suffix = 1;
+      while (document.getElementById(id)) id = `${base}-${suffix++}`;
+      section.id = id;
+    }
+    const heading = section.querySelector('.ca1f5a5, h2, h3');
+    const item = document.createElement('li');
+    const link = document.createElement('a');
+    link.className = 'toc-link';
+    link.href = `#${encodeURIComponent(section.id)}`;
+    link.textContent = heading?.textContent.trim() || section.getAttribute('aria-label') || `Section ${index + 1}`;
+    item.append(link);
+    fragment.append(item);
+  });
+  if (sections.length) fallback.parentElement.replaceWith(fragment);
+  const entries = Array.from(toc.querySelectorAll('a[href^="#"]')).map(link => {
+    const target = document.getElementById(decodeURIComponent(link.hash.slice(1)));
+    return { link, target };
+  }).filter(entry => entry.target);
+  if (!entries.length) return;
+  let activeLink;
+  let pending = false;
+  const activate = entry => {
+    if (!entry || entry.link === activeLink) return;
+    if (activeLink) activeLink.removeAttribute('aria-current');
+    entry.link.setAttribute('aria-current', 'location');
+    activeLink = entry.link;
+  };
+  const update = () => {
+    pending = false;
+    const boundary = Math.min(180, window.innerHeight * .25);
+    let active = entries[0];
+    for (const entry of entries) {
+      if (entry.target.getBoundingClientRect().top <= boundary) active = entry;
+    }
+    const root = document.scrollingElement || document.documentElement;
+    if (root.scrollHeight > window.innerHeight && Math.ceil(window.scrollY + window.innerHeight) >= root.scrollHeight - 2) {
+      active = entries[entries.length - 1];
+    }
+    activate(active);
+  };
+  const schedule = () => {
+    if (pending) return;
+    pending = true;
+    window.requestAnimationFrame(update);
+  };
+  if ('IntersectionObserver' in window) {
+    const observer = new IntersectionObserver(schedule, {
+      rootMargin: '-12% 0px -60% 0px',
+      threshold: [0, .1, .5, 1]
     });
-
-    window.addEventListener('resize', ()=>{
-      document.querySelectorAll('.faq-content.open').forEach(p=>{
-        p.style.maxHeight = p.scrollHeight + 'px';
-      });
+    entries.forEach(entry => observer.observe(entry.target));
+  }
+  toc.addEventListener('click', event => {
+    const link = event.target.closest('a');
+    if (!link || event.defaultPrevented || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+    const entry = entries.find(item => item.link === link);
+    if (!entry) return;
+    event.preventDefault();
+    const hadTabindex = entry.target.hasAttribute('tabindex');
+    if (!hadTabindex) {
+      entry.target.setAttribute('tabindex', '-1');
+      entry.target.addEventListener('blur', () => entry.target.removeAttribute('tabindex'), { once: true });
+    }
+    entry.target.focus({ preventScroll: true });
+    entry.target.scrollIntoView({
+      behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth',
+      block: 'start'
     });
-  })();
+    if (window.location.hash !== link.hash) {
+      try { window.history.pushState(null, '', link.hash); } catch {}
+    }
+    activate(entry);
+  });
+  window.addEventListener('scroll', schedule, { passive: true });
+  window.addEventListener('resize', schedule, { passive: true });
+  window.addEventListener('hashchange', schedule);
+  window.addEventListener('load', schedule, { once: true });
+  update();
+})();
 </script>
-
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-</body></html>
