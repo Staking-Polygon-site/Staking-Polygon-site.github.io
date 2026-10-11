@@ -1,1410 +1,297 @@
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Staking Polygon — Custodial, Non-Custodial & Liquid Options Compared</title>
-<meta name="description" content="A practical guide to Staking Polygon: compare custodial, non-custodial and liquid staking, weigh slashing and smart-contract risk, understand the POL migration, and learn how to start safely.">
-<link rel="canonical" href="https://staking-polygon-site.github.io/">
-<meta property="og:type" content="article">
-<meta property="og:title" content="Staking Polygon: The Complete Guide">
-<meta property="og:url" content="https://staking-polygon-site.github.io/">
-<meta property="og:image" content="https://staking-polygon-site.github.io/og.png">
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Staking Polygon: The Complete Guide">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Staking Polygon — Custodial, Non-Custodial & Liquid Options Compared</title>
+  <meta name="description" content="A practical guide to Staking Polygon: compare custodial, non-custodial and liquid staking, weigh slashing and smart-contract risk, understand the POL migration, and learn how to start safely.">
+  <link rel="canonical" href="https://staking-polygon-site.github.io/">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Staking Polygon: The Complete Guide">
+  <meta property="og:description" content="A practical guide to Staking Polygon: compare custodial, non-custodial and liquid staking, weigh slashing and smart-contract risk, understand the POL migration, and learn how to start safely.">
+  <meta property="og:url" content="https://staking-polygon-site.github.io/">
+  <meta property="og:image" content="https://staking-polygon-site.github.io/og.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Staking Polygon: The Complete Guide">
+  <meta name="twitter:description" content="A practical guide to Staking Polygon: compare custodial, non-custodial and liquid staking, weigh slashing and smart-contract risk, understand the POL migration, and learn how to start safely.">
+  <meta name="twitter:image" content="https://staking-polygon-site.github.io/og.png">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&family=Outfit:wght@500;600;700&display=swap">
 <script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebSite", "@id": "https://staking-polygon-site.github.io/#website", "url": "https://staking-polygon-site.github.io/", "name": "Staking Polygon — Custodial, Non-Custodial & Liquid Options Compared"}, {"@type": "WebPage", "@id": "https://staking-polygon-site.github.io/#webpage", "url": "https://staking-polygon-site.github.io/", "name": "Staking Polygon — Custodial, Non-Custodial & Liquid Options Compared", "isPartOf": {"@id": "https://staking-polygon-site.github.io/#website"}, "description": "A practical guide to Staking Polygon: compare custodial, non-custodial and liquid staking, weigh slashing and smart-contract risk, understand the POL migration, and learn how to start safely.", "datePublished": "2026-10-11", "dateModified": "2026-10-11"}, {"@type": "SoftwareApplication", "name": "Staking Polygon", "applicationCategory": "FinanceApplication", "operatingSystem": "Web", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://staking-polygon-site.github.io/"}, {"@type": "ListItem", "position": 2, "name": "Staking"}, {"@type": "ListItem", "position": 3, "name": "Staking Polygon"}]}, {"@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "What does staking Polygon actually mean?", "acceptedAnswer": {"@type": "Answer", "text": "It means locking POL tokens behind a validator so that validator can take part in securing the Polygon network, in exchange for a share of the rewards the protocol pays out to that validator and its delegators."}}, {"@type": "Question", "name": "Is custodial or non-custodial staking better for Polygon?", "acceptedAnswer": {"@type": "Answer", "text": "Custodial staking through an exchange is simpler but hands control of your tokens to a third party; non-custodial delegation keeps your POL in your own wallet but puts the responsibility of choosing a reliable validator on you."}}, {"@type": "Question", "name": "What is liquid staking and how does it differ?", "acceptedAnswer": {"@type": "Answer", "text": "Liquid staking mints a receipt token representing your staked POL, which you can trade or use elsewhere in DeFi while the underlying position stays locked. It adds smart-contract and peg risk that plain delegation does not carry."}}, {"@type": "Question", "name": "Can I lose money staking Polygon?", "acceptedAnswer": {"@type": "Answer", "text": "Yes, mainly through a validator being slashed for downtime or misbehavior, through a custodial platform's own failure, or through smart-contract or peg risk in a liquid staking protocol. Choosing a validator or platform with a solid track record reduces but does not eliminate this."}}, {"@type": "Question", "name": "Do I need to migrate MATIC to POL before staking?", "acceptedAnswer": {"@type": "Answer", "text": "Generally yes. Polygon's staking contracts now run on POL, so MATIC holders typically need to complete the migration before they can delegate on the current system."}}, {"@type": "Question", "name": "How long does it take to unstake on Polygon?", "acceptedAnswer": {"@type": "Answer", "text": "Non-custodial delegation uses a checkpoint-based cooldown that usually takes several days before your POL becomes transferable again. Liquid staking receipt tokens can instead be sold on the open market without waiting for that cooldown."}}, {"@type": "Question", "name": "Where can I check a validator's real performance?", "acceptedAnswer": {"@type": "Answer", "text": "A network explorer such as PolygonScan shows live stake and activity for a given validator, which is a more direct check than relying on a platform's own marketing claims about uptime or commission."}}]}]}</script>
-<style>
-:root{--bg:#0D0F0A;--surface:#181C12;--text:#EEF2E6;--muted:#95997F;--accent:#A3E635;--accent-ink:#111600;--radius:13px;--display:"Outfit";--body:"Figtree"}
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-}
-html {
-  scroll-behavior: smooth;
-  scroll-padding-top: 2rem;
-  background: var(--bg);
-  -webkit-text-size-adjust: 100%;
-}
-body {
-  margin: 0;
-  min-width: 280px;
-  color: var(--text);
-  background: var(--bg);
-  font-family: var(--body);
-  font-size: 1rem;
-  font-weight: 400;
-  line-height: 1.7;
-  -webkit-font-smoothing: antialiased;
-  overflow-wrap: break-word;
-}
-::selection {
-  color: var(--accent-ink);
-  background: var(--accent);
-}
-a {
-  color: var(--accent);
-  text-decoration-thickness: .075em;
-  text-underline-offset: .2em;
-  transition: color .18s ease, background .18s ease, border-color .18s ease;
-}
-a:hover {
-  color: var(--text);
-}
-a:focus-visible,
-summary:focus-visible,
-[tabindex]:focus-visible {
-  outline: 3px solid var(--accent);
-  outline-offset: 5px;
-  border-radius: calc(var(--radius) * .35);
-}
-img,
-svg,
-video {
-  max-width: 100%;
-  vertical-align: middle;
-}
-img,
-video {
-  height: auto;
-}
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  margin-top: 0;
-  color: var(--text);
-  font-family: var(--display);
-  font-weight: 650;
-  line-height: 1.2;
-  text-wrap: balance;
-}
-p,
-ul,
-ol,
-dl,
-figure,
-blockquote {
-  margin-top: 0;
-}
-[hidden] {
-  display: none !important;
-}
-.c62e276 {
-  width: min(100% - 6rem, 1240px);
-  margin-inline: auto;
-}
-.cdb6b55 {
-  position: absolute;
-  z-index: 20;
-  top: 1rem;
-  left: 1rem;
-  padding: .75rem 1.15rem;
-  transform: translateY(-180%);
-  border-radius: var(--radius);
-  color: var(--accent-ink);
-  background: var(--accent);
-  font-weight: 600;
-}
-.cdb6b55:focus {
-  transform: translateY(0);
-}
-.c11e0a4 {
-  position: relative;
-  z-index: 1;
-  border-bottom: 1px solid color-mix(in srgb, var(--text) 10%, var(--bg));
-  background: var(--bg);
-}
-.ca8c6d7 {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 2rem;
-  min-height: 88px;
-  padding-block: 1rem;
-}
-.c7c9140 {
-  display: inline-flex;
-  align-items: center;
-  gap: .75rem;
-  color: var(--text);
-  font-family: var(--display);
-  font-size: 1.2rem;
-  font-weight: 650;
-  letter-spacing: -.04em;
-}
-.ce7b99a {
-  display: grid;
-  place-items: center;
-  width: 34px;
-  height: 34px;
-  border: 1px solid color-mix(in srgb, var(--accent) 30%, var(--surface));
-  border-radius: calc(var(--radius) * .55);
-  color: var(--accent);
-  background: color-mix(in srgb, var(--accent) 8%, var(--surface));
-}
-.ce7b99a svg {
-  width: 19px;
-  height: 19px;
-  fill: none;
-  stroke: var(--accent);
-  stroke-width: 1.6;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-}
-.c976efe {
-  display: inline-flex;
-  align-items: center;
-  gap: .8rem;
-  padding: .5rem 0;
-  color: var(--text);
-  font-size: .9rem;
-  font-weight: 600;
-  text-decoration: none;
-}
-.c976efe:hover {
-  color: var(--accent);
-}
-.c163931 {
-  position: relative;
-  isolation: isolate;
-  overflow: hidden;
-  border-bottom: 1px solid color-mix(in srgb, var(--accent) 15%, var(--bg));
-  background:
-    radial-gradient(ellipse at 95% 12%, color-mix(in srgb, var(--accent) 14%, transparent), color-mix(in srgb, var(--accent) 0%, transparent) 62%),
-    linear-gradient(130deg, var(--surface), color-mix(in srgb, var(--accent) 5%, var(--bg)) 70%, var(--bg));
-}
-.c163931::after {
-  content: "";
-  position: absolute;
-  z-index: -1;
-  width: 520px;
-  height: 520px;
-  right: -240px;
-  bottom: -310px;
-  border: 1px solid color-mix(in srgb, var(--accent) 15%, transparent);
-  border-radius: 50%;
-  box-shadow: 0 0 0 65px color-mix(in srgb, var(--accent) 3%, transparent), 0 0 0 130px color-mix(in srgb, var(--accent) 2%, transparent);
-  pointer-events: none;
-}
-.c543082 {
-  padding-block: 1.2rem 3rem;
-}
-.c194967 {
-  margin-bottom: 1.6rem;
-  color: var(--muted);
-  font-size: .8rem;
-  line-height: 1.6;
-}
-.c66e047 {
-  display: inline;
-  color: var(--muted);
-  font-family: var(--body);
-  font-size: inherit;
-  text-decoration: none;
-}
-.c66e047 a,
-a.c66e047 {
-  color: var(--muted);
-  text-decoration: none;
-}
-.c66e047 a:hover,
-a.c66e047:hover {
-  color: var(--accent);
-  text-decoration: underline;
-}
-.c194967 ol,
-.c194967 ul,
-ol.c66e047,
-ul.c66e047 {
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: .45rem .7rem;
-  padding: 0;
-  margin: 0;
-  list-style: none;
-}
-.c194967 li {
-  display: inline;
-}
-.c194967 [aria-current="page"] {
-  color: var(--text);
-}
-.c6ae318 {
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: .8rem;
-  margin-bottom: 1.35rem;
-  color: var(--accent);
-  font-size: .875rem;
-  font-weight: 600;
-}
-.ca0297e {
-  padding-block: .3rem;
-}
-.c76fdb0 {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 36px;
-  max-width: 180px;
-  padding: .4rem .65rem;
-  border: 1px solid color-mix(in srgb, var(--text) 9%, var(--surface));
-  border-radius: calc(var(--radius) * .6);
-  background: var(--surface);
-  box-shadow: 0 3px 10px color-mix(in srgb, var(--text) 4%, transparent);
-  color: var(--text);
-  font-size: .8rem;
-  line-height: 1;
-}
-.c76fdb0:empty {
-  display: none;
-}
-.c76fdb0 img,
-.c76fdb0 svg {
-  display: block;
-  width: auto;
-  max-width: 148px;
-  height: 24px;
-  object-fit: contain;
-}
-.c163931 h1 {
-  max-width: 1050px;
-  margin: 0 0 1.5rem;
-  font-family: var(--display);
-  font-size: clamp(2.7rem, 5.7vw, 5.1rem);
-  font-weight: 600;
-  line-height: 1.06;
-  letter-spacing: -.055em;
-  overflow-wrap: anywhere;
-}
-.c163931 h1 em {
-  color: var(--accent);
-  font-style: normal;
-}
-.c163931 h1 a {
-  color: inherit;
-}
-.c4fa7fb {
-  max-width: 760px;
-  margin: 0 0 2.1rem;
-  color: var(--muted);
-  font-size: clamp(1.05rem, 1.6vw, 1.22rem);
-  line-height: 1.75;
-  text-wrap: pretty;
-}
-.c057b9a {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 1.7rem;
-  min-height: 54px;
-  padding: .85rem 1.35rem;
-  border: 1px solid var(--accent);
-  border-radius: var(--radius);
-  color: var(--accent-ink);
-  background: var(--accent);
-  box-shadow: 0 6px 18px color-mix(in srgb, var(--accent) 18%, transparent);
-  font-family: var(--body);
-  font-size: .95rem;
-  font-weight: 650;
-  line-height: 1.4;
-  text-decoration: none;
-  transition: background .2s ease, box-shadow .2s ease, transform .2s ease;
-}
-.c057b9a:hover {
-  color: var(--accent-ink);
-  background: color-mix(in srgb, var(--accent) 92%, var(--text));
-  box-shadow: 0 9px 24px color-mix(in srgb, var(--accent) 24%, transparent);
-  transform: translateY(-2px);
-}
-.cf89071 {
-  font-family: var(--body);
-  font-size: 1.25em;
-  line-height: 1;
-}
-.cf4f11e {
-  display: grid;
-  grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.82fr);
-  gap: clamp(2rem, 4vw, 3.75rem);
-  align-items: start;
-}
-.cdcb109 {
-  min-width: 0;
-}
-.cdcb109 .c4fa7fb {
-  margin-bottom: 1.6rem;
-}
-.c1b6d2c {
-  position: relative;
-  min-width: 0;
-  display: flex;
-  flex-direction: column;
-  padding: clamp(1.15rem, 2vw, 1.65rem);
-  border: 1px solid color-mix(in srgb, var(--accent) 20%, var(--surface));
-  border-radius: calc(var(--radius) * 1.4);
-  background: linear-gradient(158deg, color-mix(in srgb, var(--accent) 8%, var(--surface)), var(--surface) 46%);
-  box-shadow: 0 22px 60px -26px color-mix(in srgb, var(--text) 24%, transparent), 0 3px 12px -6px color-mix(in srgb, var(--accent) 14%, transparent);
-}
-.c1b6d2c::before {
-  content: "";
-  position: absolute;
-  inset: -1px 14% auto;
-  height: 2px;
-  background: linear-gradient(90deg, transparent, color-mix(in srgb, var(--accent) 60%, transparent), transparent);
-}
-.cb6dcc3 {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  gap: 0.6rem 1rem;
-  margin-bottom: 1rem;
-}
-.cb6dcc3 h2 {
-  margin: 0;
-  font-family: var(--display);
-  font-size: 1.15rem;
-  font-weight: 650;
-  letter-spacing: -0.03em;
-}
-.c969f58 {
-  display: inline-flex;
-  align-items: center;
-  max-width: 100%;
-  padding: 0.28rem 0.62rem;
-  border: 1px solid color-mix(in srgb, var(--accent) 18%, transparent);
-  border-radius: 999px;
-  background: color-mix(in srgb, var(--accent) 8%, var(--surface));
-  color: var(--accent);
-  font-size: 0.72rem;
-  font-weight: 600;
-  overflow-wrap: anywhere;
-}
-.c0f7067 .c6097eb {
-  width: 100%;
-  border-collapse: collapse;
-  font-size: 0.85rem;
-}
-.c0f7067 .c6097eb th,
-.c0f7067 .c6097eb td {
-  padding: 0.58rem 0;
-  border-bottom: 1px solid color-mix(in srgb, var(--text) 10%, transparent);
-  vertical-align: top;
-  text-align: left;
-  overflow-wrap: anywhere;
-}
-.c0f7067 .c6097eb tr:last-child th,
-.c0f7067 .c6097eb tr:last-child td {
-  border-bottom: 0;
-}
-.c0f7067 .c6097eb th {
-  width: 38%;
-  padding-right: 0.9rem;
-  color: var(--muted);
-  font-weight: 500;
-}
-.c0f7067 .c6097eb td {
-  color: var(--text);
-  font-weight: 550;
-}
-.cde2ec0 {
-  margin-top: 1.15rem;
-  width: 100%;
-}
-@media (max-width: 920px) {
-  .cf4f11e {
-    grid-template-columns: minmax(0, 1fr);
-    gap: 2rem;
-  }
-  .c1b6d2c {
-    width: 100%;
-    max-width: 560px;
-  }
-}
-.summary-strip {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 1rem;
-  margin-block: 1.5rem 4.5rem;
-}
-.summary-item {
-  min-width: 0;
-  padding: 1.2rem 1.35rem;
-  border: 1px solid color-mix(in srgb, var(--text) 9%, var(--surface));
-  border-radius: var(--radius);
-  background: var(--surface);
-  box-shadow: 0 3px 12px color-mix(in srgb, var(--text) 3%, transparent);
-}
-.summary-item strong {
-  display: block;
-  margin-bottom: .2rem;
-  color: var(--text);
-  font-family: var(--display);
-  font-size: 1rem;
-  font-weight: 600;
-  line-height: 1.4;
-  letter-spacing: -.02em;
-}
-.summary-item span {
-  display: block;
-  color: var(--muted);
-  font-size: .8rem;
-  line-height: 1.5;
-}
-.c898bf2 {
-  display: grid;
-  grid-template-columns: 235px minmax(0, 1fr);
-  align-items: start;
-  gap: clamp(2.5rem, 5vw, 5rem);
-  padding-bottom: 4.5rem;
-}
-.ce7160e {
-  position: sticky;
-  top: 2rem;
-  min-width: 0;
-  max-height: calc(100dvh - 4rem);
-  overflow-y: auto;
-  overscroll-behavior: contain;
-  scrollbar-width: thin;
-  scrollbar-color: color-mix(in srgb, var(--muted) 35%, var(--surface)) var(--surface);
-  padding: .3rem .75rem 1rem .25rem;
-}
-.c5b58a4 {
-  margin: 0 0 1.1rem;
-  color: var(--text);
-  font-family: var(--display);
-  font-size: .95rem;
-  font-weight: 650;
-  letter-spacing: -.02em;
-}
-.ca445f9 {
-  display: grid;
-  gap: .3rem;
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-.ca445f9 li {
-  min-width: 0;
-  margin: 0;
-  padding: 0;
-}
-.c08ea51 {
-  position: relative;
-  display: block;
-  padding: .7rem .9rem .7rem 1.1rem;
-  border-inline-start: 2px solid color-mix(in srgb, var(--muted) 18%, var(--bg));
-  border-radius: 0 calc(var(--radius) * .55) calc(var(--radius) * .55) 0;
-  color: var(--muted);
-  font-family: var(--body);
-  font-size: .85rem;
-  font-weight: 450;
-  line-height: 1.5;
-  text-decoration: none;
-  overflow-wrap: anywhere;
-}
-.c08ea51:hover {
-  border-inline-start-color: color-mix(in srgb, var(--accent) 45%, var(--bg));
-  color: var(--text);
-  background: color-mix(in srgb, var(--accent) 5%, var(--bg));
-}
-.c08ea51[aria-current="location"] {
-  border-inline-start-color: var(--accent);
-  color: var(--accent);
-  background: color-mix(in srgb, var(--accent) 9%, var(--bg));
-  font-weight: 650;
-}
-.c58fa84 {
-  margin: 1.65rem 0 0;
-  padding: 1.2rem 0 0;
-  border-top: 1px solid color-mix(in srgb, var(--text) 10%, var(--bg));
-  color: var(--muted);
-  font-size: .78rem;
-  line-height: 1.65;
-}
-.cc3d40d {
-  min-width: 0;
-}
-.facts-panel {
-  padding: clamp(1.3rem, 3vw, 2.3rem);
-  margin-bottom: 3.75rem;
-  border: 1px solid color-mix(in srgb, var(--accent) 18%, var(--surface));
-  border-top: 3px solid var(--accent);
-  border-radius: var(--radius);
-  background: var(--surface);
-  box-shadow: 0 10px 35px color-mix(in srgb, var(--text) 5%, transparent);
-  scroll-margin-top: 2rem;
-}
-.panel-heading {
-  display: flex;
-  align-items: baseline;
-  flex-wrap: wrap;
-  gap: .5rem 1.5rem;
-  justify-content: space-between;
-  margin-bottom: 1.4rem;
-}
-.panel-heading h2 {
-  margin: 0;
-  font-size: clamp(1.45rem, 2.3vw, 1.85rem);
-  letter-spacing: -.04em;
-}
-.panel-heading p {
-  margin: 0;
-  color: var(--muted);
-  font-size: .8rem;
-}
-.facts-content {
-  min-width: 0;
-  overflow-x: auto;
-  scrollbar-width: thin;
-  scrollbar-color: var(--muted) var(--surface);
-}
-.c6097eb {
-  width: 100%;
-  border-collapse: collapse;
-  color: var(--text);
-  font-family: var(--body);
-  font-size: .925rem;
-  line-height: 1.6;
-  text-align: left;
-}
-.c6097eb caption {
-  padding: 0 0 1rem;
-  color: var(--muted);
-  font-size: .85rem;
-  text-align: left;
-}
-.c6097eb th,
-.c6097eb td {
-  padding: 1.05rem .85rem;
-  border-bottom: 1px solid color-mix(in srgb, var(--text) 9%, var(--surface));
-  vertical-align: top;
-  overflow-wrap: anywhere;
-}
-.c6097eb th {
-  width: 37%;
-  color: var(--muted);
-  font-weight: 500;
-}
-.c6097eb thead th {
-  color: var(--text);
-  background: color-mix(in srgb, var(--accent) 5%, var(--surface));
-  font-weight: 650;
-}
-.c6097eb td {
-  font-weight: 550;
-}
-.c6097eb tr > :first-child {
-  padding-left: 0;
-}
-.c6097eb tr > :last-child {
-  padding-right: 0;
-}
-.c6097eb tbody:last-child tr:last-child > *,
-.c6097eb > tr:last-child > * {
-  border-bottom: 0;
-}
-.c6097eb td p:last-child,
-.c6097eb th p:last-child {
-  margin-bottom: 0;
-}
-.cf7e669 {
-  min-width: 0;
-}
-.cb495ac {
-  min-width: 0;
-  margin: 0 0 3.4rem;
-  scroll-margin-top: 2rem;
-}
-.cb495ac + .cb495ac {
-  padding-top: 2.8rem;
-  border-top: 1px solid color-mix(in srgb, var(--text) 11%, var(--bg));
-}
-.ca1f5a5 {
-  margin: 0 0 1.25rem;
-  color: var(--text);
-  font-family: var(--display);
-  font-size: clamp(1.65rem, 2.8vw, 2.35rem);
-  font-weight: 600;
-  line-height: 1.22;
-  letter-spacing: -.045em;
-}
-.c2d8e58 {
-  color: var(--text);
-  font-family: var(--body);
-  font-size: 1rem;
-  line-height: 1.85;
-  overflow-wrap: anywhere;
-}
-.c2d8e58 > :last-child {
-  margin-bottom: 0;
-}
-.c2d8e58 p {
-  margin: 0 0 1.3rem;
-  text-wrap: pretty;
-}
-.c2d8e58 h3 {
-  margin: 2rem 0 .9rem;
-  font-size: clamp(1.2rem, 2vw, 1.45rem);
-  font-weight: 600;
-  line-height: 1.35;
-  letter-spacing: -.025em;
-}
-.c2d8e58 h4,
-.c2d8e58 h5,
-.c2d8e58 h6 {
-  margin: 1.6rem 0 .75rem;
-  font-size: 1.075rem;
-  line-height: 1.4;
-}
-.c2d8e58 h3:first-child,
-.c2d8e58 h4:first-child {
-  margin-top: 0;
-}
-.c2d8e58 strong,
-.c4d355f strong {
-  color: var(--text);
-  font-weight: 650;
-}
-.c2d8e58 ul,
-.c2d8e58 ol,
-.c4d355f ul,
-.c4d355f ol {
-  margin: 1.2rem 0 1.6rem;
-  padding-left: 1.5rem;
-}
-.c2d8e58 li,
-.c4d355f li {
-  padding-left: .4rem;
-  margin-block: .55rem;
-}
-.c2d8e58 li::marker,
-.c4d355f li::marker {
-  color: var(--accent);
-  font-weight: 600;
-}
-.c2d8e58 li > ul,
-.c2d8e58 li > ol {
-  margin-block: .5rem;
-}
-.c2d8e58 li p {
-  margin-bottom: .6rem;
-}
-.c2d8e58 blockquote {
-  margin: 1.8rem 0;
-  padding: 1.3rem 1.5rem;
-  border-inline-start: 3px solid var(--accent);
-  border-radius: 0 var(--radius) var(--radius) 0;
-  background: color-mix(in srgb, var(--accent) 6%, var(--surface));
-  color: var(--text);
-  font-size: 1.05rem;
-}
-.c2d8e58 blockquote > :last-child {
-  margin-bottom: 0;
-}
-.c2d8e58 blockquote cite {
-  display: block;
-  margin-top: .9rem;
-  color: var(--muted);
-  font-size: .85rem;
-  font-style: normal;
-}
-.c2d8e58 table {
-  display: block;
-  width: 100%;
-  max-width: 100%;
-  margin: 1.7rem 0;
-  overflow-x: auto;
-  border: 1px solid color-mix(in srgb, var(--text) 12%, var(--surface));
-  border-radius: var(--radius);
-  border-spacing: 0;
-  background: var(--surface);
-  font-family: var(--body);
-  font-size: .875rem;
-  line-height: 1.65;
-  text-align: left;
-  scrollbar-width: thin;
-  scrollbar-color: var(--muted) var(--surface);
-}
-.c2d8e58 table caption {
-  padding: .9rem 1rem;
-  color: var(--muted);
-  font-size: .82rem;
-  text-align: left;
-}
-.c2d8e58 th,
-.c2d8e58 td {
-  min-width: 125px;
-  padding: 1rem 1.15rem;
-  border-bottom: 1px solid color-mix(in srgb, var(--text) 9%, var(--surface));
-  vertical-align: top;
-}
-.c2d8e58 th {
-  color: var(--text);
-  background: color-mix(in srgb, var(--accent) 7%, var(--surface));
-  font-weight: 650;
-}
-.c2d8e58 tbody tr:nth-child(even) {
-  background: color-mix(in srgb, var(--text) 2%, var(--surface));
-}
-.c2d8e58 tbody:last-child tr:last-child > * {
-  border-bottom: 0;
-}
-.c2d8e58 td > :last-child,
-.c2d8e58 th > :last-child {
-  margin-bottom: 0;
-}
-.c2d8e58 figure {
-  margin: 1.8rem 0;
-}
-.c2d8e58 figure img {
-  display: block;
-  border-radius: var(--radius);
-}
-.c2d8e58 figcaption {
-  margin-top: .7rem;
-  color: var(--muted);
-  font-size: .8rem;
-  line-height: 1.6;
-}
-.c2d8e58 code,
-.c4d355f code {
-  padding: .1em .35em;
-  border-radius: calc(var(--radius) * .25);
-  background: color-mix(in srgb, var(--accent) 7%, var(--surface));
-  color: var(--text);
-  font-family: var(--body);
-  font-size: .9em;
-}
-.c2d8e58 pre {
-  overflow-x: auto;
-  padding: 1.2rem;
-  border: 1px solid color-mix(in srgb, var(--text) 10%, var(--surface));
-  border-radius: var(--radius);
-  background: var(--surface);
-  color: var(--text);
-  font-family: var(--body);
-  font-size: .875rem;
-  line-height: 1.7;
-}
-.c2d8e58 pre code {
-  padding: 0;
-  background: var(--surface);
-}
-.c2d8e58 hr {
-  margin: 2rem 0;
-  border: 0;
-  border-top: 1px solid color-mix(in srgb, var(--text) 12%, var(--bg));
-}
-.c2d8e58 dt {
-  margin-top: 1.1rem;
-  color: var(--text);
-  font-weight: 650;
-}
-.c2d8e58 dd {
-  margin: .4rem 0 1rem;
-  color: var(--muted);
-}
-.c9a8c5e {
-  padding-top: 2.75rem;
-  border-top: 1px solid color-mix(in srgb, var(--text) 11%, var(--bg));
-  scroll-margin-top: 2rem;
-}
-.c9a8c5e > .ca1f5a5 {
-  margin-bottom: 1.65rem;
-}
-.cf38d54 {
-  margin: 0 0 .8rem;
-  border: 1px solid color-mix(in srgb, var(--text) 11%, var(--surface));
-  border-radius: var(--radius);
-  background: var(--surface);
-  box-shadow: 0 3px 12px color-mix(in srgb, var(--text) 3%, transparent);
-  overflow: clip;
-  transition: border-color .2s ease, box-shadow .2s ease;
-}
-.cf38d54:hover {
-  border-color: color-mix(in srgb, var(--accent) 35%, var(--surface));
-}
-.cf38d54[open] {
-  border-color: color-mix(in srgb, var(--accent) 35%, var(--surface));
-  box-shadow: 0 6px 20px color-mix(in srgb, var(--text) 4%, transparent);
-}
-.c9815a3 {
-  position: relative;
-  display: block;
-  padding: 1.35rem 3.8rem 1.35rem 1.4rem;
-  color: var(--text);
-  font-family: var(--display);
-  font-size: 1.025rem;
-  font-weight: 600;
-  line-height: 1.5;
-  letter-spacing: -.015em;
-  list-style: none;
-  cursor: pointer;
-}
-.c9815a3::-webkit-details-marker {
-  display: none;
-}
-.c9815a3::after {
-  content: "+";
-  position: absolute;
-  top: 1.3rem;
-  right: 1.35rem;
-  display: grid;
-  place-items: center;
-  width: 25px;
-  height: 25px;
-  border-radius: 50%;
-  background: color-mix(in srgb, var(--accent) 9%, var(--surface));
-  color: var(--accent);
-  font-family: var(--body);
-  font-size: 1.15rem;
-  font-weight: 400;
-  line-height: 1;
-}
-.cf38d54[open] > .c9815a3::after {
-  content: "−";
-}
-.cf38d54 > .c9815a3:focus-visible {
-  outline-offset: -5px;
-}
-.c4d355f {
-  padding: 0 1.4rem 1.45rem;
-  color: var(--muted);
-  font-family: var(--body);
-  font-size: .95rem;
-  line-height: 1.8;
-}
-.c4d355f > :first-child {
-  margin-top: 0;
-}
-.c4d355f > :last-child {
-  margin-bottom: 0;
-}
-.c4d355f p {
-  margin-bottom: 1rem;
-}
-.c624544 {
-  padding-block: 3rem 3.6rem;
-  border-top: 1px solid color-mix(in srgb, var(--text) 10%, var(--bg));
-  background: color-mix(in srgb, var(--surface) 70%, var(--bg));
-  scroll-margin-top: 2rem;
-}
-.cac0660 {
-  display: grid;
-  grid-template-columns: 235px minmax(0, 1fr);
-  gap: clamp(2.5rem, 5vw, 5rem);
-}
-.cc7b2bf h2 {
-  margin-bottom: .7rem;
-  font-size: 1.4rem;
-  letter-spacing: -.035em;
-}
-.cc7b2bf p {
-  margin: 0;
-  color: var(--muted);
-  font-size: .85rem;
-  line-height: 1.7;
-}
-.c72ee5b {
-  min-width: 0;
-}
-.cbf7085 {
-  display: grid;
-  gap: .7rem;
-  margin: 0;
-  padding: 0;
-  list-style: none;
-  font-family: var(--body);
-}
-.cf80e89 {
-  display: block;
-  min-width: 0;
-  padding: 1rem 1.2rem;
-  border: 1px solid color-mix(in srgb, var(--text) 9%, var(--surface));
-  border-radius: calc(var(--radius) * .75);
-  background: var(--surface);
-  color: var(--muted);
-  font-family: var(--body);
-  font-size: .875rem;
-  line-height: 1.7;
-  overflow-wrap: anywhere;
-}
-.cf80e89 a,
-a.cf80e89 {
-  color: var(--text);
-  text-decoration-color: color-mix(in srgb, var(--accent) 35%, var(--surface));
-  text-underline-offset: .25em;
-}
-.cf80e89 a:hover,
-a.cf80e89:hover {
-  color: var(--accent);
-  text-decoration-color: var(--accent);
-}
-.cf80e89 p {
-  margin: .4rem 0 0;
-}
-.cf80e89 small {
-  color: var(--muted);
-  font-size: .8rem;
-}
-.cd90b31 {
-  border-top: 1px solid color-mix(in srgb, var(--text) 10%, var(--bg));
-  background: var(--bg);
-}
-.c7b2c5f {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  gap: 1rem 2rem;
-  min-height: 100px;
-  padding-block: 1.5rem;
-}
-.cac5500 {
-  color: var(--text);
-  font-family: var(--display);
-  font-size: 1rem;
-  font-weight: 600;
-  letter-spacing: -.025em;
-}
-.c579311 {
-  margin: 0;
-  color: var(--muted);
-  font-size: .8rem;
-}
-.c579311 span {
-  color: var(--text);
-}
-@media (min-width: 1500px) {
-  .c543082 {
-    padding-bottom: 6rem;
-  }
-  .c194967 {
-    margin-bottom: 4.5rem;
-  }
-  .c898bf2 {
-    gap: 5.5rem;
-  }
-  .cac0660 {
-    gap: 5.5rem;
-  }
-}
-@media (max-width: 1050px) {
-  .c62e276 {
-    width: calc(100% - 3rem);
-  }
-  .c898bf2,
-  .cac0660 {
-    grid-template-columns: 190px minmax(0, 1fr);
-    gap: 2.25rem;
-  }
-  .summary-strip {
-    gap: .75rem;
-  }
-  .summary-item {
-    padding: 1rem;
-  }
-  .c08ea51 {
-    font-size: .8rem;
-  }
-}
-@media (max-width: 760px) {
-  html {
-    scroll-padding-top: 1rem;
-  }
-  .ca8c6d7 {
-    min-height: 72px;
-  }
-  .c543082 {
-    padding-block: 1.25rem 3.25rem;
-  }
-  .c194967 {
-    margin-bottom: 2.6rem;
-  }
-  .c163931 h1 {
-    max-width: 100%;
-    font-size: clamp(2.45rem, 7.4vw, 3.6rem);
-    letter-spacing: -.045em;
-  }
-  .c4fa7fb {
-    font-size: 1.05rem;
-  }
-  .summary-strip {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    margin-block: 1.2rem 2.5rem;
-  }
-  .c898bf2 {
-    grid-template-columns: minmax(0, 1fr);
-    gap: 2.3rem;
-    padding-bottom: 3rem;
-  }
-  .ce7160e {
-    position: static;
-    max-height: none;
-    padding: 1.2rem;
-    border: 1px solid color-mix(in srgb, var(--text) 10%, var(--surface));
-    border-radius: var(--radius);
-    background: var(--surface);
-  }
-  .c5b58a4 {
-    margin-bottom: .8rem;
-  }
-  .ca445f9 {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: .4rem .8rem;
-  }
-  .c08ea51 {
-    height: 100%;
-    padding-block: .7rem;
-    font-size: .825rem;
-  }
-  .c58fa84 {
-    display: none;
-  }
-  .facts-panel {
-    margin-bottom: 2.5rem;
-  }
-  .cb495ac {
-    margin-bottom: 2.6rem;
-  }
-  .cb495ac + .cb495ac {
-    padding-top: 2.2rem;
-  }
-  .cac0660 {
-    grid-template-columns: minmax(0, 1fr);
-    gap: 1.5rem;
-  }
-  .c624544 {
-    padding-block: 2.5rem;
-  }
-  .cb495ac,
-  .facts-panel,
-  .c9a8c5e,
-  .c624544 {
-    scroll-margin-top: 1rem;
-  }
-}
-@media (max-width: 440px) {
-  .c62e276 {
-    width: calc(100% - 2rem);
-  }
-  .ca8c6d7 {
-    gap: 1rem;
-  }
-  .c7c9140 {
-    gap: .5rem;
-    font-size: 1.05rem;
-  }
-  .c976efe {
-    gap: .45rem;
-    font-size: .8rem;
-  }
-  .c6ae318 {
-    gap: .65rem;
-    margin-bottom: 1.1rem;
-  }
-  .c163931 h1 {
-    font-size: 2.5rem;
-  }
-  .c057b9a {
-    width: 100%;
-    justify-content: space-between;
-  }
-  .summary-item {
-    padding: .9rem;
-  }
-  .summary-item strong {
-    font-size: .9rem;
-  }
-  .summary-item span {
-    font-size: .75rem;
-  }
-  .ca445f9 {
-    grid-template-columns: minmax(0, 1fr);
-  }
-  .facts-panel {
-    padding: 1.15rem;
-  }
-  .c6097eb {
-    font-size: .85rem;
-  }
-  .c6097eb th,
-  .c6097eb td {
-    padding-block: .9rem;
-    padding-inline: .5rem;
-  }
-  .c2d8e58 {
-    font-size: .95rem;
-    line-height: 1.8;
-  }
-  .c2d8e58 blockquote {
-    padding: 1rem 1.1rem;
-  }
-  .c9815a3 {
-    padding: 1.1rem 3rem 1.1rem 1.1rem;
-    font-size: .95rem;
-  }
-  .c9815a3::after {
-    top: 1.1rem;
-    right: .9rem;
-  }
-  .c4d355f {
-    padding: 0 1.1rem 1.2rem;
-    font-size: .9rem;
-  }
-  .c7b2c5f {
-    align-items: flex-start;
-    flex-direction: column;
-    gap: .6rem;
-  }
-}
-@media (prefers-reduced-motion: reduce) {
-  html {
-    scroll-behavior: auto;
-  }
-  *,
-  *::before,
-  *::after {
-    transition: none !important;
-  }
-  .c057b9a:hover {
-    transform: none;
-  }
-}
-@media print {
-  body {
-    background: var(--surface);
-    font-size: 10pt;
-  }
-  .c62e276 {
-    width: 100%;
-  }
-  .c11e0a4,
-  .cdb6b55,
-  .c057b9a,
-  .ce7160e,
-  .c163931::after {
-    display: none;
-  }
-  .c163931 {
-    background: var(--surface);
-  }
-  .c543082 {
-    padding-block: 1rem 2rem;
-  }
-  .c194967 {
-    margin-bottom: 1.5rem;
-  }
-  .c163931 h1 {
-    font-size: 32pt;
-  }
-  .summary-strip {
-    margin-bottom: 2rem;
-  }
-  .c898bf2,
-  .cac0660 {
-    display: block;
-  }
-  .facts-panel,
-  .summary-item,
-  .cf38d54 {
-    box-shadow: none;
-  }
-  .ca1f5a5,
-  .c2d8e58 h3 {
-    break-after: avoid;
-  }
-  .cf38d54,
-  .cf80e89,
-  .c2d8e58 tr {
-    break-inside: avoid;
-  }
-  .cc7b2bf {
-    margin-bottom: 1rem;
-  }
-}
-</style>
+  <style>
+    :root{--bg:#0D0F0A;--surface:#181C12;--text:#EEF2E6;--muted:#95997F;--accent:#A3E635;--accent-ink:#111600;--radius:13px;--display:"Outfit";--body:"Figtree"}
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth;scroll-padding-top:2rem}
+    body{margin:0;background:var(--bg);color:var(--text);font:400 1rem/1.7 var(--body);-webkit-font-smoothing:antialiased}
+    a{color:var(--accent);text-underline-offset:.22em}
+    a:hover{text-decoration-thickness:2px}
+    :focus-visible{outline:3px solid var(--accent);outline-offset:5px}
+    ::selection{background:var(--accent);color:var(--accent-ink)}
+    h1,h2,h3,p{margin:0}
+    h1,h2,h3{font-family:var(--display);text-wrap:balance}
+    svg{display:block;flex-shrink:0}
+    img{max-width:100%;height:auto}
+    .c62e276{width:min(1180px,calc(100% - 64px));margin-inline:auto}
+    .ca80bc5{position:absolute;top:1rem;left:1rem;z-index:10;transform:translateY(-200%);padding:.7rem 1rem;background:var(--surface);border-radius:var(--radius)}
+    .ca80bc5:focus{transform:translateY(0)}
+    .c0127c8{min-height:96px;display:flex;align-items:center;justify-content:space-between;gap:2rem;border-bottom:1px solid color-mix(in srgb,var(--text) 10%,transparent)}
+    .cacce5a{display:inline-flex;align-items:center;gap:.7rem;color:var(--text);font:600 1.2rem/1 var(--display);letter-spacing:-.04em;text-decoration:none}
+    .c5e0872{display:grid;place-items:center;width:38px;height:38px;background:var(--accent);color:var(--accent-ink);border-radius:var(--radius)}
+    .c201988{display:flex;align-items:center;gap:1.8rem}
+    .c201988>a{font-size:.88rem;font-weight:600;color:var(--text);text-decoration:none}
+    .c201988>a:hover{color:var(--accent)}
+    .c201988 .c2c5d2f{padding:.65rem 1rem;border:1px solid color-mix(in srgb,var(--text) 18%,transparent);border-radius:var(--radius)}
+    .c194967{padding-top:1.6rem;font-size:.8rem;color:var(--muted)}
+    .c66e047{display:flex;flex-wrap:wrap;align-items:center;gap:.5rem;color:var(--muted)}
+    ol.c66e047,ul.c66e047,.c66e047 ol,.c66e047 ul{list-style:none;padding:0;margin:0;display:flex;flex-wrap:wrap;gap:.5rem}
+    .c66e047 a{color:var(--muted);text-decoration:none}
+    .c66e047 a:hover{color:var(--accent)}
+    .c66e047 [aria-current]{color:var(--text)}
+    .c163931{position:relative;display:grid;grid-template-columns:minmax(0,1.12fr) minmax(0,1fr);align-items:start;gap:clamp(1.75rem,5vw,4rem);padding-block:2.25rem 3.5rem}
+    .c1618ca{display:inline-flex;align-items:center;gap:.5rem;margin-bottom:1.35rem;color:var(--accent);font-size:.86rem;font-weight:600}
+    .c1618ca::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 5px color-mix(in srgb,var(--accent) 10%,transparent)}
+    h1{font-size:clamp(2.5rem,4.8vw,4.7rem);line-height:1.06;letter-spacing:-.055em;overflow-wrap:anywhere}
+    h1 em{color:var(--accent);font-style:normal}
+    .c4b1bdc{margin-top:1.5rem;max-width:49ch;font-size:1.06rem;line-height:1.85;color:var(--muted)}
+    .c1a2d84{display:inline-flex;justify-content:center;align-items:center;gap:1.15rem;min-height:54px;padding:.9rem 1.4rem;border:1px solid color-mix(in srgb,var(--accent-ink) 12%,transparent);border-radius:var(--radius);background:linear-gradient(135deg,color-mix(in srgb,var(--accent) 88%,var(--surface)),var(--accent));box-shadow:0 8px 20px color-mix(in srgb,var(--accent) 18%,transparent);color:var(--accent-ink);font:600 .95rem/1.4 var(--body);text-decoration:none;transition:transform .2s,box-shadow .2s}
+    .c1a2d84:hover{transform:translateY(-2px);box-shadow:0 12px 26px color-mix(in srgb,var(--accent) 26%,transparent)}
+    .cdcb109>.c1a2d84{margin-top:2rem}
+    .cd678ec{margin-top:1.1rem;color:var(--muted);font-size:.8rem}
+    .c258788{position:relative;isolation:isolate;min-width:0;padding:1.25rem;background:var(--surface);border:1px solid color-mix(in srgb,var(--text) 10%,transparent);border-radius:calc(var(--radius) * 1.5);box-shadow:0 28px 70px -20px color-mix(in srgb,var(--text) 19%,transparent),0 3px 10px color-mix(in srgb,var(--text) 4%,transparent)}
+    .c258788::before{content:"";position:absolute;inset:-28px;z-index:-1;pointer-events:none;background:radial-gradient(ellipse at 80% 20%,color-mix(in srgb,var(--accent) 14%,transparent),transparent 68%);border-radius:calc(var(--radius) * 2)}
+    .c43d852{display:flex;justify-content:space-between;align-items:center;gap:1rem;margin-bottom:.9rem}
+    .c43d852 h2{font-size:1.15rem;letter-spacing:-.035em}
+    .c373d33{padding:.25rem .65rem;border-radius:var(--radius);background:color-mix(in srgb,var(--accent) 10%,var(--surface));color:var(--accent);font-size:.72rem;font-weight:600}
+    .c8fdd6d{display:grid;grid-template-columns:minmax(0,1fr) 38px minmax(0,1fr);align-items:center;gap:.6rem;padding:.65rem .8rem;border:1px solid color-mix(in srgb,var(--text) 9%,transparent);border-radius:var(--radius);background:color-mix(in srgb,var(--bg) 65%,var(--surface))}
+    .c72ccf2{min-width:0;display:flex;align-items:center;gap:.7rem}
+    .c72ccf2:last-child{justify-content:flex-end}
+    .c4aefe3{font-size:.76rem;color:var(--muted)}
+    .c974cce{min-width:0;display:flex;align-items:center;justify-content:center;max-width:100px;min-height:38px;overflow-wrap:anywhere}
+    .c974cce img,.c974cce svg{max-width:100%;max-height:38px;object-fit:contain}
+    .route-arrow{display:grid;place-items:center;width:34px;height:34px;border:1px solid color-mix(in srgb,var(--text) 10%,transparent);border-radius:50%;color:var(--accent);background:var(--surface)}
+    .cb453e0{margin-top:.9rem}
+    .c6da5b6{display:flex;align-items:baseline;justify-content:space-between;gap:1rem;margin-bottom:.55rem}
+    .c6da5b6 label{font-size:.85rem;font-weight:600}
+    .cf4a1f4{font-size:.74rem;color:var(--muted)}
+    .c1b4e4b{display:flex;align-items:center;gap:.8rem;padding:.55rem .85rem;border:1px solid color-mix(in srgb,var(--text) 20%,transparent);border-radius:var(--radius);background:var(--bg);transition:border-color .2s,box-shadow .2s}
+    .c1b4e4b:focus-within{border-color:var(--accent);box-shadow:0 0 0 3px color-mix(in srgb,var(--accent) 12%,transparent)}
+    .c1b4e4b:has([aria-invalid="true"]){border-color:var(--accent)}
+    .c1b4e4b input{width:100%;min-width:0;padding:0;border:0;outline:none;background:var(--bg);color:var(--text);font:500 1.55rem/1.2 var(--display);letter-spacing:-.04em;font-variant-numeric:tabular-nums}
+    .c1b4e4b input::placeholder{color:var(--muted)}
+    .c1b4e4b>span{font-size:.8rem;color:var(--muted)}
+    .c95fd83{min-height:1.4em;margin-top:.5rem;font-size:.73rem;color:var(--muted)}
+    .cc4e7d0{display:grid;grid-template-columns:1fr 1fr;gap:.9rem;margin-top:.8rem}
+    .cc4e7d0 .cb453e0{margin-top:0}
+    .c14e773{position:relative}
+    .c14e773::after{content:"";position:absolute;right:.95rem;top:50%;width:.5rem;height:.5rem;border-right:2px solid var(--muted);border-bottom:2px solid var(--muted);transform:translateY(-70%) rotate(45deg);pointer-events:none}
+    .c8ecaa2{width:100%;padding:.55rem 2rem .55rem .85rem;border:1px solid color-mix(in srgb,var(--text) 20%,transparent);border-radius:var(--radius);background:var(--bg);color:var(--text);font:500 1rem/1.3 var(--display);letter-spacing:-.02em;appearance:none;-webkit-appearance:none;cursor:pointer}
+    .c8ecaa2:focus-visible{border-color:var(--accent);outline:none;box-shadow:0 0 0 3px color-mix(in srgb,var(--accent) 12%,transparent)}
+    .c67fd7f{margin-top:1rem;padding:.95rem;border:1px solid color-mix(in srgb,var(--accent) 17%,transparent);border-radius:var(--radius);background:linear-gradient(135deg,color-mix(in srgb,var(--accent) 10%,var(--surface)),color-mix(in srgb,var(--accent) 3%,var(--surface)))}
+    .c7df8e7{font-size:.8rem;color:var(--muted)}
+    .cc5f0d0{display:flex;align-items:baseline;flex-wrap:wrap;gap:.5rem;margin:.2rem 0 .7rem}
+    .cc5f0d0 output{font:600 clamp(1.5rem,2.4vw,2.05rem)/1.15 var(--display);letter-spacing:-.05em;font-variant-numeric:tabular-nums;overflow-wrap:anywhere}
+    .cc5f0d0 span{font-size:.8rem;color:var(--muted)}
+    .c7bd708{display:grid;gap:.4rem;margin:0;padding-top:.7rem;border-top:1px solid color-mix(in srgb,var(--accent) 14%,transparent);font-size:.82rem}
+    .c7bd708>div{display:flex;justify-content:space-between;gap:1rem}
+    .c7bd708 dt{color:var(--muted)}
+    .c7bd708 dd{margin:0;font-weight:600;text-align:right;font-variant-numeric:tabular-nums}
+    .c258788>.c1a2d84{width:100%;margin-top:1.2rem}
+    .c4e01fa{margin-top:1rem;font-size:.75rem;color:var(--muted)}
+    .c4e01fa summary{cursor:pointer;width:fit-content;text-underline-offset:.2em}
+    .c4e01fa summary:hover{color:var(--accent)}
+    .c4e01fa p{margin-top:.55rem;line-height:1.7}
+    .c283059{padding:2rem 2.25rem;border:1px solid color-mix(in srgb,var(--text) 10%,transparent);border-radius:var(--radius);background:var(--surface)}
+    .c68a366{font:600 1.4rem/1.3 var(--display);letter-spacing:-.035em;margin-bottom:1.25rem}
+    .cb9e8ce{overflow-x:auto}
+    .c6097eb{width:100%;border-collapse:collapse;text-align:left;font-size:.9rem}
+    .c6097eb caption{text-align:left;margin-bottom:1rem;color:var(--muted)}
+    .c6097eb th,.c6097eb td{padding:1rem 1.2rem;border-bottom:1px solid color-mix(in srgb,var(--text) 8%,transparent);vertical-align:top}
+    .c6097eb th:first-child,.c6097eb td:first-child{padding-left:0}
+    .c6097eb th:last-child,.c6097eb td:last-child{padding-right:0}
+    .c6097eb th{font-weight:600;color:var(--text)}
+    .c6097eb td{color:var(--muted)}
+    .c6097eb tbody tr:last-child>*{border-bottom:0}
+    .c6097eb thead{background:color-mix(in srgb,var(--accent) 5%,var(--surface))}
+    .c3dab21{max-width:820px;margin:4.5rem auto}
+    .cb495ac{margin-block:0 3rem;padding-bottom:2.75rem;border-bottom:1px solid color-mix(in srgb,var(--text) 10%,transparent)}
+    .ca1f5a5{margin:0 0 1.2rem;font:600 clamp(1.65rem,3vw,2.25rem)/1.2 var(--display);letter-spacing:-.04em}
+    .c2d8e58{color:var(--muted);line-height:1.9;overflow-wrap:anywhere}
+    .c2d8e58 p+p{margin-top:1.1rem}
+    .c2d8e58 h3{margin:1.8rem 0 .7rem;font-size:1.25rem;line-height:1.4;color:var(--text)}
+    .c2d8e58 strong{color:var(--text);font-weight:600}
+    .c2d8e58 ul,.c2d8e58 ol{padding-left:1.4rem;margin-block:1.2rem}
+    .c2d8e58 li+li{margin-top:.55rem}
+    .c2d8e58 li::marker{color:var(--accent)}
+    .c2d8e58 blockquote{margin:1.5rem 0;padding:1rem 1.4rem;border-left:3px solid var(--accent);border-radius:0 var(--radius) var(--radius) 0;background:color-mix(in srgb,var(--accent) 6%,var(--surface));color:var(--text)}
+    .cf38d54{margin-block:.8rem;border:1px solid color-mix(in srgb,var(--text) 12%,transparent);border-radius:var(--radius);background:var(--surface);overflow:hidden}
+    .c9815a3{position:relative;cursor:pointer;padding:1.2rem 3.3rem 1.2rem 1.35rem;list-style:none;font:500 1.05rem/1.5 var(--display);color:var(--text)}
+    .c9815a3::-webkit-details-marker{display:none}
+    .c9815a3::after{content:"+";position:absolute;right:1.35rem;top:1.15rem;color:var(--accent);font-size:1.3rem}
+    .cf38d54[open]>.c9815a3::after{content:"−"}
+    .cf38d54[open]{border-color:color-mix(in srgb,var(--accent) 35%,transparent)}
+    .c9815a3:focus-visible{outline-offset:-5px;border-radius:var(--radius)}
+    .c4d355f{padding:0 1.35rem 1.35rem;color:var(--muted);font-size:.95rem;line-height:1.85;overflow-wrap:anywhere}
+    .c4d355f p+p{margin-top:.8rem}
+    .c696d80{padding:2rem 2.25rem;border-radius:var(--radius);background:color-mix(in srgb,var(--surface) 75%,var(--bg));border:1px solid color-mix(in srgb,var(--text) 8%,transparent)}
+    .cbf7085{margin:0;padding-left:1.2rem;color:var(--muted);font-size:.86rem}
+    .cf80e89{padding:.35rem 0 .35rem .3rem;overflow-wrap:anywhere}
+    .cf80e89::marker{color:var(--muted)}
+    .cf80e89 a{color:var(--text);text-decoration-color:color-mix(in srgb,var(--accent) 45%,transparent)}
+    .cf80e89 a:hover{color:var(--accent)}
+    .cc6daec{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;margin-top:3rem;padding-block:1.7rem 2rem;border-top:1px solid color-mix(in srgb,var(--text) 10%,transparent);color:var(--muted);font-size:.78rem}
+    .cac5500{font:600 .95rem/1.4 var(--display);color:var(--text)}
+    @media(min-width:1400px){.c163931{padding-block:2.75rem 4rem}}
+    @media(max-width:900px){.c163931{gap:2rem;grid-template-columns:minmax(0,1fr) minmax(0,1fr)}.c258788{padding:1.25rem}.c8fdd6d{padding:.8rem}.c72ccf2{flex-direction:column;gap:.25rem}.c72ccf2:last-child{flex-direction:column-reverse}h1{font-size:clamp(2.5rem,5.5vw,4rem)}}
+    @media(max-width:720px){.c62e276{width:calc(100% - 40px)}.c0127c8{min-height:78px;gap:1rem}.c201988{gap:1rem}.c201988>.c0f18d4{display:none}.c163931{grid-template-columns:minmax(0,1fr);padding-block:2.75rem 3rem;gap:2.5rem}.cdcb109{max-width:560px}h1{font-size:clamp(2.6rem,9vw,4rem)}.c4b1bdc{font-size:1rem}.c258788{width:100%;max-width:520px;justify-self:center;padding:1.5rem}.c72ccf2,.c72ccf2:last-child{flex-direction:row}.c283059,.c696d80{padding:1.5rem}.c3dab21{margin-block:3rem}.c6097eb th,.c6097eb td{padding:.85rem .75rem}.cb495ac{margin-bottom:2rem;padding-bottom:2rem}.cc6daec{margin-top:2rem}}
+    @media(max-width:380px){.c62e276{width:calc(100% - 28px)}.c258788{padding:1rem}.cacce5a{font-size:1.05rem}.c201988 .c2c5d2f{padding:.55rem .7rem}.c72ccf2,.c72ccf2:last-child{flex-direction:column}.c72ccf2:last-child{flex-direction:column-reverse}.c283059,.c696d80{padding:1.1rem}.c7bd708{font-size:.76rem}}
+    @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{transition:none!important}}
+  </style>
 </head>
 <body>
-<a class="cdb6b55" href="#guide-main">Skip to guide</a>
-<header class="c11e0a4">
-  <div class="c62e276 ca8c6d7">
-    <div class="c7c9140">
-      <span class="ce7b99a" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 5.5h6a3 3 0 0 1 2 1 3 3 0 0 1 2-1h6v14h-6a3 3 0 0 0-2 1 3 3 0 0 0-2-1H4zM12 6.5v14M7 9h2M15 9h2M7 12h2M15 12h2"/></svg></span>
-      <span>The guide</span>
-    </div>
-    <a class="c976efe" href="dashboard/">Stake <span class="cf89071" aria-hidden="true">↗</span></a>
-  </div>
-</header>
-<section class="c163931" aria-labelledby="guide-title">
-  <div class="c62e276 c543082">
-    <nav class="c194967" aria-label="Breadcrumb"><nav class="c66e047" aria-label="Breadcrumb"><a href="dashboard/">Home</a> <span>/</span> <span>Staking</span> <span>/</span> <span>Staking Polygon</span></nav></nav>
-    <div class="cf4f11e">
-      <div class="cdcb109">
-        <div class="c6ae318"><span class="ca0297e">A closer look</span><span class="c76fdb0"><img src="assets/tokens/polygon.svg" alt="Polygon" width="28" height="28"></span></div>
-        <h1 id="guide-title">Staking <em>Polygon</em>: A Safety-First Guide</h1>
-        <p class="c4fa7fb">Staking Polygon turns an idle POL balance into a productive one: you commit tokens to a validator that helps secure the network, and in return you receive a share of the rewards the protocol pays out. The decision is not just whether to stake but how — through an exchange that custodies your tokens, through a wallet that delegates directly on-chain, or through a liquid staking protocol that hands you a tradable receipt token. Each path carries a different mix of convenience, control and risk, and this guide walks through all three before touching on the mechanics of starting.</p>
-        <a class="c057b9a" href="dashboard/">Stake <span class="cf89071" aria-hidden="true">↗</span></a>
+  <a class="ca80bc5" href="#content">Skip to content</a>
+  <div class="c62e276">
+    <nav class="c0127c8" aria-label="Primary navigation">
+      <a class="cacce5a" href="#" aria-label="Staking guide home">
+        <span class="c5e0872" aria-hidden="true"><svg width="23" height="23" viewBox="0 0 24 24" fill="none"><path d="M5 19V11a7 7 0 0 1 14 0v8M9 19v-8a3 3 0 0 1 6 0v8" stroke="var(--accent-ink)" stroke-width="1.7" stroke-linecap="round"/></svg></span>
+        Staking guide
+      </a>
+      <div class="c201988">
+        <a class="c0f18d4" href="#key-facts">Key facts</a>
+        <a class="c0f18d4" href="#sources">Sources</a>
+        <a class="c2c5d2f" href="dashboard/">Stake <span aria-hidden="true">↗</span></a>
       </div>
-      <aside class="c1b6d2c" id="key-facts" aria-labelledby="aside-title">
-        <div class="cb6dcc3">
-          <h2 id="aside-title">At a glance</h2>
-          <span class="c969f58">Staking</span>
+    </nav>
+    <div class="c194967"><nav class="c66e047" aria-label="Breadcrumb"><a href="dashboard/">Home</a> <span>/</span> <span>Staking</span> <span>/</span> <span>Staking Polygon</span></nav></div>
+    <section class="c163931" aria-labelledby="hero-heading">
+      <div class="cdcb109">
+        <span class="c1618ca">Staking calculator</span>
+        <h1 id="hero-heading">Staking <em>Polygon</em>: A Safety-First Guide</h1>
+        <p class="c4b1bdc">Staking Polygon turns an idle POL balance into a productive one: you commit tokens to a validator that helps secure the network, and in return you receive a share of the rewards the protocol pays out. The decision is not just whether to stake but how — through an exchange that custodies your tokens, through a wallet that delegates directly on-chain, or through a liquid staking protocol that hands you a tradable receipt token. Each path carries a different mix of convenience, control and risk, and this guide walks through all three before touching on the mechanics of starting.</p>
+        <a class="c1a2d84" href="dashboard/">Stake <svg aria-hidden="true" width="19" height="19" viewBox="0 0 24 24" fill="none"><path d="M5 12h14m-6-6 6 6-6 6" stroke="var(--accent-ink)" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        <p class="cd678ec">Set the amount and APY. Pick a period. See the rewards.</p>
+      </div>
+      <aside class="c258788" aria-labelledby="calculator-heading">
+        <div class="c43d852">
+          <h2 id="calculator-heading">Your staking rewards</h2>
+          <span class="c373d33">Rewards</span>
         </div>
-        <div class="c0f7067"><table class="c6097eb"><tbody><tr><th scope="row">Network</th><td>Polygon PoS — Ethereum-aligned sidechain/L2</td></tr>
+        <div class="c8fdd6d" aria-label="Staked asset">
+          <div class="c72ccf2"><span class="c974cce"><img src="assets/tokens/polygon.svg" alt="Polygon" width="28" height="28"></span><span class="c4aefe3">Staked asset</span></div>
+        </div>
+        <div class="cb453e0">
+          <div class="c6da5b6"><label for="amount">Amount staked</label><span class="cf4a1f4">Your deposit</span></div>
+          <div class="c1b4e4b"><input id="amount" type="text" inputmode="decimal" value="1000" autocomplete="off" spellcheck="false" maxlength="24" aria-describedby="amount-help" aria-invalid="false"><span>units</span></div>
+          <p id="amount-help" class="c95fd83">Enter an amount from 1 to 1,000,000 units.</p>
+        </div>
+        <div class="cc4e7d0">
+          <div class="cb453e0">
+            <div class="c6da5b6"><label for="apy">APY</label><span class="cf4a1f4">Annual %</span></div>
+            <div class="c1b4e4b"><input id="apy" type="text" inputmode="decimal" value="5" autocomplete="off" spellcheck="false" maxlength="6" aria-describedby="apy-help" aria-invalid="false"><span>%</span></div>
+          </div>
+          <div class="cb453e0">
+            <div class="c6da5b6"><label for="period">Period</label><span class="cf4a1f4">Horizon</span></div>
+            <div class="c14e773"><select id="period" class="c8ecaa2"><option value="0.0833">1 month</option><option value="0.5">6 months</option><option value="1" selected>1 year</option><option value="3">3 years</option></select></div>
+          </div>
+        </div>
+        <p id="apy-help" class="c95fd83">Rewards compound monthly at the APY you enter.</p>
+        <div class="c67fd7f" aria-live="polite" aria-atomic="true">
+          <p class="c7df8e7">Estimated rewards</p>
+          <div class="cc5f0d0"><output id="received" for="amount">51.16</output><span>units</span></div>
+          <dl class="c7bd708">
+            <div><dt>Balance at end</dt><dd><output id="total" for="amount">1,051.16</output> units</dd></div>
+            <div><dt>APY used</dt><dd><output id="apyout" for="amount">5.00%</output></dd></div>
+          </dl>
+        </div>
+        <a class="c1a2d84" href="dashboard/">Stake <svg aria-hidden="true" width="19" height="19" viewBox="0 0 24 24" fill="none"><path d="M5 12h14m-6-6 6 6-6 6" stroke="var(--accent-ink)" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        <details class="c4e01fa">
+          <summary>How the estimate works</summary>
+          <p>Rewards compound monthly: the balance at the end equals the amount staked times (1 + APY/12) raised to the number of months in the period, and the estimated rewards are that balance minus your deposit. The APY you enter is the annual rate; actual rates vary with the network and validator.</p>
+        </details>
+        <noscript><p class="c95fd83">Enable JavaScript to calculate a different amount.</p></noscript>
+      </aside>
+    </section>
+    <section id="key-facts" class="c283059" aria-labelledby="facts-heading">
+      <h2 id="facts-heading" class="c68a366">Key facts</h2>
+      <div class="cb9e8ce"><table class="c6097eb"><tbody><tr><th scope="row">Network</th><td>Polygon PoS — Ethereum-aligned sidechain/L2</td></tr>
 <tr><th scope="row">Staked asset</th><td>POL (migrated from MATIC)</td></tr>
 <tr><th scope="row">Consensus role</th><td>Proof-of-stake validators and delegators</td></tr>
 <tr><th scope="row">Unstaking delay</th><td>Checkpoint-based cooldown, typically several days</td></tr>
 <tr><th scope="row">Main risks</th><td>Slashing, validator downtime, smart-contract risk (liquid staking)</td></tr>
 <tr><th scope="row">Custody options</th><td>Custodial (exchange), non-custodial (direct), liquid staking</td></tr></tbody></table></div>
-        <a class="c057b9a cde2ec0" href="dashboard/">Stake <span class="cf89071" aria-hidden="true">↗</span></a>
-      </aside>
-    </div>
-  </div>
-</section>
-<div class="c62e276">
-  <div class="c898bf2">
-    <nav class="ce7160e" aria-labelledby="toc-title">
-      <h2 class="c5b58a4" id="toc-title">On this page</h2>
-      <ul class="ca445f9" id="toc-list">
-        <li><a class="c08ea51" href="#guide-sections" data-sections-link>In depth</a></li>
-        <li><a class="c08ea51" href="#questions">Questions &amp; answers</a></li>
-        <li><a class="c08ea51" href="#sources">Sources</a></li>
-      </ul>
-      <p class="c58fa84">Read from the beginning, or jump to the details you need.</p>
-    </nav>
-    <main class="cc3d40d" id="guide-main" tabindex="-1">
-      <div class="cf7e669" id="guide-sections"><section class="cb495ac"><h2 class="ca1f5a5">What Staking Polygon Means</h2><div class="c2d8e58"><strong>Staking Polygon means locking POL tokens behind a validator on the Polygon network so that validator can participate in consensus, and receiving a cut of the rewards the protocol distributes in exchange.</strong> The network itself does not hold your funds hostage in some mysterious vault — it simply records that your tokens back a particular validator's voting power, and that validator's performance determines whether your stake earns its full reward or loses a slice of it. Everything else in this guide — the custody models, the risks, the migration from MATIC — builds on that one mechanic. None of this requires you to run any hardware yourself; the validator does the technical work, and your role is choosing which one to trust with your tokens.<h3>Validators and delegators</h3>A validator runs the infrastructure that proposes and confirms blocks; a delegator simply points their stake at a validator without running any software. Most people staking Polygon are delegators, which is why the choice of validator — or of the platform standing in for one — matters more than any technical setup.<h3>Why Polygon needs staked POL</h3>Proof-of-stake security is only as strong as the capital backing it. The more POL that is locked behind honest validators, the costlier it becomes for any single actor to accumulate enough influence to misbehave, which is the economic logic every reward payout is funding.</div></section>
+    </section>
+    <main id="content" class="c3dab21">
+      <section class="cb495ac"><h2 class="ca1f5a5">What Staking Polygon Means</h2><div class="c2d8e58"><strong>Staking Polygon means locking POL tokens behind a validator on the Polygon network so that validator can participate in consensus, and receiving a cut of the rewards the protocol distributes in exchange.</strong> The network itself does not hold your funds hostage in some mysterious vault — it simply records that your tokens back a particular validator's voting power, and that validator's performance determines whether your stake earns its full reward or loses a slice of it. Everything else in this guide — the custody models, the risks, the migration from MATIC — builds on that one mechanic. None of this requires you to run any hardware yourself; the validator does the technical work, and your role is choosing which one to trust with your tokens.<h3>Validators and delegators</h3>A validator runs the infrastructure that proposes and confirms blocks; a delegator simply points their stake at a validator without running any software. Most people staking Polygon are delegators, which is why the choice of validator — or of the platform standing in for one — matters more than any technical setup.<h3>Why Polygon needs staked POL</h3>Proof-of-stake security is only as strong as the capital backing it. The more POL that is locked behind honest validators, the costlier it becomes for any single actor to accumulate enough influence to misbehave, which is the economic logic every reward payout is funding.</div></section>
 <section class="cb495ac"><h2 class="ca1f5a5">Staking Polygon Options: Custodial, Non-Custodial, Liquid</h2><div class="c2d8e58">There are three practical routes into staking Polygon, and they differ mainly in who holds the keys and how quickly you can exit. Custodial staking through an exchange is the simplest to start but hands control of your tokens to a third party. Non-custodial delegation keeps POL in your own wallet while you point it at a validator directly, typically through the <a href="https://docs.polygon.technology/" rel="nofollow noopener" target="_blank">Polygon docs</a> staking dashboard. Liquid staking mints a receipt token representing your staked position, which stays usable elsewhere in DeFi while the underlying POL is locked. None of the three is objectively correct; the right pick depends on whether you value simplicity, direct control, or ongoing liquidity the most.<table><thead><tr><th>Model</th><th>Who holds the keys</th><th>Main trade-off</th></tr></thead><tbody><tr><td>Custodial (exchange)</td><td>The exchange</td><td>Easiest setup, but counterparty risk and withdrawal limits</td></tr><tr><td>Non-custodial (direct delegation)</td><td>You, in your own wallet</td><td>Full control, but you choose and monitor the validator yourself</td></tr><tr><td>Liquid staking</td><td>A smart contract, via a receipt token</td><td>Capital stays liquid, but adds smart-contract and peg risk</td></tr></tbody></table></div></section>
 <section class="cb495ac"><h2 class="ca1f5a5">Risks to Weigh Before Staking Polygon</h2><div class="c2d8e58">No staking method is risk-free, and the risks differ enough by model that comparing them side by side is more useful than a single blanket warning. Before committing a meaningful amount, it helps to walk through each failure mode on its own terms.<h3>Slashing and validator downtime</h3>A validator that signs conflicting blocks or goes offline for an extended stretch can be penalized, and a portion of that penalty is typically absorbed by the delegators backing it. This is why the single biggest decision in non-custodial and custodial staking alike is which validator — or which platform's chosen validator set — you trust with uptime and honest behavior.<h3>Smart-contract risk in liquid staking</h3>A liquid staking protocol adds a layer that custodial and plain non-custodial delegation do not carry: the contract minting and redeeming your receipt token. A bug, an exploit or a severe de-peg between the receipt token and the underlying asset can cost you value even if the validators behind it perform flawlessly, so the convenience of staying liquid is bought with an extra attack surface.</div></section>
 <section class="cb495ac"><h2 class="ca1f5a5">The POL Migration and Staking Polygon Today</h2><div class="c2d8e58">Polygon's staking token transitioned from MATIC to POL as part of the network's broader move toward a shared security model across multiple Polygon chains. If you are staking Polygon today, the asset behind your position is POL, and MATIC holders who have not yet migrated generally need to do so before they can delegate on the current staking contracts. You can confirm a validator's live stake and a migration contract's activity directly on <a href="https://polygonscan.com/" rel="nofollow noopener" target="_blank">PolygonScan</a> rather than relying on a third party's summary of it. The migration itself is a one-time action per wallet; once it is done, every future staking transaction simply uses POL as though it had always been the native asset.</div></section>
 <section class="cb495ac"><h2 class="ca1f5a5">How to Start Staking Polygon Safely</h2><div class="c2d8e58">Once you have picked a custody model, the actual process of staking Polygon follows a short, repeatable sequence regardless of which route you take, and skipping a step is usually what causes the few problems people actually run into.<ul><li>Decide on custodial, non-custodial or liquid staking based on how much control versus convenience you want.</li><li>If delegating directly, connect a self-custody wallet holding POL to the official staking dashboard.</li><li>Research the validator's uptime history and fee before delegating — do not pick the first name on the list.</li><li>Confirm the amount, review the commission rate, and sign the delegation transaction.</li><li>Track rewards and validator performance periodically rather than assuming nothing will change.</li></ul><h3>Choosing a validator or platform</h3>Look for a long uptime record, a reasonable commission, and — for custodial or liquid options — a platform that discloses which validators it actually uses. A background check on a validator's history, available through <a href="https://en.wikipedia.org/wiki/Polygon_(blockchain)" rel="nofollow noopener" target="_blank">Wikipedia's overview of Polygon</a> and the network's own explorer, costs a few minutes and can save a slashing headache later.<h3>Unstaking and the cooldown period</h3>Exiting a non-custodial delegation is not instant: Polygon enforces a checkpoint-based cooldown before your POL becomes transferable again, typically a matter of days. Liquid staking sidesteps this by letting you sell the receipt token on the open market instead of waiting, at the cost of depending on that market's liquidity and peg.</div></section>
 <section class="cb495ac"><h2 class="ca1f5a5">Staking Polygon Rewards and Realistic Expectations</h2><div class="c2d8e58">Reward rates for staking Polygon move with total stake participation and network emissions, so any specific percentage quoted today will drift over time rather than staying fixed. The useful comparison is not the headline yield but the yield net of commission, any platform fee on custodial or liquid products, and the opportunity cost of the cooldown period if you might need the funds back quickly. Sites tracking on-chain yields across staking and liquid-staking protocols, such as <a href="https://defillama.com/" rel="nofollow noopener" target="_blank">DefiLlama</a>, are a reasonable way to sanity-check a quoted rate against what similar protocols are actually paying. Treat any number you see as a snapshot rather than a promise, since the rate paid out next month depends on how much total stake the network attracts between now and then.</div></section>
-<section class="cb495ac"><h2 class="ca1f5a5">Staking Polygon vs Other Chains: Is It Worth It</h2><div class="c2d8e58">The case for staking Polygon rests on the same logic that applies to proof-of-stake chains generally, a model covered in general terms by <a href="https://ethereum.org/en/staking/" rel="nofollow noopener" target="_blank">ethereum.org's staking overview</a>: you are paid for taking on validator and liquidity risk rather than simply holding an asset. Whether it is worth it next to staking on another chain depends on your view of Polygon's roadmap, the commission and risk profile of the validator or platform you choose, and whether you value the liquidity a receipt token offers over the simplicity of a direct, non-custodial delegation. There is no universally correct answer — only a correct answer for how much control and liquidity you are willing to trade for yield. Reading the risk comparison earlier in this guide before committing funds is a better use of your time than chasing the single highest advertised rate.</div></section></div>
-      <section class="c9a8c5e" id="questions" aria-labelledby="questions-title">
-        <h2 class="ca1f5a5" id="questions-title">Questions &amp; answers</h2>
-        <details class="cf38d54"><summary class="c9815a3">What does staking Polygon actually mean?</summary><div class="c4d355f">It means locking POL tokens behind a validator so that validator can take part in securing the Polygon network, in exchange for a share of the rewards the protocol pays out to that validator and its delegators.</div></details>
+<section class="cb495ac"><h2 class="ca1f5a5">Staking Polygon vs Other Chains: Is It Worth It</h2><div class="c2d8e58">The case for staking Polygon rests on the same logic that applies to proof-of-stake chains generally, a model covered in general terms by <a href="https://ethereum.org/en/staking/" rel="nofollow noopener" target="_blank">ethereum.org's staking overview</a>: you are paid for taking on validator and liquidity risk rather than simply holding an asset. Whether it is worth it next to staking on another chain depends on your view of Polygon's roadmap, the commission and risk profile of the validator or platform you choose, and whether you value the liquidity a receipt token offers over the simplicity of a direct, non-custodial delegation. There is no universally correct answer — only a correct answer for how much control and liquidity you are willing to trade for yield. Reading the risk comparison earlier in this guide before committing funds is a better use of your time than chasing the single highest advertised rate.</div></section>
+      <details class="cf38d54"><summary class="c9815a3">What does staking Polygon actually mean?</summary><div class="c4d355f">It means locking POL tokens behind a validator so that validator can take part in securing the Polygon network, in exchange for a share of the rewards the protocol pays out to that validator and its delegators.</div></details>
 <details class="cf38d54"><summary class="c9815a3">Is custodial or non-custodial staking better for Polygon?</summary><div class="c4d355f">Custodial staking through an exchange is simpler but hands control of your tokens to a third party; non-custodial delegation keeps your POL in your own wallet but puts the responsibility of choosing a reliable validator on you.</div></details>
 <details class="cf38d54"><summary class="c9815a3">What is liquid staking and how does it differ?</summary><div class="c4d355f">Liquid staking mints a receipt token representing your staked POL, which you can trade or use elsewhere in DeFi while the underlying position stays locked. It adds smart-contract and peg risk that plain delegation does not carry.</div></details>
 <details class="cf38d54"><summary class="c9815a3">Can I lose money staking Polygon?</summary><div class="c4d355f">Yes, mainly through a validator being slashed for downtime or misbehavior, through a custodial platform's own failure, or through smart-contract or peg risk in a liquid staking protocol. Choosing a validator or platform with a solid track record reduces but does not eliminate this.</div></details>
 <details class="cf38d54"><summary class="c9815a3">Do I need to migrate MATIC to POL before staking?</summary><div class="c4d355f">Generally yes. Polygon's staking contracts now run on POL, so MATIC holders typically need to complete the migration before they can delegate on the current system.</div></details>
 <details class="cf38d54"><summary class="c9815a3">How long does it take to unstake on Polygon?</summary><div class="c4d355f">Non-custodial delegation uses a checkpoint-based cooldown that usually takes several days before your POL becomes transferable again. Liquid staking receipt tokens can instead be sold on the open market without waiting for that cooldown.</div></details>
 <details class="cf38d54"><summary class="c9815a3">Where can I check a validator's real performance?</summary><div class="c4d355f">A network explorer such as PolygonScan shows live stake and activity for a given validator, which is a more direct check than relying on a platform's own marketing claims about uptime or commission.</div></details>
-      </section>
     </main>
-  </div>
-</div>
-<section class="c624544" id="sources" aria-labelledby="sources-title">
-  <div class="c62e276 cac0660">
-    <div class="cc7b2bf"><h2 id="sources-title">Sources</h2><p>References for further reading.</p></div>
-    <div class="c72ee5b"><ul class="cbf7085"><li><a class="cf80e89" href="https://docs.polygon.technology/" rel="nofollow noopener" target="_blank">Polygon documentation</a></li>
+    <section id="sources" class="c696d80" aria-labelledby="sources-heading">
+      <h2 id="sources-heading" class="c68a366">Sources</h2>
+      <ul class="cbf7085"><li><a class="cf80e89" href="https://docs.polygon.technology/" rel="nofollow noopener" target="_blank">Polygon documentation</a></li>
 <li><a class="cf80e89" href="https://polygonscan.com/" rel="nofollow noopener" target="_blank">PolygonScan</a></li>
 <li><a class="cf80e89" href="https://en.wikipedia.org/wiki/Polygon_(blockchain)" rel="nofollow noopener" target="_blank">Polygon — Wikipedia</a></li>
-<li><a class="cf80e89" href="https://defillama.com/" rel="nofollow noopener" target="_blank">DefiLlama</a></li></ul></div>
+<li><a class="cf80e89" href="https://defillama.com/" rel="nofollow noopener" target="_blank">DefiLlama</a></li></ul>
+    </section>
+    <footer class="cc6daec">
+      <span class="cac5500">Staking guide</span>
+      <div>Updated Oct 11, 2026</div>
+    </footer>
   </div>
-</section>
-<footer class="cd90b31">
-  <div class="c62e276 c7b2c5f">
-    <span class="cac5500">The guide</span>
-    <p class="c579311">Last updated <span>Updated Oct 11, 2026</span></p>
-  </div>
-</footer>
-<script>
-(() => {
-  const toc = document.getElementById('toc-list');
-  const sections = Array.from(document.querySelectorAll('#guide-sections .cb495ac'));
-  const fallback = toc.querySelector('[data-sections-link]');
-  const fragment = document.createDocumentFragment();
-  sections.forEach((section, index) => {
-    if (!section.id) {
-      const base = `guide-section-${index + 1}`;
-      let id = base;
-      let suffix = 1;
-      while (document.getElementById(id)) id = `${base}-${suffix++}`;
-      section.id = id;
-    }
-    const heading = section.querySelector('.ca1f5a5, h2, h3');
-    const item = document.createElement('li');
-    const link = document.createElement('a');
-    link.className = 'toc-link';
-    link.href = `#${encodeURIComponent(section.id)}`;
-    link.textContent = heading?.textContent.trim() || section.getAttribute('aria-label') || `Section ${index + 1}`;
-    item.append(link);
-    fragment.append(item);
-  });
-  if (sections.length) fallback.parentElement.replaceWith(fragment);
-  const entries = Array.from(toc.querySelectorAll('a[href^="#"]')).map(link => {
-    const target = document.getElementById(decodeURIComponent(link.hash.slice(1)));
-    return { link, target };
-  }).filter(entry => entry.target);
-  if (!entries.length) return;
-  let activeLink;
-  let pending = false;
-  const activate = entry => {
-    if (!entry || entry.link === activeLink) return;
-    if (activeLink) activeLink.removeAttribute('aria-current');
-    entry.link.setAttribute('aria-current', 'location');
-    activeLink = entry.link;
-  };
-  const update = () => {
-    pending = false;
-    const boundary = Math.min(180, window.innerHeight * .25);
-    let active = entries[0];
-    for (const entry of entries) {
-      if (entry.target.getBoundingClientRect().top <= boundary) active = entry;
-    }
-    const root = document.scrollingElement || document.documentElement;
-    if (root.scrollHeight > window.innerHeight && Math.ceil(window.scrollY + window.innerHeight) >= root.scrollHeight - 2) {
-      active = entries[entries.length - 1];
-    }
-    activate(active);
-  };
-  const schedule = () => {
-    if (pending) return;
-    pending = true;
-    window.requestAnimationFrame(update);
-  };
-  if ('IntersectionObserver' in window) {
-    const observer = new IntersectionObserver(schedule, {
-      rootMargin: '-12% 0px -60% 0px',
-      threshold: [0, .1, .5, 1]
-    });
-    entries.forEach(entry => observer.observe(entry.target));
-  }
-  toc.addEventListener('click', event => {
-    const link = event.target.closest('a');
-    if (!link || event.defaultPrevented || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
-    const entry = entries.find(item => item.link === link);
-    if (!entry) return;
-    event.preventDefault();
-    const hadTabindex = entry.target.hasAttribute('tabindex');
-    if (!hadTabindex) {
-      entry.target.setAttribute('tabindex', '-1');
-      entry.target.addEventListener('blur', () => entry.target.removeAttribute('tabindex'), { once: true });
-    }
-    entry.target.focus({ preventScroll: true });
-    entry.target.scrollIntoView({
-      behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth',
-      block: 'start'
-    });
-    if (window.location.hash !== link.hash) {
-      try { window.history.pushState(null, '', link.hash); } catch {}
-    }
-    activate(entry);
-  });
-  window.addEventListener('scroll', schedule, { passive: true });
-  window.addEventListener('resize', schedule, { passive: true });
-  window.addEventListener('hashchange', schedule);
-  window.addEventListener('load', schedule, { once: true });
-  update();
-})();
-</script>
+  <script>
+    (() => {
+      const amount = document.getElementById('amount');
+      const apy = document.getElementById('apy');
+      const period = document.getElementById('period');
+      const help = document.getElementById('amount-help');
+      const received = document.getElementById('received');
+      const total = document.getElementById('total');
+      const apyout = document.getElementById('apyout');
+      const format = new Intl.NumberFormat('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+      let pending;
+      function num(el, min, max) {
+        const raw = el.value.trim();
+        const ok = /^(?:\d+(?:[.,]\d{1,4})?|[.,]\d{1,4})$/.test(raw);
+        const v = ok ? Number(raw.replace(',', '.')) : NaN;
+        return (Number.isFinite(v) && v >= min && v <= max) ? v : NaN;
+      }
+      function calculate() {
+        const value = num(amount, 1, 1000000);
+        const rate = num(apy, 0, 1000);
+        amount.setAttribute('aria-invalid', String(Number.isNaN(value)));
+        apy.setAttribute('aria-invalid', String(Number.isNaN(rate)));
+        if (Number.isNaN(value) || Number.isNaN(rate)) {
+          received.textContent = '—';
+          total.textContent = '—';
+          apyout.textContent = '—';
+          help.textContent = 'Enter an amount (1–1,000,000) and an APY (0–1,000%).';
+          return;
+        }
+        const years = Number(period.value) || 1;
+        const months = Math.max(1, Math.round(years * 12));
+        const monthly = rate / 100 / 12;
+        const endBalance = value * Math.pow(1 + monthly, months);
+        received.textContent = format.format(endBalance - value);
+        total.textContent = format.format(endBalance);
+        apyout.textContent = format.format(rate) + '%';
+        help.textContent = 'Enter an amount from 1 to 1,000,000 units.';
+      }
+      amount.addEventListener('input', () => { clearTimeout(pending); pending = setTimeout(calculate, 180); });
+      apy.addEventListener('input', () => { clearTimeout(pending); pending = setTimeout(calculate, 180); });
+      amount.addEventListener('blur', () => { clearTimeout(pending); calculate(); });
+      apy.addEventListener('blur', () => { clearTimeout(pending); calculate(); });
+      period.addEventListener('change', calculate);
+      calculate();
+    })();
+  </script>
 </body>
 </html>
+
