@@ -1,0 +1,300 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Polygon Staking Guide: Pick the Right Strategy</title>
+  <meta name="description" content="A Polygon Staking Guide to designing your approach: native delegation vs liquid staking vs exchange, validator selection, compounding math, POL migration and profiles.">
+  <link rel="canonical" href="https://staking-polygon-site.github.io/polygon-staking-guide/">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Polygon Staking Guide: Build a Strategy That Fits You">
+  <meta property="og:description" content="A Polygon Staking Guide to designing your approach: native delegation vs liquid staking vs exchange, validator selection, compounding math, POL migration and profiles.">
+  <meta property="og:url" content="https://staking-polygon-site.github.io/polygon-staking-guide/">
+  <meta property="og:image" content="https://staking-polygon-site.github.io/og.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Polygon Staking Guide: Build a Strategy That Fits You">
+  <meta name="twitter:description" content="A Polygon Staking Guide to designing your approach: native delegation vs liquid staking vs exchange, validator selection, compounding math, POL migration and profiles.">
+  <meta name="twitter:image" content="https://staking-polygon-site.github.io/og.png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&family=Outfit:wght@500;600;700&display=swap">
+<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebSite", "@id": "https://staking-polygon-site.github.io/#website", "url": "https://staking-polygon-site.github.io/polygon-staking-guide/", "name": "Polygon Staking Guide: Pick the Right Strategy"}, {"@type": "WebPage", "@id": "https://staking-polygon-site.github.io/#webpage", "url": "https://staking-polygon-site.github.io/polygon-staking-guide/", "name": "Polygon Staking Guide: Pick the Right Strategy", "isPartOf": {"@id": "https://staking-polygon-site.github.io/#website"}, "description": "A Polygon Staking Guide to designing your approach: native delegation vs liquid staking vs exchange, validator selection, compounding math, POL migration and profiles.", "datePublished": "2026-10-12", "dateModified": "2026-10-12"}, {"@type": "SoftwareApplication", "name": "Polygon Staking Guide", "applicationCategory": "FinanceApplication", "operatingSystem": "Web", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://staking-polygon-site.github.io/polygon-staking-guide/"}, {"@type": "ListItem", "position": 2, "name": "Staking"}, {"@type": "ListItem", "position": 3, "name": "Polygon Staking Guide"}]}, {"@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Which Polygon staking approach gives the best real return?", "acceptedAnswer": {"@type": "Answer", "text": "Net of fees, native delegation to a low-commission, high-uptime validator usually keeps the most yield because it carries only validator commission. Liquid staking gives up a little to a protocol fee in exchange for keeping your capital usable, which often more than pays for itself if you actually deploy the receipt token."}}, {"@type": "Question", "name": "Should I use stMATIC or MaticX over native delegation?", "acceptedAnswer": {"@type": "Answer", "text": "Choose a liquid staking token when you want the staked capital to keep working as collateral or liquidity, or when the native unbonding cooldown is a real constraint. Stay native when you plan to hold untouched for the long term and want the lowest possible fee drag."}}, {"@type": "Question", "name": "How much does compounding actually add to my yield?", "acceptedAnswer": {"@type": "Answer", "text": "On a 4.5% base rate, moving from idle rewards to regular restaking lifts effective APY to roughly 4.6%, worth over 130 extra POL on a 10,000 POL position across three years. Liquid staking tokens capture this automatically by compounding rewards into the token's rising exchange rate."}}, {"@type": "Question", "name": "Do I have to migrate MATIC to POL before staking?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. The current staking contracts and the major liquid staking protocols settle in POL, so a legacy MATIC balance must be migrated first. It is a one-time, roughly one-to-one action per wallet, after which every staking transaction uses POL natively."}}, {"@type": "Question", "name": "How long is the unbonding period, and how do I avoid it?", "acceptedAnswer": {"@type": "Answer", "text": "Native unbonding runs on a checkpoint-based cooldown of about three to four days. Keep an unstaked buffer for short-term needs, or use liquid staking and sell the receipt token on the open market to exit without waiting for the queue."}}, {"@type": "Question", "name": "How many validators should I delegate to?", "acceptedAnswer": {"@type": "Answer", "text": "For a sizable position, split across two or three validators that each pass an uptime and self-stake check. You reduce single-operator risk and support a healthier, less concentrated validator set, at the cost of managing a few delegations instead of one."}}, {"@type": "Question", "name": "Is exchange staking ever the right choice?", "acceptedAnswer": {"@type": "Answer", "text": "For a hands-off holder who values one dashboard over a few basis points, yes. You accept custodial risk and the highest fee drag of the three routes in exchange for the simplest possible experience and no key management."}}]}]}</script>
+  <style>
+    :root{--bg:#0D0F0A;--surface:#181C12;--text:#EEF2E6;--muted:#95997F;--accent:#A3E635;--accent-ink:#111600;--radius:13px;--display:"Outfit";--body:"Figtree"}
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth;scroll-padding-top:2rem}
+    body{margin:0;background:var(--bg);color:var(--text);font:400 1rem/1.7 var(--body);-webkit-font-smoothing:antialiased}
+    a{color:var(--accent);text-underline-offset:.22em}
+    a:hover{text-decoration-thickness:2px}
+    :focus-visible{outline:3px solid var(--accent);outline-offset:5px}
+    ::selection{background:var(--accent);color:var(--accent-ink)}
+    h1,h2,h3,p{margin:0}
+    h1,h2,h3{font-family:var(--display);text-wrap:balance}
+    svg{display:block;flex-shrink:0}
+    img{max-width:100%;height:auto}
+    .c085063{width:min(1180px,calc(100% - 64px));margin-inline:auto}
+    .c8589bd{position:absolute;top:1rem;left:1rem;z-index:10;transform:translateY(-200%);padding:.7rem 1rem;background:var(--surface);border-radius:var(--radius)}
+    .c8589bd:focus{transform:translateY(0)}
+    .ca550ef{min-height:96px;display:flex;align-items:center;justify-content:space-between;gap:2rem;border-bottom:1px solid color-mix(in srgb,var(--text) 10%,transparent)}
+    .cb72ba9{display:inline-flex;align-items:center;gap:.7rem;color:var(--text);font:600 1.2rem/1 var(--display);letter-spacing:-.04em;text-decoration:none}
+    .c8f1cf6{display:grid;place-items:center;width:38px;height:38px;background:var(--accent);color:var(--accent-ink);border-radius:var(--radius)}
+    .ce51097{display:flex;align-items:center;gap:1.8rem}
+    .ce51097>a{font-size:.88rem;font-weight:600;color:var(--text);text-decoration:none}
+    .ce51097>a:hover{color:var(--accent)}
+    .ce51097 .c20e20f{padding:.65rem 1rem;border:1px solid color-mix(in srgb,var(--text) 18%,transparent);border-radius:var(--radius)}
+    .cead280{padding-top:1.6rem;font-size:.8rem;color:var(--muted)}
+    .ccd9187{display:flex;flex-wrap:wrap;align-items:center;gap:.5rem;color:var(--muted)}
+    ol.ccd9187,ul.ccd9187,.ccd9187 ol,.ccd9187 ul{list-style:none;padding:0;margin:0;display:flex;flex-wrap:wrap;gap:.5rem}
+    .ccd9187 a{color:var(--muted);text-decoration:none}
+    .ccd9187 a:hover{color:var(--accent)}
+    .ccd9187 [aria-current]{color:var(--text)}
+    .cbde31b{position:relative;display:grid;grid-template-columns:minmax(0,1.12fr) minmax(0,1fr);align-items:start;gap:clamp(1.75rem,5vw,4rem);padding-block:2.25rem 3.5rem}
+    .c31044e{display:inline-flex;align-items:center;gap:.5rem;margin-bottom:1.35rem;color:var(--accent);font-size:.86rem;font-weight:600}
+    .c31044e::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 5px color-mix(in srgb,var(--accent) 10%,transparent)}
+    h1{font-size:clamp(2.5rem,4.8vw,4.7rem);line-height:1.06;letter-spacing:-.055em;overflow-wrap:anywhere}
+    h1 em{color:var(--accent);font-style:normal}
+    .c21c568{margin-top:1.5rem;max-width:49ch;font-size:1.06rem;line-height:1.85;color:var(--muted)}
+    .cd75c66{display:inline-flex;justify-content:center;align-items:center;gap:1.15rem;min-height:54px;padding:.9rem 1.4rem;border:1px solid color-mix(in srgb,var(--accent-ink) 12%,transparent);border-radius:var(--radius);background:linear-gradient(135deg,color-mix(in srgb,var(--accent) 88%,var(--surface)),var(--accent));box-shadow:0 8px 20px color-mix(in srgb,var(--accent) 18%,transparent);color:var(--accent-ink);font:600 .95rem/1.4 var(--body);text-decoration:none;transition:transform .2s,box-shadow .2s}
+    .cd75c66:hover{transform:translateY(-2px);box-shadow:0 12px 26px color-mix(in srgb,var(--accent) 26%,transparent)}
+    .c469c06>.cd75c66{margin-top:2rem}
+    .cb3445e{margin-top:1.1rem;color:var(--muted);font-size:.8rem}
+    .cebbdf4{position:relative;isolation:isolate;min-width:0;padding:1.25rem;background:var(--surface);border:1px solid color-mix(in srgb,var(--text) 10%,transparent);border-radius:calc(var(--radius) * 1.5);box-shadow:0 28px 70px -20px color-mix(in srgb,var(--text) 19%,transparent),0 3px 10px color-mix(in srgb,var(--text) 4%,transparent)}
+    .cebbdf4::before{content:"";position:absolute;inset:-28px;z-index:-1;pointer-events:none;background:radial-gradient(ellipse at 80% 20%,color-mix(in srgb,var(--accent) 14%,transparent),transparent 68%);border-radius:calc(var(--radius) * 2)}
+    .c8b370d{display:flex;justify-content:space-between;align-items:center;gap:1rem;margin-bottom:.9rem}
+    .c8b370d h2{font-size:1.15rem;letter-spacing:-.035em}
+    .cc5e5f2{padding:.25rem .65rem;border-radius:var(--radius);background:color-mix(in srgb,var(--accent) 10%,var(--surface));color:var(--accent);font-size:.72rem;font-weight:600}
+    .cd0f8a1{display:grid;grid-template-columns:minmax(0,1fr) 38px minmax(0,1fr);align-items:center;gap:.6rem;padding:.65rem .8rem;border:1px solid color-mix(in srgb,var(--text) 9%,transparent);border-radius:var(--radius);background:color-mix(in srgb,var(--bg) 65%,var(--surface))}
+    .cc0d636{min-width:0;display:flex;align-items:center;gap:.7rem}
+    .cc0d636:last-child{justify-content:flex-end}
+    .c3c865d{font-size:.76rem;color:var(--muted)}
+    .cdbb431{min-width:0;display:flex;align-items:center;justify-content:center;max-width:100px;min-height:38px;overflow-wrap:anywhere}
+    .cdbb431 img,.cdbb431 svg{max-width:100%;max-height:38px;object-fit:contain}
+    .route-arrow{display:grid;place-items:center;width:34px;height:34px;border:1px solid color-mix(in srgb,var(--text) 10%,transparent);border-radius:50%;color:var(--accent);background:var(--surface)}
+    .cc2b89a{margin-top:.9rem}
+    .c3503e0{display:flex;align-items:baseline;justify-content:space-between;gap:1rem;margin-bottom:.55rem}
+    .c3503e0 label{font-size:.85rem;font-weight:600}
+    .c124d3d{font-size:.74rem;color:var(--muted)}
+    .cabdaf5{display:flex;align-items:center;gap:.8rem;padding:.55rem .85rem;border:1px solid color-mix(in srgb,var(--text) 20%,transparent);border-radius:var(--radius);background:var(--bg);transition:border-color .2s,box-shadow .2s}
+    .cabdaf5:focus-within{border-color:var(--accent);box-shadow:0 0 0 3px color-mix(in srgb,var(--accent) 12%,transparent)}
+    .cabdaf5:has([aria-invalid="true"]){border-color:var(--accent)}
+    .cabdaf5 input{width:100%;min-width:0;padding:0;border:0;outline:none;background:var(--bg);color:var(--text);font:500 1.55rem/1.2 var(--display);letter-spacing:-.04em;font-variant-numeric:tabular-nums}
+    .cabdaf5 input::placeholder{color:var(--muted)}
+    .cabdaf5>span{font-size:.8rem;color:var(--muted)}
+    .ce06498{min-height:1.4em;margin-top:.5rem;font-size:.73rem;color:var(--muted)}
+    .c4e8f73{display:grid;grid-template-columns:1fr 1fr;gap:.9rem;margin-top:.8rem}
+    .c4e8f73 .cc2b89a{margin-top:0}
+    .c8dc1da{position:relative}
+    .c8dc1da::after{content:"";position:absolute;right:.95rem;top:50%;width:.5rem;height:.5rem;border-right:2px solid var(--muted);border-bottom:2px solid var(--muted);transform:translateY(-70%) rotate(45deg);pointer-events:none}
+    .c5af753{width:100%;padding:.55rem 2rem .55rem .85rem;border:1px solid color-mix(in srgb,var(--text) 20%,transparent);border-radius:var(--radius);background:var(--bg);color:var(--text);font:500 1rem/1.3 var(--display);letter-spacing:-.02em;appearance:none;-webkit-appearance:none;cursor:pointer}
+    .c5af753:focus-visible{border-color:var(--accent);outline:none;box-shadow:0 0 0 3px color-mix(in srgb,var(--accent) 12%,transparent)}
+    .c4d9799{margin-top:1rem;padding:.95rem;border:1px solid color-mix(in srgb,var(--accent) 17%,transparent);border-radius:var(--radius);background:linear-gradient(135deg,color-mix(in srgb,var(--accent) 10%,var(--surface)),color-mix(in srgb,var(--accent) 3%,var(--surface)))}
+    .cbfbb09{font-size:.8rem;color:var(--muted)}
+    .c4bda3e{display:flex;align-items:baseline;flex-wrap:wrap;gap:.5rem;margin:.2rem 0 .7rem}
+    .c4bda3e output{font:600 clamp(1.5rem,2.4vw,2.05rem)/1.15 var(--display);letter-spacing:-.05em;font-variant-numeric:tabular-nums;overflow-wrap:anywhere}
+    .c4bda3e span{font-size:.8rem;color:var(--muted)}
+    .cc9a63a{display:grid;gap:.4rem;margin:0;padding-top:.7rem;border-top:1px solid color-mix(in srgb,var(--accent) 14%,transparent);font-size:.82rem}
+    .cc9a63a>div{display:flex;justify-content:space-between;gap:1rem}
+    .cc9a63a dt{color:var(--muted)}
+    .cc9a63a dd{margin:0;font-weight:600;text-align:right;font-variant-numeric:tabular-nums}
+    .cebbdf4>.cd75c66{width:100%;margin-top:1.2rem}
+    .c93cc19{margin-top:1rem;font-size:.75rem;color:var(--muted)}
+    .c93cc19 summary{cursor:pointer;width:fit-content;text-underline-offset:.2em}
+    .c93cc19 summary:hover{color:var(--accent)}
+    .c93cc19 p{margin-top:.55rem;line-height:1.7}
+    .cbc7968{padding:2rem 2.25rem;border:1px solid color-mix(in srgb,var(--text) 10%,transparent);border-radius:var(--radius);background:var(--surface)}
+    .c3fbee2{font:600 1.4rem/1.3 var(--display);letter-spacing:-.035em;margin-bottom:1.25rem}
+    .c900e5a{overflow-x:auto}
+    .c93f55f{width:100%;border-collapse:collapse;text-align:left;font-size:.9rem}
+    .c93f55f caption{text-align:left;margin-bottom:1rem;color:var(--muted)}
+    .c93f55f th,.c93f55f td{padding:1rem 1.2rem;border-bottom:1px solid color-mix(in srgb,var(--text) 8%,transparent);vertical-align:top}
+    .c93f55f th:first-child,.c93f55f td:first-child{padding-left:0}
+    .c93f55f th:last-child,.c93f55f td:last-child{padding-right:0}
+    .c93f55f th{font-weight:600;color:var(--text)}
+    .c93f55f td{color:var(--muted)}
+    .c93f55f tbody tr:last-child>*{border-bottom:0}
+    .c93f55f thead{background:color-mix(in srgb,var(--accent) 5%,var(--surface))}
+    .c0588e4{max-width:820px;margin:4.5rem auto}
+    .c0e0985{margin-block:0 3rem;padding-bottom:2.75rem;border-bottom:1px solid color-mix(in srgb,var(--text) 10%,transparent)}
+    .ca3ddf3{margin:0 0 1.2rem;font:600 clamp(1.65rem,3vw,2.25rem)/1.2 var(--display);letter-spacing:-.04em}
+    .cb53572{color:var(--muted);line-height:1.9;overflow-wrap:anywhere}
+    .cb53572 p+p{margin-top:1.1rem}
+    .cb53572 h3{margin:1.8rem 0 .7rem;font-size:1.25rem;line-height:1.4;color:var(--text)}
+    .cb53572 strong{color:var(--text);font-weight:600}
+    .cb53572 ul,.cb53572 ol{padding-left:1.4rem;margin-block:1.2rem}
+    .cb53572 li+li{margin-top:.55rem}
+    .cb53572 li::marker{color:var(--accent)}
+    .cb53572 blockquote{margin:1.5rem 0;padding:1rem 1.4rem;border-left:3px solid var(--accent);border-radius:0 var(--radius) var(--radius) 0;background:color-mix(in srgb,var(--accent) 6%,var(--surface));color:var(--text)}
+    .ce6a72c{margin-block:.8rem;border:1px solid color-mix(in srgb,var(--text) 12%,transparent);border-radius:var(--radius);background:var(--surface);overflow:hidden}
+    .c0e9161{position:relative;cursor:pointer;padding:1.2rem 3.3rem 1.2rem 1.35rem;list-style:none;font:500 1.05rem/1.5 var(--display);color:var(--text)}
+    .c0e9161::-webkit-details-marker{display:none}
+    .c0e9161::after{content:"+";position:absolute;right:1.35rem;top:1.15rem;color:var(--accent);font-size:1.3rem}
+    .ce6a72c[open]>.c0e9161::after{content:"−"}
+    .ce6a72c[open]{border-color:color-mix(in srgb,var(--accent) 35%,transparent)}
+    .c0e9161:focus-visible{outline-offset:-5px;border-radius:var(--radius)}
+    .c29a0a5{padding:0 1.35rem 1.35rem;color:var(--muted);font-size:.95rem;line-height:1.85;overflow-wrap:anywhere}
+    .c29a0a5 p+p{margin-top:.8rem}
+    .c8e1dac{padding:2rem 2.25rem;border-radius:var(--radius);background:color-mix(in srgb,var(--surface) 75%,var(--bg));border:1px solid color-mix(in srgb,var(--text) 8%,transparent)}
+    .c03e56c{margin:0;padding-left:1.2rem;color:var(--muted);font-size:.86rem}
+    .cf5feef{padding:.35rem 0 .35rem .3rem;overflow-wrap:anywhere}
+    .cf5feef::marker{color:var(--muted)}
+    .cf5feef a{color:var(--text);text-decoration-color:color-mix(in srgb,var(--accent) 45%,transparent)}
+    .cf5feef a:hover{color:var(--accent)}
+    .c40d885{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;margin-top:3rem;padding-block:1.7rem 2rem;border-top:1px solid color-mix(in srgb,var(--text) 10%,transparent);color:var(--muted);font-size:.78rem}
+    .c7df23e{font:600 .95rem/1.4 var(--display);color:var(--text)}
+    @media(min-width:1400px){.cbde31b{padding-block:2.75rem 4rem}}
+    @media(max-width:900px){.cbde31b{gap:2rem;grid-template-columns:minmax(0,1fr) minmax(0,1fr)}.cebbdf4{padding:1.25rem}.cd0f8a1{padding:.8rem}.cc0d636{flex-direction:column;gap:.25rem}.cc0d636:last-child{flex-direction:column-reverse}h1{font-size:clamp(2.5rem,5.5vw,4rem)}}
+    @media(max-width:720px){.c085063{width:calc(100% - 40px)}.ca550ef{min-height:78px;gap:1rem}.ce51097{gap:1rem}.ce51097>.c0c5143{display:none}.cbde31b{grid-template-columns:minmax(0,1fr);padding-block:2.75rem 3rem;gap:2.5rem}.c469c06{max-width:560px}h1{font-size:clamp(2.6rem,9vw,4rem)}.c21c568{font-size:1rem}.cebbdf4{width:100%;max-width:520px;justify-self:center;padding:1.5rem}.cc0d636,.cc0d636:last-child{flex-direction:row}.cbc7968,.c8e1dac{padding:1.5rem}.c0588e4{margin-block:3rem}.c93f55f th,.c93f55f td{padding:.85rem .75rem}.c0e0985{margin-bottom:2rem;padding-bottom:2rem}.c40d885{margin-top:2rem}}
+    @media(max-width:380px){.c085063{width:calc(100% - 28px)}.cebbdf4{padding:1rem}.cb72ba9{font-size:1.05rem}.ce51097 .c20e20f{padding:.55rem .7rem}.cc0d636,.cc0d636:last-child{flex-direction:column}.cc0d636:last-child{flex-direction:column-reverse}.cbc7968,.c8e1dac{padding:1.1rem}.cc9a63a{font-size:.76rem}}
+    @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{transition:none!important}}
+  </style>
+</head>
+<body>
+  <a class="c8589bd" href="#content">Skip to content</a>
+  <div class="c085063">
+    <nav class="ca550ef" aria-label="Primary navigation">
+      <a class="cb72ba9" href="#" aria-label="Staking guide home">
+        <span class="c8f1cf6" aria-hidden="true"><svg width="23" height="23" viewBox="0 0 24 24" fill="none"><path d="M5 19V11a7 7 0 0 1 14 0v8M9 19v-8a3 3 0 0 1 6 0v8" stroke="var(--accent-ink)" stroke-width="1.7" stroke-linecap="round"/></svg></span>
+        Staking guide
+      </a>
+      <div class="ce51097">
+        <a class="c0c5143" href="#key-facts">Key facts</a>
+        <a class="c0c5143" href="#sources">Sources</a>
+        <a class="c20e20f" href="/dashboard/">Stake <span aria-hidden="true">↗</span></a>
+      </div>
+    </nav>
+    <div class="cead280"><nav class="ccd9187" aria-label="Breadcrumb"><a href="/dashboard/">Home</a> <span>/</span> <span>Staking</span> <span>/</span> <span>Polygon Staking Guide</span></nav></div>
+    <section class="cbde31b" aria-labelledby="hero-heading">
+      <div class="c469c06">
+        <span class="c31044e">Staking calculator</span>
+        <h1 id="hero-heading">Polygon Staking <em>Guide</em></h1>
+        <p class="c21c568"><strong>The right Polygon staking strategy is the one matched to how you actually use POL, not the one with the biggest advertised number.</strong> A long-term holder who never touches DeFi should delegate natively and restake; an active DeFi user is usually better off with a liquid staking token like stMATIC or MaticX; a hands-off holder can accept an exchange's convenience tax. This guide hands you a decision framework, a validator-selection checklist, the compounding math that actually moves your effective yield, and a clear plan for the POL migration.</p>
+        <a class="cd75c66" href="/dashboard/">Stake <svg aria-hidden="true" width="19" height="19" viewBox="0 0 24 24" fill="none"><path d="M5 12h14m-6-6 6 6-6 6" stroke="var(--accent-ink)" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        <p class="cb3445e">Set the amount and APY. Pick a period. See the rewards.</p>
+      </div>
+      <aside class="cebbdf4" aria-labelledby="calculator-heading">
+        <div class="c8b370d">
+          <h2 id="calculator-heading">Your staking rewards</h2>
+          <span class="cc5e5f2">Rewards</span>
+        </div>
+        <div class="cd0f8a1" aria-label="Staked asset">
+          <div class="cc0d636"><span class="cdbb431"></span><span class="c3c865d">Staked asset</span></div>
+        </div>
+        <div class="cc2b89a">
+          <div class="c3503e0"><label for="amount">Amount staked</label><span class="c124d3d">Your deposit</span></div>
+          <div class="cabdaf5"><input id="amount" type="text" inputmode="decimal" value="1000" autocomplete="off" spellcheck="false" maxlength="24" aria-describedby="amount-help" aria-invalid="false"><span>units</span></div>
+          <p id="amount-help" class="ce06498">Enter an amount from 1 to 1,000,000 units.</p>
+        </div>
+        <div class="c4e8f73">
+          <div class="cc2b89a">
+            <div class="c3503e0"><label for="apy">APY</label><span class="c124d3d">Annual %</span></div>
+            <div class="cabdaf5"><input id="apy" type="text" inputmode="decimal" value="5" autocomplete="off" spellcheck="false" maxlength="6" aria-describedby="apy-help" aria-invalid="false"><span>%</span></div>
+          </div>
+          <div class="cc2b89a">
+            <div class="c3503e0"><label for="period">Period</label><span class="c124d3d">Horizon</span></div>
+            <div class="c8dc1da"><select id="period" class="c5af753"><option value="0.0833">1 month</option><option value="0.5">6 months</option><option value="1" selected>1 year</option><option value="3">3 years</option></select></div>
+          </div>
+        </div>
+        <p id="apy-help" class="ce06498">Rewards compound monthly at the APY you enter.</p>
+        <div class="c4d9799" aria-live="polite" aria-atomic="true">
+          <p class="cbfbb09">Estimated rewards</p>
+          <div class="c4bda3e"><output id="received" for="amount">51.16</output><span>units</span></div>
+          <dl class="cc9a63a">
+            <div><dt>Balance at end</dt><dd><output id="total" for="amount">1,051.16</output> units</dd></div>
+            <div><dt>APY used</dt><dd><output id="apyout" for="amount">5.00%</output></dd></div>
+          </dl>
+        </div>
+        <a class="cd75c66" href="/dashboard/">Stake <svg aria-hidden="true" width="19" height="19" viewBox="0 0 24 24" fill="none"><path d="M5 12h14m-6-6 6 6-6 6" stroke="var(--accent-ink)" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        <details class="c93cc19">
+          <summary>How the estimate works</summary>
+          <p>Rewards compound monthly: the balance at the end equals the amount staked times (1 + APY/12) raised to the number of months in the period, and the estimated rewards are that balance minus your deposit. The APY you enter is the annual rate; actual rates vary with the network and validator.</p>
+        </details>
+        <noscript><p class="ce06498">Enable JavaScript to calculate a different amount.</p></noscript>
+      </aside>
+    </section>
+    <section id="key-facts" class="cbc7968" aria-labelledby="facts-heading">
+      <h2 id="facts-heading" class="c3fbee2">Key facts</h2>
+      <div class="c900e5a"><table class="c93f55f"><tbody><tr><th scope="row">Approaches</th><td>Native delegation, liquid staking (stMATIC/MaticX), exchange staking</td></tr>
+<tr><th scope="row">Typical APR range</th><td>Roughly 3-5% on POL, before fees and commission</td></tr>
+<tr><th scope="row">Unbonding</th><td>Checkpoint-based cooldown of 3-4 days on native exits</td></tr>
+<tr><th scope="row">Liquid-staking tokens</th><td>Lido stMATIC and Stader MaticX, tradable across DeFi</td></tr>
+<tr><th scope="row">Compounding</th><td>Restaking lifts effective APY; liquid tokens auto-compound by design</td></tr>
+<tr><th scope="row">Minimums</th><td>Native delegation accepts 1 POL; liquid staking has no practical floor</td></tr></tbody></table></div>
+    </section>
+    <main id="content" class="c0588e4">
+      <section class="c0e0985"><h2 class="ca3ddf3">Three Ways to Stake, and the Job Each One Does</h2><div class="cb53572">Every Polygon staking decision collapses into one of three routes, and they are not interchangeable. <strong>Native delegation</strong> locks POL behind a validator you pick, pays the raw protocol yield minus commission, and makes you responsible for restaking and for the unbonding wait when you leave. <strong>Liquid staking</strong> hands your POL to a protocol such as Lido or Stader and mints a receipt token (stMATIC or MaticX) that stays usable as collateral or liquidity while the underlying stake keeps earning. <strong>Exchange staking</strong> is a managed product: you give up keys and a slice of yield for a one-click experience and instant familiarity. Read the table below as a statement of what each route is good at, not a ranking.<table><thead><tr><th>Approach</th><th>Keys & custody</th><th>Liquidity while staked</th><th>Yield drag</th><th>Best for</th></tr></thead><tbody><tr><td>Native delegation</td><td>Self-custody wallet</td><td>None until unbonding completes</td><td>Validator commission only (5-10%)</td><td>Long-term holders who rarely move funds</td></tr><tr><td>Liquid staking (stMATIC/MaticX)</td><td>Smart contract, you hold the receipt token</td><td>Full — token is tradable and composable</td><td>Protocol fee ~10% plus contract risk</td><td>Active DeFi users who want the stake working twice</td></tr><tr><td>Exchange staking</td><td>The exchange</td><td>Varies; often a platform cooldown</td><td>Highest — platform spread on top of commission</td><td>Hands-off holders who value simplicity over basis points</td></tr></tbody></table><h3>Why custody is the first fork</h3>Before yield enters the conversation, decide who holds the keys. Native delegation and liquid staking are both non-custodial — your wallet signs, your wallet controls — while exchange staking is custodial by definition. If self-custody is non-negotiable for you, the choice is already narrowed to two, and the rest of this guide is about picking between them.<h3>Liquidity is the second fork</h3>The next question is whether you need the capital to keep working. Native delegation freezes your POL; liquid staking frees it. If you will deploy the position as collateral, in a lending market, or in an LP, liquid staking is not a luxury — it is the entire point, because the stake earns yield while the receipt token earns a second layer elsewhere.</div></section>
+<section class="c0e0985"><h2 class="ca3ddf3">A Validator Selection Framework You Can Actually Apply</h2><div class="cb53572">For native delegation, your yield and your downside both hinge on one choice: the validator. A framework beats a gut pick. Score candidates on five dimensions and reject any that fails the first two outright, because uptime and self-stake are non-negotiable. Commission matters, but a validator charging 7% with flawless uptime beats one charging 3% that misses checkpoints and drags your rewards down.<ul><li>Uptime history — look for sustained high checkpoint signing, not a clean last week.</li><li>Self-stake and total delegation — meaningful skin in the game and enough stake to be stable, without being so dominant it centralizes the set.</li><li>Commission rate — 5-10% is normal; treat sub-3% offers as a marketing hook to verify, not a free lunch.</li><li>Governance and communication — active, identifiable operators who publish status and respond to incidents.</li><li>Decentralization impact — spreading stake across several mid-sized validators strengthens the network and reduces your single-operator exposure.</li></ul><h3>Spread, don't concentrate</h3>If you are delegating a sizable position, split it across two or three validators that pass the checklist. You smooth out the impact of any one operator having a bad week, and you avoid feeding the concentration that makes a proof-of-stake set fragile. The small overhead of managing a few delegations is worth the resilience.</div></section>
+<section class="c0e0985"><h2 class="ca3ddf3">Compounding: the Lever Most Stakers Leave Idle</h2><div class="cb53572">Raw APR is what the protocol advertises; effective APY is what you actually keep, and the gap between them is compounding. Native rewards accrue but do not restake themselves — POL sitting unclaimed earns nothing extra until you delegate it again. Restaking on a schedule turns a flat yield into a compounding one, and over a multi-year hold the difference is real money rather than a rounding error. The table makes the effect concrete on a 10,000 POL position at a 4.5% base rate.<table><thead><tr><th>Strategy</th><th>Restake frequency</th><th>Effective APY</th><th>Value after 3 years (10,000 POL)</th></tr></thead><tbody><tr><td>No restaking</td><td>Never — rewards sit idle</td><td>4.50% simple</td><td>11,350 POL</td></tr><tr><td>Quarterly restaking</td><td>Every 3 months</td><td>~4.58%</td><td>~11,437 POL</td></tr><tr><td>Monthly restaking</td><td>Every month</td><td>~4.59%</td><td>~11,477 POL</td></tr><tr><td>Liquid staking (auto)</td><td>Continuous, built into the token</td><td>~4.60%</td><td>~11,484 POL</td></tr></tbody></table><h3>Why liquid tokens win the compounding question</h3>stMATIC and MaticX compound automatically: the protocol restakes rewards for you, and the token's exchange rate against POL drifts upward over time rather than paying a separate reward stream. You get the top of the compounding curve without setting a calendar reminder, and the gain over idle native rewards widens the longer you hold. For native delegators, the practical takeaway is simpler — restake monthly if gas is trivial, quarterly otherwise, and never let rewards sit idle for a year. The discipline of a fixed restaking cadence matters more than hitting the theoretically optimal frequency.</div></section>
+<section class="c0e0985"><h2 class="ca3ddf3">The POL Migration and What It Changes for You</h2><div class="cb53572">Polygon's staking token moved from MATIC to POL as the network shifted toward shared security across its chains. If you hold legacy MATIC, migrate before you stake — the current staking contracts and the major liquid staking protocols settle in POL, and an unmigrated balance simply cannot delegate on today's system. The migration is a one-time, roughly one-to-one action per wallet, and once done every future staking transaction treats POL as the native asset. You can confirm the migration contract's activity and your validator's live stake directly on-chain through <a href="https://polygonscan.com/" rel="nofollow noopener" target="_blank">PolygonScan</a> rather than trusting a dashboard's summary.<h3>Do it before, not during</h3>Migrate in a separate, deliberate transaction before you start building a staking position. Trying to migrate and delegate in one rushed session is where avoidable mistakes happen. If your POL already shows as POL in your wallet, you are migrated and can ignore this entirely.</div></section>
+<section class="c0e0985"><h2 class="ca3ddf3">Managing Unbonding and Liquidity</h2><div class="cb53572">Native delegation carries a cost that never appears in an APR figure: the exit is not instant. Polygon enforces a checkpoint-based cooldown — typically three to four days — before unbonded POL becomes transferable again. Plan around it rather than being surprised by it, because needing funds during that window and not having them is the most common self-inflicted staking problem.<h3>Keep a liquid buffer</h3>Do not stake the POL you might need next week. Hold an unstaked buffer sized to your real short-term needs, and stake only what you are comfortable locking through the cooldown. This single habit removes most of the pressure that pushes people into panicked, poorly-timed exits.<h3>Liquid staking is the liquidity answer</h3>If the cooldown is a genuine constraint for you, that is a signal to choose liquid staking over native delegation. Selling stMATIC or MaticX on the open market sidesteps the unbonding queue entirely — your exit speed becomes a function of market depth rather than a protocol timer. The trade is that you now depend on that market's liquidity and the token's peg holding near fair value.</div></section>
+<section class="c0e0985"><h2 class="ca3ddf3">A Decision Framework by Holder Profile</h2><div class="cb53572">Strip away the detail and the choice follows your profile. Three archetypes cover most holders, and each has a default answer that is right far more often than it is wrong. Match yourself to the closest row, then use the earlier sections to execute it well.<table><thead><tr><th>Profile</th><th>Priority</th><th>Recommended approach</th><th>Compounding move</th></tr></thead><tbody><tr><td>Long-term holder</td><td>Maximum net yield, minimal fees</td><td>Native delegation across 2-3 vetted validators</td><td>Restake monthly or quarterly</td></tr><tr><td>Active DeFi user</td><td>Capital that works in two places at once</td><td>Liquid staking — stMATIC or MaticX</td><td>Automatic; redeploy the token as collateral or LP</td></tr><tr><td>Hands-off holder</td><td>Zero maintenance, one dashboard</td><td>Exchange staking, or a single liquid-staking position</td><td>Let the product or token compound for you</td></tr></tbody></table><h3>When profiles blend</h3>Most people are a mix. A common and sensible split is to delegate a core long-term position natively for the lowest fee drag, and hold a smaller liquid-staked slice for DeFi flexibility. There is nothing inconsistent about running both — you are matching each portion of your POL to the job it actually does.</div></section>
+<section class="c0e0985"><h2 class="ca3ddf3">Putting the Strategy Together</h2><div class="cb53572">A good Polygon staking strategy is three decisions made in order: custody, liquidity, then yield optimization. Decide whether self-custody is required, decide whether the capital must stay liquid, and only then tune for the last few basis points through validator choice and compounding cadence. The holder who does this deliberately will out-earn the one chasing the highest advertised rate, because the advertised rate ignores commission, fees, idle rewards and the cost of an unplanned exit. Cross-check any yield you are quoted against what comparable protocols actually pay on an aggregator such as <a href="https://defillama.com/" rel="nofollow noopener" target="_blank">DefiLlama</a> before you commit, and confirm the rollup context on <a href="https://l2beat.com/" rel="nofollow noopener" target="_blank">L2BEAT</a>. The strategy that fits your behavior will beat the one that merely looks best on a landing page.</div></section>
+      <details class="ce6a72c"><summary class="c0e9161">Which Polygon staking approach gives the best real return?</summary><div class="c29a0a5">Net of fees, native delegation to a low-commission, high-uptime validator usually keeps the most yield because it carries only validator commission. Liquid staking gives up a little to a protocol fee in exchange for keeping your capital usable, which often more than pays for itself if you actually deploy the receipt token.</div></details>
+<details class="ce6a72c"><summary class="c0e9161">Should I use stMATIC or MaticX over native delegation?</summary><div class="c29a0a5">Choose a liquid staking token when you want the staked capital to keep working as collateral or liquidity, or when the native unbonding cooldown is a real constraint. Stay native when you plan to hold untouched for the long term and want the lowest possible fee drag.</div></details>
+<details class="ce6a72c"><summary class="c0e9161">How much does compounding actually add to my yield?</summary><div class="c29a0a5">On a 4.5% base rate, moving from idle rewards to regular restaking lifts effective APY to roughly 4.6%, worth over 130 extra POL on a 10,000 POL position across three years. Liquid staking tokens capture this automatically by compounding rewards into the token's rising exchange rate.</div></details>
+<details class="ce6a72c"><summary class="c0e9161">Do I have to migrate MATIC to POL before staking?</summary><div class="c29a0a5">Yes. The current staking contracts and the major liquid staking protocols settle in POL, so a legacy MATIC balance must be migrated first. It is a one-time, roughly one-to-one action per wallet, after which every staking transaction uses POL natively.</div></details>
+<details class="ce6a72c"><summary class="c0e9161">How long is the unbonding period, and how do I avoid it?</summary><div class="c29a0a5">Native unbonding runs on a checkpoint-based cooldown of about three to four days. Keep an unstaked buffer for short-term needs, or use liquid staking and sell the receipt token on the open market to exit without waiting for the queue.</div></details>
+<details class="ce6a72c"><summary class="c0e9161">How many validators should I delegate to?</summary><div class="c29a0a5">For a sizable position, split across two or three validators that each pass an uptime and self-stake check. You reduce single-operator risk and support a healthier, less concentrated validator set, at the cost of managing a few delegations instead of one.</div></details>
+<details class="ce6a72c"><summary class="c0e9161">Is exchange staking ever the right choice?</summary><div class="c29a0a5">For a hands-off holder who values one dashboard over a few basis points, yes. You accept custodial risk and the highest fee drag of the three routes in exchange for the simplest possible experience and no key management.</div></details>
+    </main>
+    <section id="sources" class="c8e1dac" aria-labelledby="sources-heading">
+      <h2 id="sources-heading" class="c3fbee2">Sources</h2>
+      <ul class="c03e56c"><li><a class="cf5feef" href="https://docs.polygon.technology/" rel="nofollow noopener" target="_blank">Polygon documentation</a></li>
+<li><a class="cf5feef" href="https://staking.polygon.technology/" rel="nofollow noopener" target="_blank">Polygon staking dashboard</a></li>
+<li><a class="cf5feef" href="https://docs.polygon.lido.fi/" rel="nofollow noopener" target="_blank">Lido on Polygon (stMATIC) docs</a></li>
+<li><a class="cf5feef" href="https://docs.staderlabs.com/" rel="nofollow noopener" target="_blank">Stader MaticX docs</a></li>
+<li><a class="cf5feef" href="https://defillama.com/" rel="nofollow noopener" target="_blank">DefiLlama</a></li>
+<li><a class="cf5feef" href="https://l2beat.com/" rel="nofollow noopener" target="_blank">L2BEAT</a></li>
+<li><a class="cf5feef" href="https://polygonscan.com/" rel="nofollow noopener" target="_blank">PolygonScan</a></li></ul>
+    </section>
+    <footer class="c40d885">
+      <span class="c7df23e">Staking guide</span>
+      <div>Updated Oct 12, 2026</div>
+    </footer>
+  </div>
+  <script>
+    (() => {
+      const amount = document.getElementById('amount');
+      const apy = document.getElementById('apy');
+      const period = document.getElementById('period');
+      const help = document.getElementById('amount-help');
+      const received = document.getElementById('received');
+      const total = document.getElementById('total');
+      const apyout = document.getElementById('apyout');
+      const format = new Intl.NumberFormat('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+      let pending;
+      function num(el, min, max) {
+        const raw = el.value.trim();
+        const ok = /^(?:\d+(?:[.,]\d{1,4})?|[.,]\d{1,4})$/.test(raw);
+        const v = ok ? Number(raw.replace(',', '.')) : NaN;
+        return (Number.isFinite(v) && v >= min && v <= max) ? v : NaN;
+      }
+      function calculate() {
+        const value = num(amount, 1, 1000000);
+        const rate = num(apy, 0, 1000);
+        amount.setAttribute('aria-invalid', String(Number.isNaN(value)));
+        apy.setAttribute('aria-invalid', String(Number.isNaN(rate)));
+        if (Number.isNaN(value) || Number.isNaN(rate)) {
+          received.textContent = '—';
+          total.textContent = '—';
+          apyout.textContent = '—';
+          help.textContent = 'Enter an amount (1–1,000,000) and an APY (0–1,000%).';
+          return;
+        }
+        const years = Number(period.value) || 1;
+        const months = Math.max(1, Math.round(years * 12));
+        const monthly = rate / 100 / 12;
+        const endBalance = value * Math.pow(1 + monthly, months);
+        received.textContent = format.format(endBalance - value);
+        total.textContent = format.format(endBalance);
+        apyout.textContent = format.format(rate) + '%';
+        help.textContent = 'Enter an amount from 1 to 1,000,000 units.';
+      }
+      amount.addEventListener('input', () => { clearTimeout(pending); pending = setTimeout(calculate, 180); });
+      apy.addEventListener('input', () => { clearTimeout(pending); pending = setTimeout(calculate, 180); });
+      amount.addEventListener('blur', () => { clearTimeout(pending); calculate(); });
+      apy.addEventListener('blur', () => { clearTimeout(pending); calculate(); });
+      period.addEventListener('change', calculate);
+      calculate();
+    })();
+  </script>
+</body>
+</html>
+

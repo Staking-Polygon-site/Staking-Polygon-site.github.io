@@ -1,0 +1,299 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Polygon Mining: Why You Stake POL, Not Mine It</title>
+  <meta name="description" content="Polygon Mining does not exist — Polygon is proof-of-stake, so there are no blocks to mine. Here is why, and how to actually earn POL by staking instead.">
+  <link rel="canonical" href="https://staking-polygon-site.github.io/polygon-mining/">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Polygon Mining Is a Myth — Here's How You Really Earn POL">
+  <meta property="og:description" content="Polygon Mining does not exist — Polygon is proof-of-stake, so there are no blocks to mine. Here is why, and how to actually earn POL by staking instead.">
+  <meta property="og:url" content="https://staking-polygon-site.github.io/polygon-mining/">
+  <meta property="og:image" content="https://staking-polygon-site.github.io/og.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Polygon Mining Is a Myth — Here's How You Really Earn POL">
+  <meta name="twitter:description" content="Polygon Mining does not exist — Polygon is proof-of-stake, so there are no blocks to mine. Here is why, and how to actually earn POL by staking instead.">
+  <meta name="twitter:image" content="https://staking-polygon-site.github.io/og.png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&family=Outfit:wght@500;600;700&display=swap">
+<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebSite", "@id": "https://staking-polygon-site.github.io/#website", "url": "https://staking-polygon-site.github.io/polygon-mining/", "name": "Polygon Mining: Why You Stake POL, Not Mine It"}, {"@type": "WebPage", "@id": "https://staking-polygon-site.github.io/#webpage", "url": "https://staking-polygon-site.github.io/polygon-mining/", "name": "Polygon Mining: Why You Stake POL, Not Mine It", "isPartOf": {"@id": "https://staking-polygon-site.github.io/#website"}, "description": "Polygon Mining does not exist — Polygon is proof-of-stake, so there are no blocks to mine. Here is why, and how to actually earn POL by staking instead.", "datePublished": "2026-10-12", "dateModified": "2026-10-12"}, {"@type": "SoftwareApplication", "name": "Polygon Mining", "applicationCategory": "FinanceApplication", "operatingSystem": "Web", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://staking-polygon-site.github.io/polygon-mining/"}, {"@type": "ListItem", "position": 2, "name": "Staking"}, {"@type": "ListItem", "position": 3, "name": "Polygon Mining"}]}, {"@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Can you mine Polygon?", "acceptedAnswer": {"@type": "Answer", "text": "No. Polygon runs on proof-of-stake, so there are no blocks to mine and no mining rewards. The equivalent way to earn POL for securing the network is staking — delegating your tokens to a validator."}}, {"@type": "Question", "name": "Is Polygon proof of work?", "acceptedAnswer": {"@type": "Answer", "text": "No. Polygon is a proof-of-stake network and always has been. Security comes from validators staking POL, not from miners solving computational puzzles as on Bitcoin or pre-2022 Ethereum."}}, {"@type": "Question", "name": "Why do people still search for Polygon mining?", "acceptedAnswer": {"@type": "Answer", "text": "Most newcomers meet Bitcoin or early Ethereum first, where mining with GPUs or ASICs was how you earned. They carry that assumption to every chain, but on Polygon hardware earns nothing — staked capital does."}}, {"@type": "Question", "name": "What is the mining equivalent on Polygon?", "acceptedAnswer": {"@type": "Answer", "text": "Staking. You delegate POL to a validator, help secure the chain, and receive a share of the rewards in return — the proof-of-stake counterpart to a proof-of-work block reward, with no hardware required."}}, {"@type": "Question", "name": "How much can I earn staking POL instead of mining?", "acceptedAnswer": {"@type": "Answer", "text": "Staking POL has typically paid around 3-5% APR, varying with total network participation and shown before the validator's commission. Liquidity and DeFi strategies can pay more but carry additional risk."}}, {"@type": "Question", "name": "Do I need a mining rig or special hardware for Polygon?", "acceptedAnswer": {"@type": "Answer", "text": "No. Delegating POL needs only a wallet and a few dollars in network fees. Validators run a standard server; there are no ASICs, GPUs, or power-hungry rigs involved anywhere in the process."}}, {"@type": "Question", "name": "Is staking Polygon better for the environment than mining?", "acceptedAnswer": {"@type": "Answer", "text": "Yes, by a wide margin. Proof-of-stake consumes a tiny fraction of the energy a proof-of-work network uses — Ethereum cut its energy use by about 99.95% when it made the same switch Polygon was built on."}}]}]}</script>
+  <style>
+    :root{--bg:#0D0F0A;--surface:#181C12;--text:#EEF2E6;--muted:#95997F;--accent:#A3E635;--accent-ink:#111600;--radius:13px;--display:"Outfit";--body:"Figtree"}
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth;scroll-padding-top:2rem}
+    body{margin:0;background:var(--bg);color:var(--text);font:400 1rem/1.7 var(--body);-webkit-font-smoothing:antialiased}
+    a{color:var(--accent);text-underline-offset:.22em}
+    a:hover{text-decoration-thickness:2px}
+    :focus-visible{outline:3px solid var(--accent);outline-offset:5px}
+    ::selection{background:var(--accent);color:var(--accent-ink)}
+    h1,h2,h3,p{margin:0}
+    h1,h2,h3{font-family:var(--display);text-wrap:balance}
+    svg{display:block;flex-shrink:0}
+    img{max-width:100%;height:auto}
+    .cdce86d{width:min(1180px,calc(100% - 64px));margin-inline:auto}
+    .ceb84fa{position:absolute;top:1rem;left:1rem;z-index:10;transform:translateY(-200%);padding:.7rem 1rem;background:var(--surface);border-radius:var(--radius)}
+    .ceb84fa:focus{transform:translateY(0)}
+    .cb4e322{min-height:96px;display:flex;align-items:center;justify-content:space-between;gap:2rem;border-bottom:1px solid color-mix(in srgb,var(--text) 10%,transparent)}
+    .c4567b1{display:inline-flex;align-items:center;gap:.7rem;color:var(--text);font:600 1.2rem/1 var(--display);letter-spacing:-.04em;text-decoration:none}
+    .cfa8c17{display:grid;place-items:center;width:38px;height:38px;background:var(--accent);color:var(--accent-ink);border-radius:var(--radius)}
+    .c3f5c1c{display:flex;align-items:center;gap:1.8rem}
+    .c3f5c1c>a{font-size:.88rem;font-weight:600;color:var(--text);text-decoration:none}
+    .c3f5c1c>a:hover{color:var(--accent)}
+    .c3f5c1c .c5e47f6{padding:.65rem 1rem;border:1px solid color-mix(in srgb,var(--text) 18%,transparent);border-radius:var(--radius)}
+    .c536dff{padding-top:1.6rem;font-size:.8rem;color:var(--muted)}
+    .c3a9312{display:flex;flex-wrap:wrap;align-items:center;gap:.5rem;color:var(--muted)}
+    ol.c3a9312,ul.c3a9312,.c3a9312 ol,.c3a9312 ul{list-style:none;padding:0;margin:0;display:flex;flex-wrap:wrap;gap:.5rem}
+    .c3a9312 a{color:var(--muted);text-decoration:none}
+    .c3a9312 a:hover{color:var(--accent)}
+    .c3a9312 [aria-current]{color:var(--text)}
+    .c843297{position:relative;display:grid;grid-template-columns:minmax(0,1.12fr) minmax(0,1fr);align-items:start;gap:clamp(1.75rem,5vw,4rem);padding-block:2.25rem 3.5rem}
+    .c0b549e{display:inline-flex;align-items:center;gap:.5rem;margin-bottom:1.35rem;color:var(--accent);font-size:.86rem;font-weight:600}
+    .c0b549e::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 5px color-mix(in srgb,var(--accent) 10%,transparent)}
+    h1{font-size:clamp(2.5rem,4.8vw,4.7rem);line-height:1.06;letter-spacing:-.055em;overflow-wrap:anywhere}
+    h1 em{color:var(--accent);font-style:normal}
+    .c3c43e6{margin-top:1.5rem;max-width:49ch;font-size:1.06rem;line-height:1.85;color:var(--muted)}
+    .c545a57{display:inline-flex;justify-content:center;align-items:center;gap:1.15rem;min-height:54px;padding:.9rem 1.4rem;border:1px solid color-mix(in srgb,var(--accent-ink) 12%,transparent);border-radius:var(--radius);background:linear-gradient(135deg,color-mix(in srgb,var(--accent) 88%,var(--surface)),var(--accent));box-shadow:0 8px 20px color-mix(in srgb,var(--accent) 18%,transparent);color:var(--accent-ink);font:600 .95rem/1.4 var(--body);text-decoration:none;transition:transform .2s,box-shadow .2s}
+    .c545a57:hover{transform:translateY(-2px);box-shadow:0 12px 26px color-mix(in srgb,var(--accent) 26%,transparent)}
+    .ceb3aa2>.c545a57{margin-top:2rem}
+    .c69d20e{margin-top:1.1rem;color:var(--muted);font-size:.8rem}
+    .cd26b0b{position:relative;isolation:isolate;min-width:0;padding:1.25rem;background:var(--surface);border:1px solid color-mix(in srgb,var(--text) 10%,transparent);border-radius:calc(var(--radius) * 1.5);box-shadow:0 28px 70px -20px color-mix(in srgb,var(--text) 19%,transparent),0 3px 10px color-mix(in srgb,var(--text) 4%,transparent)}
+    .cd26b0b::before{content:"";position:absolute;inset:-28px;z-index:-1;pointer-events:none;background:radial-gradient(ellipse at 80% 20%,color-mix(in srgb,var(--accent) 14%,transparent),transparent 68%);border-radius:calc(var(--radius) * 2)}
+    .c042c37{display:flex;justify-content:space-between;align-items:center;gap:1rem;margin-bottom:.9rem}
+    .c042c37 h2{font-size:1.15rem;letter-spacing:-.035em}
+    .c85ec96{padding:.25rem .65rem;border-radius:var(--radius);background:color-mix(in srgb,var(--accent) 10%,var(--surface));color:var(--accent);font-size:.72rem;font-weight:600}
+    .ced3f7e{display:grid;grid-template-columns:minmax(0,1fr) 38px minmax(0,1fr);align-items:center;gap:.6rem;padding:.65rem .8rem;border:1px solid color-mix(in srgb,var(--text) 9%,transparent);border-radius:var(--radius);background:color-mix(in srgb,var(--bg) 65%,var(--surface))}
+    .c694293{min-width:0;display:flex;align-items:center;gap:.7rem}
+    .c694293:last-child{justify-content:flex-end}
+    .cbbb78b{font-size:.76rem;color:var(--muted)}
+    .c395a04{min-width:0;display:flex;align-items:center;justify-content:center;max-width:100px;min-height:38px;overflow-wrap:anywhere}
+    .c395a04 img,.c395a04 svg{max-width:100%;max-height:38px;object-fit:contain}
+    .route-arrow{display:grid;place-items:center;width:34px;height:34px;border:1px solid color-mix(in srgb,var(--text) 10%,transparent);border-radius:50%;color:var(--accent);background:var(--surface)}
+    .c305cdb{margin-top:.9rem}
+    .cb79cd5{display:flex;align-items:baseline;justify-content:space-between;gap:1rem;margin-bottom:.55rem}
+    .cb79cd5 label{font-size:.85rem;font-weight:600}
+    .c479c02{font-size:.74rem;color:var(--muted)}
+    .c96c4a9{display:flex;align-items:center;gap:.8rem;padding:.55rem .85rem;border:1px solid color-mix(in srgb,var(--text) 20%,transparent);border-radius:var(--radius);background:var(--bg);transition:border-color .2s,box-shadow .2s}
+    .c96c4a9:focus-within{border-color:var(--accent);box-shadow:0 0 0 3px color-mix(in srgb,var(--accent) 12%,transparent)}
+    .c96c4a9:has([aria-invalid="true"]){border-color:var(--accent)}
+    .c96c4a9 input{width:100%;min-width:0;padding:0;border:0;outline:none;background:var(--bg);color:var(--text);font:500 1.55rem/1.2 var(--display);letter-spacing:-.04em;font-variant-numeric:tabular-nums}
+    .c96c4a9 input::placeholder{color:var(--muted)}
+    .c96c4a9>span{font-size:.8rem;color:var(--muted)}
+    .c6b1893{min-height:1.4em;margin-top:.5rem;font-size:.73rem;color:var(--muted)}
+    .c511f76{display:grid;grid-template-columns:1fr 1fr;gap:.9rem;margin-top:.8rem}
+    .c511f76 .c305cdb{margin-top:0}
+    .c4be854{position:relative}
+    .c4be854::after{content:"";position:absolute;right:.95rem;top:50%;width:.5rem;height:.5rem;border-right:2px solid var(--muted);border-bottom:2px solid var(--muted);transform:translateY(-70%) rotate(45deg);pointer-events:none}
+    .ce32499{width:100%;padding:.55rem 2rem .55rem .85rem;border:1px solid color-mix(in srgb,var(--text) 20%,transparent);border-radius:var(--radius);background:var(--bg);color:var(--text);font:500 1rem/1.3 var(--display);letter-spacing:-.02em;appearance:none;-webkit-appearance:none;cursor:pointer}
+    .ce32499:focus-visible{border-color:var(--accent);outline:none;box-shadow:0 0 0 3px color-mix(in srgb,var(--accent) 12%,transparent)}
+    .c3c1715{margin-top:1rem;padding:.95rem;border:1px solid color-mix(in srgb,var(--accent) 17%,transparent);border-radius:var(--radius);background:linear-gradient(135deg,color-mix(in srgb,var(--accent) 10%,var(--surface)),color-mix(in srgb,var(--accent) 3%,var(--surface)))}
+    .c477f5a{font-size:.8rem;color:var(--muted)}
+    .caebb9b{display:flex;align-items:baseline;flex-wrap:wrap;gap:.5rem;margin:.2rem 0 .7rem}
+    .caebb9b output{font:600 clamp(1.5rem,2.4vw,2.05rem)/1.15 var(--display);letter-spacing:-.05em;font-variant-numeric:tabular-nums;overflow-wrap:anywhere}
+    .caebb9b span{font-size:.8rem;color:var(--muted)}
+    .cf98bb8{display:grid;gap:.4rem;margin:0;padding-top:.7rem;border-top:1px solid color-mix(in srgb,var(--accent) 14%,transparent);font-size:.82rem}
+    .cf98bb8>div{display:flex;justify-content:space-between;gap:1rem}
+    .cf98bb8 dt{color:var(--muted)}
+    .cf98bb8 dd{margin:0;font-weight:600;text-align:right;font-variant-numeric:tabular-nums}
+    .cd26b0b>.c545a57{width:100%;margin-top:1.2rem}
+    .ca9e9b6{margin-top:1rem;font-size:.75rem;color:var(--muted)}
+    .ca9e9b6 summary{cursor:pointer;width:fit-content;text-underline-offset:.2em}
+    .ca9e9b6 summary:hover{color:var(--accent)}
+    .ca9e9b6 p{margin-top:.55rem;line-height:1.7}
+    .c88854a{padding:2rem 2.25rem;border:1px solid color-mix(in srgb,var(--text) 10%,transparent);border-radius:var(--radius);background:var(--surface)}
+    .c065fe2{font:600 1.4rem/1.3 var(--display);letter-spacing:-.035em;margin-bottom:1.25rem}
+    .ca2720e{overflow-x:auto}
+    .c5a704d{width:100%;border-collapse:collapse;text-align:left;font-size:.9rem}
+    .c5a704d caption{text-align:left;margin-bottom:1rem;color:var(--muted)}
+    .c5a704d th,.c5a704d td{padding:1rem 1.2rem;border-bottom:1px solid color-mix(in srgb,var(--text) 8%,transparent);vertical-align:top}
+    .c5a704d th:first-child,.c5a704d td:first-child{padding-left:0}
+    .c5a704d th:last-child,.c5a704d td:last-child{padding-right:0}
+    .c5a704d th{font-weight:600;color:var(--text)}
+    .c5a704d td{color:var(--muted)}
+    .c5a704d tbody tr:last-child>*{border-bottom:0}
+    .c5a704d thead{background:color-mix(in srgb,var(--accent) 5%,var(--surface))}
+    .cac8f49{max-width:820px;margin:4.5rem auto}
+    .cce3279{margin-block:0 3rem;padding-bottom:2.75rem;border-bottom:1px solid color-mix(in srgb,var(--text) 10%,transparent)}
+    .c9e74d4{margin:0 0 1.2rem;font:600 clamp(1.65rem,3vw,2.25rem)/1.2 var(--display);letter-spacing:-.04em}
+    .cbcfb7a{color:var(--muted);line-height:1.9;overflow-wrap:anywhere}
+    .cbcfb7a p+p{margin-top:1.1rem}
+    .cbcfb7a h3{margin:1.8rem 0 .7rem;font-size:1.25rem;line-height:1.4;color:var(--text)}
+    .cbcfb7a strong{color:var(--text);font-weight:600}
+    .cbcfb7a ul,.cbcfb7a ol{padding-left:1.4rem;margin-block:1.2rem}
+    .cbcfb7a li+li{margin-top:.55rem}
+    .cbcfb7a li::marker{color:var(--accent)}
+    .cbcfb7a blockquote{margin:1.5rem 0;padding:1rem 1.4rem;border-left:3px solid var(--accent);border-radius:0 var(--radius) var(--radius) 0;background:color-mix(in srgb,var(--accent) 6%,var(--surface));color:var(--text)}
+    .c5058e9{margin-block:.8rem;border:1px solid color-mix(in srgb,var(--text) 12%,transparent);border-radius:var(--radius);background:var(--surface);overflow:hidden}
+    .c692e19{position:relative;cursor:pointer;padding:1.2rem 3.3rem 1.2rem 1.35rem;list-style:none;font:500 1.05rem/1.5 var(--display);color:var(--text)}
+    .c692e19::-webkit-details-marker{display:none}
+    .c692e19::after{content:"+";position:absolute;right:1.35rem;top:1.15rem;color:var(--accent);font-size:1.3rem}
+    .c5058e9[open]>.c692e19::after{content:"−"}
+    .c5058e9[open]{border-color:color-mix(in srgb,var(--accent) 35%,transparent)}
+    .c692e19:focus-visible{outline-offset:-5px;border-radius:var(--radius)}
+    .c6fce35{padding:0 1.35rem 1.35rem;color:var(--muted);font-size:.95rem;line-height:1.85;overflow-wrap:anywhere}
+    .c6fce35 p+p{margin-top:.8rem}
+    .c5e6e24{padding:2rem 2.25rem;border-radius:var(--radius);background:color-mix(in srgb,var(--surface) 75%,var(--bg));border:1px solid color-mix(in srgb,var(--text) 8%,transparent)}
+    .c5f5415{margin:0;padding-left:1.2rem;color:var(--muted);font-size:.86rem}
+    .c12a4ce{padding:.35rem 0 .35rem .3rem;overflow-wrap:anywhere}
+    .c12a4ce::marker{color:var(--muted)}
+    .c12a4ce a{color:var(--text);text-decoration-color:color-mix(in srgb,var(--accent) 45%,transparent)}
+    .c12a4ce a:hover{color:var(--accent)}
+    .c7f1d5e{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;margin-top:3rem;padding-block:1.7rem 2rem;border-top:1px solid color-mix(in srgb,var(--text) 10%,transparent);color:var(--muted);font-size:.78rem}
+    .c4a942b{font:600 .95rem/1.4 var(--display);color:var(--text)}
+    @media(min-width:1400px){.c843297{padding-block:2.75rem 4rem}}
+    @media(max-width:900px){.c843297{gap:2rem;grid-template-columns:minmax(0,1fr) minmax(0,1fr)}.cd26b0b{padding:1.25rem}.ced3f7e{padding:.8rem}.c694293{flex-direction:column;gap:.25rem}.c694293:last-child{flex-direction:column-reverse}h1{font-size:clamp(2.5rem,5.5vw,4rem)}}
+    @media(max-width:720px){.cdce86d{width:calc(100% - 40px)}.cb4e322{min-height:78px;gap:1rem}.c3f5c1c{gap:1rem}.c3f5c1c>.c9b37af{display:none}.c843297{grid-template-columns:minmax(0,1fr);padding-block:2.75rem 3rem;gap:2.5rem}.ceb3aa2{max-width:560px}h1{font-size:clamp(2.6rem,9vw,4rem)}.c3c43e6{font-size:1rem}.cd26b0b{width:100%;max-width:520px;justify-self:center;padding:1.5rem}.c694293,.c694293:last-child{flex-direction:row}.c88854a,.c5e6e24{padding:1.5rem}.cac8f49{margin-block:3rem}.c5a704d th,.c5a704d td{padding:.85rem .75rem}.cce3279{margin-bottom:2rem;padding-bottom:2rem}.c7f1d5e{margin-top:2rem}}
+    @media(max-width:380px){.cdce86d{width:calc(100% - 28px)}.cd26b0b{padding:1rem}.c4567b1{font-size:1.05rem}.c3f5c1c .c5e47f6{padding:.55rem .7rem}.c694293,.c694293:last-child{flex-direction:column}.c694293:last-child{flex-direction:column-reverse}.c88854a,.c5e6e24{padding:1.1rem}.cf98bb8{font-size:.76rem}}
+    @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{transition:none!important}}
+  </style>
+</head>
+<body>
+  <a class="ceb84fa" href="#content">Skip to content</a>
+  <div class="cdce86d">
+    <nav class="cb4e322" aria-label="Primary navigation">
+      <a class="c4567b1" href="#" aria-label="Staking guide home">
+        <span class="cfa8c17" aria-hidden="true"><svg width="23" height="23" viewBox="0 0 24 24" fill="none"><path d="M5 19V11a7 7 0 0 1 14 0v8M9 19v-8a3 3 0 0 1 6 0v8" stroke="var(--accent-ink)" stroke-width="1.7" stroke-linecap="round"/></svg></span>
+        Staking guide
+      </a>
+      <div class="c3f5c1c">
+        <a class="c9b37af" href="#key-facts">Key facts</a>
+        <a class="c9b37af" href="#sources">Sources</a>
+        <a class="c5e47f6" href="/dashboard/">Stake <span aria-hidden="true">↗</span></a>
+      </div>
+    </nav>
+    <div class="c536dff"><nav class="c3a9312" aria-label="Breadcrumb"><a href="/dashboard/">Home</a> <span>/</span> <span>Staking</span> <span>/</span> <span>Polygon Mining</span></nav></div>
+    <section class="c843297" aria-labelledby="hero-heading">
+      <div class="ceb3aa2">
+        <span class="c0b549e">Staking calculator</span>
+        <h1 id="hero-heading">Polygon <em>Mining</em></h1>
+        <p class="c3c43e6"><strong>You cannot mine Polygon — the network runs on proof-of-stake, so there are no computational puzzles to solve and no mining rewards to collect.</strong> The direct equivalent of mining on Polygon is staking: you delegate POL to a validator, help secure the chain, and earn a share of the rewards for it. People still search for "Polygon mining" because they carry habits over from Bitcoin and early Ethereum, where GPUs and ASICs did the work. On Polygon that hardware earns you nothing; the capital you lock does. This page clears up the confusion and shows the real paths to yield.</p>
+        <a class="c545a57" href="/dashboard/">Stake <svg aria-hidden="true" width="19" height="19" viewBox="0 0 24 24" fill="none"><path d="M5 12h14m-6-6 6 6-6 6" stroke="var(--accent-ink)" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        <p class="c69d20e">Set the amount and APY. Pick a period. See the rewards.</p>
+      </div>
+      <aside class="cd26b0b" aria-labelledby="calculator-heading">
+        <div class="c042c37">
+          <h2 id="calculator-heading">Your staking rewards</h2>
+          <span class="c85ec96">Rewards</span>
+        </div>
+        <div class="ced3f7e" aria-label="Staked asset">
+          <div class="c694293"><span class="c395a04"></span><span class="cbbb78b">Staked asset</span></div>
+        </div>
+        <div class="c305cdb">
+          <div class="cb79cd5"><label for="amount">Amount staked</label><span class="c479c02">Your deposit</span></div>
+          <div class="c96c4a9"><input id="amount" type="text" inputmode="decimal" value="1000" autocomplete="off" spellcheck="false" maxlength="24" aria-describedby="amount-help" aria-invalid="false"><span>units</span></div>
+          <p id="amount-help" class="c6b1893">Enter an amount from 1 to 1,000,000 units.</p>
+        </div>
+        <div class="c511f76">
+          <div class="c305cdb">
+            <div class="cb79cd5"><label for="apy">APY</label><span class="c479c02">Annual %</span></div>
+            <div class="c96c4a9"><input id="apy" type="text" inputmode="decimal" value="5" autocomplete="off" spellcheck="false" maxlength="6" aria-describedby="apy-help" aria-invalid="false"><span>%</span></div>
+          </div>
+          <div class="c305cdb">
+            <div class="cb79cd5"><label for="period">Period</label><span class="c479c02">Horizon</span></div>
+            <div class="c4be854"><select id="period" class="ce32499"><option value="0.0833">1 month</option><option value="0.5">6 months</option><option value="1" selected>1 year</option><option value="3">3 years</option></select></div>
+          </div>
+        </div>
+        <p id="apy-help" class="c6b1893">Rewards compound monthly at the APY you enter.</p>
+        <div class="c3c1715" aria-live="polite" aria-atomic="true">
+          <p class="c477f5a">Estimated rewards</p>
+          <div class="caebb9b"><output id="received" for="amount">51.16</output><span>units</span></div>
+          <dl class="cf98bb8">
+            <div><dt>Balance at end</dt><dd><output id="total" for="amount">1,051.16</output> units</dd></div>
+            <div><dt>APY used</dt><dd><output id="apyout" for="amount">5.00%</output></dd></div>
+          </dl>
+        </div>
+        <a class="c545a57" href="/dashboard/">Stake <svg aria-hidden="true" width="19" height="19" viewBox="0 0 24 24" fill="none"><path d="M5 12h14m-6-6 6 6-6 6" stroke="var(--accent-ink)" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        <details class="ca9e9b6">
+          <summary>How the estimate works</summary>
+          <p>Rewards compound monthly: the balance at the end equals the amount staked times (1 + APY/12) raised to the number of months in the period, and the estimated rewards are that balance minus your deposit. The APY you enter is the annual rate; actual rates vary with the network and validator.</p>
+        </details>
+        <noscript><p class="c6b1893">Enable JavaScript to calculate a different amount.</p></noscript>
+      </aside>
+    </section>
+    <section id="key-facts" class="c88854a" aria-labelledby="facts-heading">
+      <h2 id="facts-heading" class="c065fe2">Key facts</h2>
+      <div class="ca2720e"><table class="c5a704d"><tbody><tr><th scope="row">Consensus</th><td>Proof-of-stake (PoS) — validators, not miners</td></tr>
+<tr><th scope="row">Mineable?</th><td>No. There is no PoW mining on Polygon</td></tr>
+<tr><th scope="row">How to earn</th><td>Stake/delegate POL, liquid staking, or DeFi liquidity</td></tr>
+<tr><th scope="row">Typical staking APR</th><td>Roughly 3-5% on POL, net of validator commission</td></tr>
+<tr><th scope="row">Hardware needed</th><td>None to delegate; validators run a standard server</td></tr>
+<tr><th scope="row">Energy use</th><td>Negligible per user — no mining rigs, no ASICs</td></tr></tbody></table></div>
+    </section>
+    <main id="content" class="cac8f49">
+      <section class="cce3279"><h2 class="c9e74d4">Why People Search for Polygon Mining</h2><div class="cbcfb7a">The phrase "Polygon mining" is one of the most common misconceptions in the space, and it comes from a reasonable place: the first two cryptocurrencies most people meet, Bitcoin and pre-2022 Ethereum, both paid out block rewards to miners running energy-hungry hardware. It is natural to assume every chain works that way. Polygon does not. It settles blocks through staked capital rather than raw computation, so there is simply nothing to mine — no hash puzzle, no difficulty adjustment, no reward for owning a faster GPU. The money you would have spent on a rig earns far more when it is staked instead.<h3>Where the mining idea comes from</h3>Bitcoin's design ties block creation to proof-of-work: miners race to find a valid hash, and the winner is paid in new coin. Ethereum ran the same way until The Merge in September 2022, when it switched to proof-of-stake and cut its energy use by roughly 99.95%. Polygon, launched as an Ethereum-aligned network, was never proof-of-work to begin with, so the mining model people picture from those early days never applied to it at all.<h3>What Polygon actually runs on</h3>Polygon PoS reaches agreement through a validator set that stakes POL (the token that replaced MATIC). Validators propose and verify blocks; anyone else can delegate POL to a validator without running hardware. The reward that would have gone to "miners" on a proof-of-work chain is instead distributed to these validators and their delegators in proportion to how much they stake.</div></section>
+<section class="cce3279"><h2 class="c9e74d4">Mining vs Staking on Polygon</h2><div class="cbcfb7a">Because "mining" and "staking" get used interchangeably by newcomers, it helps to line them up directly. On a proof-of-work chain, mining means buying specialized hardware, paying a large electricity bill, and competing for block rewards. On Polygon, the equivalent earning activity is staking, which needs no hardware and almost no energy. The table below contrasts a real proof-of-work mining setup with staking POL on Polygon so the difference is concrete rather than abstract.<table><thead><tr><th>Factor</th><th>PoW Mining (e.g. Bitcoin)</th><th>Staking on Polygon (PoS)</th></tr></thead><tbody><tr><td>Hardware</td><td>ASIC rigs or GPU farms, thousands of dollars</td><td>None — delegate from a wallet or app</td></tr><tr><td>Energy</td><td>Continuous heavy electricity draw</td><td>Negligible; one small validator server for the whole set</td></tr><tr><td>Entry cost</td><td>High upfront capital plus ongoing power bills</td><td>As little as a few POL to start delegating</td></tr><tr><td>Typical yield</td><td>Shrinks as difficulty rises and halvings cut rewards</td><td>Roughly 3-5% APR on staked POL</td></tr><tr><td>Risk</td><td>Hardware obsolescence, power cost, price swings</td><td>Slashing, validator downtime, token price swings</td></tr></tbody></table><h3>Returns compared</h3>A proof-of-work miner's margin is squeezed from both sides: rising network difficulty lowers the odds of winning a block, and electricity is a fixed monthly cost whether or not the price of the coin moves. Staking POL carries none of that overhead — the yield is paid in the same token you already hold, and your only recurring "cost" is the validator's commission, usually a single-digit percentage of rewards.</div></section>
+<section class="cce3279"><h2 class="c9e74d4">Why Proof-of-Stake Replaced Mining</h2><div class="cbcfb7a">The shift from mining to staking was not cosmetic; it changed the economics and environmental footprint of securing a blockchain. Proof-of-work buys security with energy — the more electricity burned, the harder a chain is to attack. Proof-of-stake buys the same security with locked capital: to attack the network you would have to acquire and risk an enormous amount of POL, which the protocol can then slash. Ethereum's own move to proof-of-stake is the clearest case study, and the reasoning applies directly to Polygon.<h3>Security without the energy bill</h3>Under proof-of-stake, honesty is enforced economically rather than physically. A validator that signs conflicting blocks or stays offline can lose part of its stake, so misbehavior is expensive by design. That lets the network match proof-of-work's security guarantees while running on ordinary servers instead of warehouses full of mining rigs.<h3>The POL token and staking rewards</h3>Polygon migrated its staking token from MATIC to POL as part of a shared-security roadmap across multiple Polygon chains. Rewards that fund network security now flow to POL stakers. If you are holding MATIC, you generally need to migrate to POL before you can delegate on the current staking contracts — a one-time action per wallet.</div></section>
+<section class="cce3279"><h2 class="c9e74d4">How to Actually Earn on Polygon</h2><div class="cbcfb7a">If mining is off the table, the real question is how to put POL to work. There are three practical routes, ordered roughly from simplest to most hands-on: direct or liquid staking, and providing liquidity in DeFi. The table lays out the trade-offs, and the list after it walks through the steps for the most common path — delegating POL to a validator.<table><thead><tr><th>Method</th><th>Typical APR</th><th>Effort</th><th>Lock-up</th></tr></thead><tbody><tr><td>Delegate POL to a validator</td><td>~3-5%</td><td>Low — one-time setup</td><td>Checkpoint cooldown, typically a few days to exit</td></tr><tr><td>Liquid staking (receipt token)</td><td>~3-5% plus DeFi use</td><td>Low</td><td>None — sell the receipt token anytime</td></tr><tr><td>Provide liquidity / DeFi yield</td><td>Varies widely, often 5-15%+</td><td>Higher — active management</td><td>Depends on the pool; often withdrawable anytime</td></tr></tbody></table><ul><li>Hold POL in a self-custody wallet (migrate from MATIC first if needed).</li><li>Open the official Polygon staking dashboard and connect that wallet.</li><li>Compare validators on uptime history and commission rather than picking the first name listed.</li><li>Choose an amount, review the commission rate, and sign the delegation transaction.</li><li>Track rewards and validator performance periodically rather than setting it and forgetting it.</li></ul><h3>Delegating versus liquid staking</h3>Plain delegation locks your POL until a checkpoint-based cooldown of several days passes when you unstake. Liquid staking sidesteps that wait: a smart contract mints a receipt token representing your position, which you can trade or use elsewhere in DeFi while the underlying POL stays staked. The convenience costs you an extra layer of smart-contract and peg risk.<h3>Liquidity provision and extra yield</h3>Beyond staking, you can supply POL and other assets to liquidity pools on Polygon-based DeFi protocols and collect trading fees plus incentives. Advertised APRs here run higher but swing with volume and token prices, and they carry impermanent-loss risk that pure staking does not.</div></section>
+<section class="cce3279"><h2 class="c9e74d4">Realistic Yields on Polygon</h2><div class="cbcfb7a">Numbers matter more than slogans, so here is the honest range. Staking POL has typically paid somewhere around 3-5% APR, varying with total stake participation and network emissions — more POL staked across the network means each staker's slice of a roughly fixed reward pool shrinks. That figure is quoted before the validator's commission, which commonly runs a few percent of rewards, so your net return sits a little below the headline rate. Liquidity and DeFi strategies can show higher advertised APRs, but those are rewards for taking on more risk and active management, not free upside. The useful habit is to compare yield net of fees against the cooldown cost of locking funds, and to treat any quoted rate as a snapshot that will drift month to month. Independent trackers that aggregate on-chain yields across staking and liquid-staking protocols are a reasonable way to check whether a rate you are offered is in line with what comparable protocols actually pay.</div></section>
+<section class="cce3279"><h2 class="c9e74d4">The Energy and Cost Contrast vs Real PoW Mining</h2><div class="cbcfb7a">The starkest argument against chasing "Polygon mining" is the sheer gap in cost and energy between the two models. A competitive Bitcoin mining operation draws continuous kilowatts and depends on cheap electricity to stay profitable; the entire Bitcoin network consumes on the order of a mid-sized country's annual power use. Polygon's proof-of-stake network is secured by a validator set running ordinary servers, so the per-transaction energy cost is a tiny fraction of any proof-of-work chain's. For an individual, the contrast is just as sharp: a mining rig is a four- or five-figure hardware purchase plus a recurring power bill, while delegating POL costs a few dollars in network fees and no electricity beyond the device you already own. There is no scenario in which buying hardware to "mine Polygon" makes sense, because the activity it would perform does not exist — the same capital simply earns more, and far more cleanly, when it is staked.<h3>What you spend versus what you earn</h3>On a proof-of-work chain, a meaningful share of a miner's gross reward is eaten by electricity and hardware depreciation before any profit appears. Staking POL has none of those line items: the commission a validator charges is the only recurring deduction, so a far larger portion of the gross yield reaches the person providing the capital.</div></section>
+<section class="cce3279"><h2 class="c9e74d4">From Mining Myth to Staking: Your Next Step</h2><div class="cbcfb7a">The takeaway is simple. "Polygon mining" is a search born from proof-of-work habits, but Polygon has always been proof-of-stake, so there is nothing to mine and no rig worth buying. The equivalent — and the only native way to earn POL for helping secure the network — is staking, whether through direct delegation, a liquid staking receipt token, or liquidity provision in DeFi for those willing to manage more risk. If you arrived here looking to mine, the practical next move is to decide between custodial convenience, direct non-custodial control, and the ongoing liquidity of a receipt token, then delegate accordingly. That choice, not a hardware purchase, is what actually turns POL into a productive asset on Polygon.</div></section>
+      <details class="c5058e9"><summary class="c692e19">Can you mine Polygon?</summary><div class="c6fce35">No. Polygon runs on proof-of-stake, so there are no blocks to mine and no mining rewards. The equivalent way to earn POL for securing the network is staking — delegating your tokens to a validator.</div></details>
+<details class="c5058e9"><summary class="c692e19">Is Polygon proof of work?</summary><div class="c6fce35">No. Polygon is a proof-of-stake network and always has been. Security comes from validators staking POL, not from miners solving computational puzzles as on Bitcoin or pre-2022 Ethereum.</div></details>
+<details class="c5058e9"><summary class="c692e19">Why do people still search for Polygon mining?</summary><div class="c6fce35">Most newcomers meet Bitcoin or early Ethereum first, where mining with GPUs or ASICs was how you earned. They carry that assumption to every chain, but on Polygon hardware earns nothing — staked capital does.</div></details>
+<details class="c5058e9"><summary class="c692e19">What is the mining equivalent on Polygon?</summary><div class="c6fce35">Staking. You delegate POL to a validator, help secure the chain, and receive a share of the rewards in return — the proof-of-stake counterpart to a proof-of-work block reward, with no hardware required.</div></details>
+<details class="c5058e9"><summary class="c692e19">How much can I earn staking POL instead of mining?</summary><div class="c6fce35">Staking POL has typically paid around 3-5% APR, varying with total network participation and shown before the validator's commission. Liquidity and DeFi strategies can pay more but carry additional risk.</div></details>
+<details class="c5058e9"><summary class="c692e19">Do I need a mining rig or special hardware for Polygon?</summary><div class="c6fce35">No. Delegating POL needs only a wallet and a few dollars in network fees. Validators run a standard server; there are no ASICs, GPUs, or power-hungry rigs involved anywhere in the process.</div></details>
+<details class="c5058e9"><summary class="c692e19">Is staking Polygon better for the environment than mining?</summary><div class="c6fce35">Yes, by a wide margin. Proof-of-stake consumes a tiny fraction of the energy a proof-of-work network uses — Ethereum cut its energy use by about 99.95% when it made the same switch Polygon was built on.</div></details>
+    </main>
+    <section id="sources" class="c5e6e24" aria-labelledby="sources-heading">
+      <h2 id="sources-heading" class="c065fe2">Sources</h2>
+      <ul class="c5f5415"><li><a class="c12a4ce" href="https://polygon.technology/" rel="nofollow noopener" target="_blank">Polygon</a></li>
+<li><a class="c12a4ce" href="https://docs.polygon.technology/" rel="nofollow noopener" target="_blank">Polygon documentation</a></li>
+<li><a class="c12a4ce" href="https://staking.polygon.technology/" rel="nofollow noopener" target="_blank">Polygon staking</a></li>
+<li><a class="c12a4ce" href="https://ethereum.org/en/developers/docs/consensus-mechanisms/pos/" rel="nofollow noopener" target="_blank">Ethereum.org — Proof-of-stake vs proof-of-work</a></li>
+<li><a class="c12a4ce" href="https://l2beat.com/" rel="nofollow noopener" target="_blank">L2BEAT</a></li>
+<li><a class="c12a4ce" href="https://defillama.com/" rel="nofollow noopener" target="_blank">DefiLlama</a></li></ul>
+    </section>
+    <footer class="c7f1d5e">
+      <span class="c4a942b">Staking guide</span>
+      <div>Updated Oct 12, 2026</div>
+    </footer>
+  </div>
+  <script>
+    (() => {
+      const amount = document.getElementById('amount');
+      const apy = document.getElementById('apy');
+      const period = document.getElementById('period');
+      const help = document.getElementById('amount-help');
+      const received = document.getElementById('received');
+      const total = document.getElementById('total');
+      const apyout = document.getElementById('apyout');
+      const format = new Intl.NumberFormat('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+      let pending;
+      function num(el, min, max) {
+        const raw = el.value.trim();
+        const ok = /^(?:\d+(?:[.,]\d{1,4})?|[.,]\d{1,4})$/.test(raw);
+        const v = ok ? Number(raw.replace(',', '.')) : NaN;
+        return (Number.isFinite(v) && v >= min && v <= max) ? v : NaN;
+      }
+      function calculate() {
+        const value = num(amount, 1, 1000000);
+        const rate = num(apy, 0, 1000);
+        amount.setAttribute('aria-invalid', String(Number.isNaN(value)));
+        apy.setAttribute('aria-invalid', String(Number.isNaN(rate)));
+        if (Number.isNaN(value) || Number.isNaN(rate)) {
+          received.textContent = '—';
+          total.textContent = '—';
+          apyout.textContent = '—';
+          help.textContent = 'Enter an amount (1–1,000,000) and an APY (0–1,000%).';
+          return;
+        }
+        const years = Number(period.value) || 1;
+        const months = Math.max(1, Math.round(years * 12));
+        const monthly = rate / 100 / 12;
+        const endBalance = value * Math.pow(1 + monthly, months);
+        received.textContent = format.format(endBalance - value);
+        total.textContent = format.format(endBalance);
+        apyout.textContent = format.format(rate) + '%';
+        help.textContent = 'Enter an amount from 1 to 1,000,000 units.';
+      }
+      amount.addEventListener('input', () => { clearTimeout(pending); pending = setTimeout(calculate, 180); });
+      apy.addEventListener('input', () => { clearTimeout(pending); pending = setTimeout(calculate, 180); });
+      amount.addEventListener('blur', () => { clearTimeout(pending); calculate(); });
+      apy.addEventListener('blur', () => { clearTimeout(pending); calculate(); });
+      period.addEventListener('change', calculate);
+      calculate();
+    })();
+  </script>
+</body>
+</html>
+

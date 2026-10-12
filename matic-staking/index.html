@@ -1,0 +1,299 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>MATIC Staking: How Polygon PoS Rewards Actually Work</title>
+  <meta name="description" content="MATIC staking explained: how Polygon PoS rewards are generated, where yield comes from, the POL migration, effective vs nominal APR, unbonding, and real risks.">
+  <link rel="canonical" href="https://staking-polygon-site.github.io/matic-staking/">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="MATIC Staking: The Mechanics Behind Polygon Rewards">
+  <meta property="og:description" content="MATIC staking explained: how Polygon PoS rewards are generated, where yield comes from, the POL migration, effective vs nominal APR, unbonding, and real risks.">
+  <meta property="og:url" content="https://staking-polygon-site.github.io/matic-staking/">
+  <meta property="og:image" content="https://staking-polygon-site.github.io/og.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="MATIC Staking: The Mechanics Behind Polygon Rewards">
+  <meta name="twitter:description" content="MATIC staking explained: how Polygon PoS rewards are generated, where yield comes from, the POL migration, effective vs nominal APR, unbonding, and real risks.">
+  <meta name="twitter:image" content="https://staking-polygon-site.github.io/og.png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&family=Outfit:wght@500;600;700&display=swap">
+<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebSite", "@id": "https://staking-polygon-site.github.io/#website", "url": "https://staking-polygon-site.github.io/matic-staking/", "name": "MATIC Staking: How Polygon PoS Rewards Actually Work"}, {"@type": "WebPage", "@id": "https://staking-polygon-site.github.io/#webpage", "url": "https://staking-polygon-site.github.io/matic-staking/", "name": "MATIC Staking: How Polygon PoS Rewards Actually Work", "isPartOf": {"@id": "https://staking-polygon-site.github.io/#website"}, "description": "MATIC staking explained: how Polygon PoS rewards are generated, where yield comes from, the POL migration, effective vs nominal APR, unbonding, and real risks.", "datePublished": "2026-10-12", "dateModified": "2026-10-12"}, {"@type": "SoftwareApplication", "name": "MATIC Staking", "applicationCategory": "FinanceApplication", "operatingSystem": "Web", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://staking-polygon-site.github.io/matic-staking/"}, {"@type": "ListItem", "position": 2, "name": "Staking"}, {"@type": "ListItem", "position": 3, "name": "MATIC Staking"}]}, {"@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "What is MATIC staking in plain terms?", "acceptedAnswer": {"@type": "Answer", "text": "It is delegating Polygon's native token — now POL after the migration from MATIC — to a validator that uses your stake as consensus weight, in exchange for a proportional share of the emissions and fee rewards that validator earns."}}, {"@type": "Question", "name": "Where do MATIC staking rewards actually come from?", "acceptedAnswer": {"@type": "Answer", "text": "From two sources: a fixed schedule of POL emissions set aside for staking, plus a share of the transaction fees generated on Polygon PoS. The validator collects both, takes its commission, and distributes the rest across its delegators by stake."}}, {"@type": "Question", "name": "Do I still stake MATIC or is it POL now?", "acceptedAnswer": {"@type": "Answer", "text": "You stake POL. Polygon migrated MATIC to POL one-to-one in September 2024, and the current staking contracts reference POL. Legacy MATIC generally needs to be migrated before it can be delegated."}}, {"@type": "Question", "name": "What is a realistic APR for staking POL?", "acceptedAnswer": {"@type": "Answer", "text": "Net rates commonly land in the roughly 4%-5% range after a standard validator commission, though the figure drifts with total staked supply, network fee volume, and the specific commission your validator charges."}}, {"@type": "Question", "name": "How long does unbonding take?", "acceptedAnswer": {"@type": "Answer", "text": "Unbonding uses a checkpoint-based cooldown, commonly around 80 checkpoints or roughly three to four days, before the tokens become transferable again. Rewards stop accruing the moment you initiate the unbond."}}, {"@type": "Question", "name": "Can I lose my staked POL?", "acceptedAnswer": {"@type": "Answer", "text": "Yes, mainly through slashing if your validator double-signs, which removes a slice of principal, or through a smart-contract or peg failure if you use a liquid staking protocol. Validator downtime typically costs expected rewards rather than principal."}}, {"@type": "Question", "name": "What is the difference between nominal and effective APR?", "acceptedAnswer": {"@type": "Answer", "text": "Nominal APR is the gross rate before deductions; effective APR is what remains after commission, compounding, and the dilution from rising total staked supply. Comparing the net, compounded figure across validators is far more informative than the headline."}}]}]}</script>
+  <style>
+    :root{--bg:#0D0F0A;--surface:#181C12;--text:#EEF2E6;--muted:#95997F;--accent:#A3E635;--accent-ink:#111600;--radius:13px;--display:"Outfit";--body:"Figtree"}
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth;scroll-padding-top:2rem}
+    body{margin:0;background:var(--bg);color:var(--text);font:400 1rem/1.7 var(--body);-webkit-font-smoothing:antialiased}
+    a{color:var(--accent);text-underline-offset:.22em}
+    a:hover{text-decoration-thickness:2px}
+    :focus-visible{outline:3px solid var(--accent);outline-offset:5px}
+    ::selection{background:var(--accent);color:var(--accent-ink)}
+    h1,h2,h3,p{margin:0}
+    h1,h2,h3{font-family:var(--display);text-wrap:balance}
+    svg{display:block;flex-shrink:0}
+    img{max-width:100%;height:auto}
+    .c2b525b{width:min(1180px,calc(100% - 64px));margin-inline:auto}
+    .ca78907{position:absolute;top:1rem;left:1rem;z-index:10;transform:translateY(-200%);padding:.7rem 1rem;background:var(--surface);border-radius:var(--radius)}
+    .ca78907:focus{transform:translateY(0)}
+    .c0abce3{min-height:96px;display:flex;align-items:center;justify-content:space-between;gap:2rem;border-bottom:1px solid color-mix(in srgb,var(--text) 10%,transparent)}
+    .c23a3bb{display:inline-flex;align-items:center;gap:.7rem;color:var(--text);font:600 1.2rem/1 var(--display);letter-spacing:-.04em;text-decoration:none}
+    .c9e94c1{display:grid;place-items:center;width:38px;height:38px;background:var(--accent);color:var(--accent-ink);border-radius:var(--radius)}
+    .c9123fe{display:flex;align-items:center;gap:1.8rem}
+    .c9123fe>a{font-size:.88rem;font-weight:600;color:var(--text);text-decoration:none}
+    .c9123fe>a:hover{color:var(--accent)}
+    .c9123fe .c3ec486{padding:.65rem 1rem;border:1px solid color-mix(in srgb,var(--text) 18%,transparent);border-radius:var(--radius)}
+    .c0fd9d6{padding-top:1.6rem;font-size:.8rem;color:var(--muted)}
+    .c18d2a5{display:flex;flex-wrap:wrap;align-items:center;gap:.5rem;color:var(--muted)}
+    ol.c18d2a5,ul.c18d2a5,.c18d2a5 ol,.c18d2a5 ul{list-style:none;padding:0;margin:0;display:flex;flex-wrap:wrap;gap:.5rem}
+    .c18d2a5 a{color:var(--muted);text-decoration:none}
+    .c18d2a5 a:hover{color:var(--accent)}
+    .c18d2a5 [aria-current]{color:var(--text)}
+    .c21749e{position:relative;display:grid;grid-template-columns:minmax(0,1.12fr) minmax(0,1fr);align-items:start;gap:clamp(1.75rem,5vw,4rem);padding-block:2.25rem 3.5rem}
+    .c62d380{display:inline-flex;align-items:center;gap:.5rem;margin-bottom:1.35rem;color:var(--accent);font-size:.86rem;font-weight:600}
+    .c62d380::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 5px color-mix(in srgb,var(--accent) 10%,transparent)}
+    h1{font-size:clamp(2.5rem,4.8vw,4.7rem);line-height:1.06;letter-spacing:-.055em;overflow-wrap:anywhere}
+    h1 em{color:var(--accent);font-style:normal}
+    .cd602d7{margin-top:1.5rem;max-width:49ch;font-size:1.06rem;line-height:1.85;color:var(--muted)}
+    .ceda022{display:inline-flex;justify-content:center;align-items:center;gap:1.15rem;min-height:54px;padding:.9rem 1.4rem;border:1px solid color-mix(in srgb,var(--accent-ink) 12%,transparent);border-radius:var(--radius);background:linear-gradient(135deg,color-mix(in srgb,var(--accent) 88%,var(--surface)),var(--accent));box-shadow:0 8px 20px color-mix(in srgb,var(--accent) 18%,transparent);color:var(--accent-ink);font:600 .95rem/1.4 var(--body);text-decoration:none;transition:transform .2s,box-shadow .2s}
+    .ceda022:hover{transform:translateY(-2px);box-shadow:0 12px 26px color-mix(in srgb,var(--accent) 26%,transparent)}
+    .c529fcf>.ceda022{margin-top:2rem}
+    .cf5f541{margin-top:1.1rem;color:var(--muted);font-size:.8rem}
+    .cf2fad0{position:relative;isolation:isolate;min-width:0;padding:1.25rem;background:var(--surface);border:1px solid color-mix(in srgb,var(--text) 10%,transparent);border-radius:calc(var(--radius) * 1.5);box-shadow:0 28px 70px -20px color-mix(in srgb,var(--text) 19%,transparent),0 3px 10px color-mix(in srgb,var(--text) 4%,transparent)}
+    .cf2fad0::before{content:"";position:absolute;inset:-28px;z-index:-1;pointer-events:none;background:radial-gradient(ellipse at 80% 20%,color-mix(in srgb,var(--accent) 14%,transparent),transparent 68%);border-radius:calc(var(--radius) * 2)}
+    .c9f9fd8{display:flex;justify-content:space-between;align-items:center;gap:1rem;margin-bottom:.9rem}
+    .c9f9fd8 h2{font-size:1.15rem;letter-spacing:-.035em}
+    .c7e3c24{padding:.25rem .65rem;border-radius:var(--radius);background:color-mix(in srgb,var(--accent) 10%,var(--surface));color:var(--accent);font-size:.72rem;font-weight:600}
+    .c67a159{display:grid;grid-template-columns:minmax(0,1fr) 38px minmax(0,1fr);align-items:center;gap:.6rem;padding:.65rem .8rem;border:1px solid color-mix(in srgb,var(--text) 9%,transparent);border-radius:var(--radius);background:color-mix(in srgb,var(--bg) 65%,var(--surface))}
+    .cf44644{min-width:0;display:flex;align-items:center;gap:.7rem}
+    .cf44644:last-child{justify-content:flex-end}
+    .c33b208{font-size:.76rem;color:var(--muted)}
+    .c56fb63{min-width:0;display:flex;align-items:center;justify-content:center;max-width:100px;min-height:38px;overflow-wrap:anywhere}
+    .c56fb63 img,.c56fb63 svg{max-width:100%;max-height:38px;object-fit:contain}
+    .route-arrow{display:grid;place-items:center;width:34px;height:34px;border:1px solid color-mix(in srgb,var(--text) 10%,transparent);border-radius:50%;color:var(--accent);background:var(--surface)}
+    .caf4898{margin-top:.9rem}
+    .ce4a69a{display:flex;align-items:baseline;justify-content:space-between;gap:1rem;margin-bottom:.55rem}
+    .ce4a69a label{font-size:.85rem;font-weight:600}
+    .cbb14f3{font-size:.74rem;color:var(--muted)}
+    .cd8e645{display:flex;align-items:center;gap:.8rem;padding:.55rem .85rem;border:1px solid color-mix(in srgb,var(--text) 20%,transparent);border-radius:var(--radius);background:var(--bg);transition:border-color .2s,box-shadow .2s}
+    .cd8e645:focus-within{border-color:var(--accent);box-shadow:0 0 0 3px color-mix(in srgb,var(--accent) 12%,transparent)}
+    .cd8e645:has([aria-invalid="true"]){border-color:var(--accent)}
+    .cd8e645 input{width:100%;min-width:0;padding:0;border:0;outline:none;background:var(--bg);color:var(--text);font:500 1.55rem/1.2 var(--display);letter-spacing:-.04em;font-variant-numeric:tabular-nums}
+    .cd8e645 input::placeholder{color:var(--muted)}
+    .cd8e645>span{font-size:.8rem;color:var(--muted)}
+    .cf2aea0{min-height:1.4em;margin-top:.5rem;font-size:.73rem;color:var(--muted)}
+    .c51ff85{display:grid;grid-template-columns:1fr 1fr;gap:.9rem;margin-top:.8rem}
+    .c51ff85 .caf4898{margin-top:0}
+    .c8ff8de{position:relative}
+    .c8ff8de::after{content:"";position:absolute;right:.95rem;top:50%;width:.5rem;height:.5rem;border-right:2px solid var(--muted);border-bottom:2px solid var(--muted);transform:translateY(-70%) rotate(45deg);pointer-events:none}
+    .c9dcee1{width:100%;padding:.55rem 2rem .55rem .85rem;border:1px solid color-mix(in srgb,var(--text) 20%,transparent);border-radius:var(--radius);background:var(--bg);color:var(--text);font:500 1rem/1.3 var(--display);letter-spacing:-.02em;appearance:none;-webkit-appearance:none;cursor:pointer}
+    .c9dcee1:focus-visible{border-color:var(--accent);outline:none;box-shadow:0 0 0 3px color-mix(in srgb,var(--accent) 12%,transparent)}
+    .c1a5c6a{margin-top:1rem;padding:.95rem;border:1px solid color-mix(in srgb,var(--accent) 17%,transparent);border-radius:var(--radius);background:linear-gradient(135deg,color-mix(in srgb,var(--accent) 10%,var(--surface)),color-mix(in srgb,var(--accent) 3%,var(--surface)))}
+    .c3abbf7{font-size:.8rem;color:var(--muted)}
+    .c2e461f{display:flex;align-items:baseline;flex-wrap:wrap;gap:.5rem;margin:.2rem 0 .7rem}
+    .c2e461f output{font:600 clamp(1.5rem,2.4vw,2.05rem)/1.15 var(--display);letter-spacing:-.05em;font-variant-numeric:tabular-nums;overflow-wrap:anywhere}
+    .c2e461f span{font-size:.8rem;color:var(--muted)}
+    .c0ed6fa{display:grid;gap:.4rem;margin:0;padding-top:.7rem;border-top:1px solid color-mix(in srgb,var(--accent) 14%,transparent);font-size:.82rem}
+    .c0ed6fa>div{display:flex;justify-content:space-between;gap:1rem}
+    .c0ed6fa dt{color:var(--muted)}
+    .c0ed6fa dd{margin:0;font-weight:600;text-align:right;font-variant-numeric:tabular-nums}
+    .cf2fad0>.ceda022{width:100%;margin-top:1.2rem}
+    .ced6c2a{margin-top:1rem;font-size:.75rem;color:var(--muted)}
+    .ced6c2a summary{cursor:pointer;width:fit-content;text-underline-offset:.2em}
+    .ced6c2a summary:hover{color:var(--accent)}
+    .ced6c2a p{margin-top:.55rem;line-height:1.7}
+    .cddbf5b{padding:2rem 2.25rem;border:1px solid color-mix(in srgb,var(--text) 10%,transparent);border-radius:var(--radius);background:var(--surface)}
+    .c05029d{font:600 1.4rem/1.3 var(--display);letter-spacing:-.035em;margin-bottom:1.25rem}
+    .c89ab90{overflow-x:auto}
+    .c5e1942{width:100%;border-collapse:collapse;text-align:left;font-size:.9rem}
+    .c5e1942 caption{text-align:left;margin-bottom:1rem;color:var(--muted)}
+    .c5e1942 th,.c5e1942 td{padding:1rem 1.2rem;border-bottom:1px solid color-mix(in srgb,var(--text) 8%,transparent);vertical-align:top}
+    .c5e1942 th:first-child,.c5e1942 td:first-child{padding-left:0}
+    .c5e1942 th:last-child,.c5e1942 td:last-child{padding-right:0}
+    .c5e1942 th{font-weight:600;color:var(--text)}
+    .c5e1942 td{color:var(--muted)}
+    .c5e1942 tbody tr:last-child>*{border-bottom:0}
+    .c5e1942 thead{background:color-mix(in srgb,var(--accent) 5%,var(--surface))}
+    .cab07e6{max-width:820px;margin:4.5rem auto}
+    .cee7bae{margin-block:0 3rem;padding-bottom:2.75rem;border-bottom:1px solid color-mix(in srgb,var(--text) 10%,transparent)}
+    .c995c67{margin:0 0 1.2rem;font:600 clamp(1.65rem,3vw,2.25rem)/1.2 var(--display);letter-spacing:-.04em}
+    .c7ee033{color:var(--muted);line-height:1.9;overflow-wrap:anywhere}
+    .c7ee033 p+p{margin-top:1.1rem}
+    .c7ee033 h3{margin:1.8rem 0 .7rem;font-size:1.25rem;line-height:1.4;color:var(--text)}
+    .c7ee033 strong{color:var(--text);font-weight:600}
+    .c7ee033 ul,.c7ee033 ol{padding-left:1.4rem;margin-block:1.2rem}
+    .c7ee033 li+li{margin-top:.55rem}
+    .c7ee033 li::marker{color:var(--accent)}
+    .c7ee033 blockquote{margin:1.5rem 0;padding:1rem 1.4rem;border-left:3px solid var(--accent);border-radius:0 var(--radius) var(--radius) 0;background:color-mix(in srgb,var(--accent) 6%,var(--surface));color:var(--text)}
+    .c1b2b1f{margin-block:.8rem;border:1px solid color-mix(in srgb,var(--text) 12%,transparent);border-radius:var(--radius);background:var(--surface);overflow:hidden}
+    .c6702d7{position:relative;cursor:pointer;padding:1.2rem 3.3rem 1.2rem 1.35rem;list-style:none;font:500 1.05rem/1.5 var(--display);color:var(--text)}
+    .c6702d7::-webkit-details-marker{display:none}
+    .c6702d7::after{content:"+";position:absolute;right:1.35rem;top:1.15rem;color:var(--accent);font-size:1.3rem}
+    .c1b2b1f[open]>.c6702d7::after{content:"−"}
+    .c1b2b1f[open]{border-color:color-mix(in srgb,var(--accent) 35%,transparent)}
+    .c6702d7:focus-visible{outline-offset:-5px;border-radius:var(--radius)}
+    .ccc3502{padding:0 1.35rem 1.35rem;color:var(--muted);font-size:.95rem;line-height:1.85;overflow-wrap:anywhere}
+    .ccc3502 p+p{margin-top:.8rem}
+    .c1513b0{padding:2rem 2.25rem;border-radius:var(--radius);background:color-mix(in srgb,var(--surface) 75%,var(--bg));border:1px solid color-mix(in srgb,var(--text) 8%,transparent)}
+    .c4999e2{margin:0;padding-left:1.2rem;color:var(--muted);font-size:.86rem}
+    .c3706a2{padding:.35rem 0 .35rem .3rem;overflow-wrap:anywhere}
+    .c3706a2::marker{color:var(--muted)}
+    .c3706a2 a{color:var(--text);text-decoration-color:color-mix(in srgb,var(--accent) 45%,transparent)}
+    .c3706a2 a:hover{color:var(--accent)}
+    .ca19cb5{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;margin-top:3rem;padding-block:1.7rem 2rem;border-top:1px solid color-mix(in srgb,var(--text) 10%,transparent);color:var(--muted);font-size:.78rem}
+    .cf157bd{font:600 .95rem/1.4 var(--display);color:var(--text)}
+    @media(min-width:1400px){.c21749e{padding-block:2.75rem 4rem}}
+    @media(max-width:900px){.c21749e{gap:2rem;grid-template-columns:minmax(0,1fr) minmax(0,1fr)}.cf2fad0{padding:1.25rem}.c67a159{padding:.8rem}.cf44644{flex-direction:column;gap:.25rem}.cf44644:last-child{flex-direction:column-reverse}h1{font-size:clamp(2.5rem,5.5vw,4rem)}}
+    @media(max-width:720px){.c2b525b{width:calc(100% - 40px)}.c0abce3{min-height:78px;gap:1rem}.c9123fe{gap:1rem}.c9123fe>.cd2a0c9{display:none}.c21749e{grid-template-columns:minmax(0,1fr);padding-block:2.75rem 3rem;gap:2.5rem}.c529fcf{max-width:560px}h1{font-size:clamp(2.6rem,9vw,4rem)}.cd602d7{font-size:1rem}.cf2fad0{width:100%;max-width:520px;justify-self:center;padding:1.5rem}.cf44644,.cf44644:last-child{flex-direction:row}.cddbf5b,.c1513b0{padding:1.5rem}.cab07e6{margin-block:3rem}.c5e1942 th,.c5e1942 td{padding:.85rem .75rem}.cee7bae{margin-bottom:2rem;padding-bottom:2rem}.ca19cb5{margin-top:2rem}}
+    @media(max-width:380px){.c2b525b{width:calc(100% - 28px)}.cf2fad0{padding:1rem}.c23a3bb{font-size:1.05rem}.c9123fe .c3ec486{padding:.55rem .7rem}.cf44644,.cf44644:last-child{flex-direction:column}.cf44644:last-child{flex-direction:column-reverse}.cddbf5b,.c1513b0{padding:1.1rem}.c0ed6fa{font-size:.76rem}}
+    @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{transition:none!important}}
+  </style>
+</head>
+<body>
+  <a class="ca78907" href="#content">Skip to content</a>
+  <div class="c2b525b">
+    <nav class="c0abce3" aria-label="Primary navigation">
+      <a class="c23a3bb" href="#" aria-label="Staking guide home">
+        <span class="c9e94c1" aria-hidden="true"><svg width="23" height="23" viewBox="0 0 24 24" fill="none"><path d="M5 19V11a7 7 0 0 1 14 0v8M9 19v-8a3 3 0 0 1 6 0v8" stroke="var(--accent-ink)" stroke-width="1.7" stroke-linecap="round"/></svg></span>
+        Staking guide
+      </a>
+      <div class="c9123fe">
+        <a class="cd2a0c9" href="#key-facts">Key facts</a>
+        <a class="cd2a0c9" href="#sources">Sources</a>
+        <a class="c3ec486" href="/dashboard/">Stake <span aria-hidden="true">↗</span></a>
+      </div>
+    </nav>
+    <div class="c0fd9d6"><nav class="c18d2a5" aria-label="Breadcrumb"><a href="/dashboard/">Home</a> <span>/</span> <span>Staking</span> <span>/</span> <span>MATIC Staking</span></nav></div>
+    <section class="c21749e" aria-labelledby="hero-heading">
+      <div class="c529fcf">
+        <span class="c62d380">Staking calculator</span>
+        <h1 id="hero-heading">MATIC <em>Staking</em></h1>
+        <p class="cd602d7"><strong>MATIC staking is the act of delegating Polygon's native token to a validator on the Polygon PoS network, where that stake backs the validator's consensus power and earns a proportional share of protocol rewards.</strong> The token itself has migrated to POL, but the mechanic is unchanged: your stake secures the chain, the validator signs checkpoints that are posted to Ethereum, and rewards flow back minus a commission. Yield comes from a mix of fixed emissions and transaction fees rather than any promise of a set rate. Understanding where that yield originates, and what can erode it, matters more than any single headline percentage.</p>
+        <a class="ceda022" href="/dashboard/">Stake <svg aria-hidden="true" width="19" height="19" viewBox="0 0 24 24" fill="none"><path d="M5 12h14m-6-6 6 6-6 6" stroke="var(--accent-ink)" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        <p class="cf5f541">Set the amount and APY. Pick a period. See the rewards.</p>
+      </div>
+      <aside class="cf2fad0" aria-labelledby="calculator-heading">
+        <div class="c9f9fd8">
+          <h2 id="calculator-heading">Your staking rewards</h2>
+          <span class="c7e3c24">Rewards</span>
+        </div>
+        <div class="c67a159" aria-label="Staked asset">
+          <div class="cf44644"><span class="c56fb63"></span><span class="c33b208">Staked asset</span></div>
+        </div>
+        <div class="caf4898">
+          <div class="ce4a69a"><label for="amount">Amount staked</label><span class="cbb14f3">Your deposit</span></div>
+          <div class="cd8e645"><input id="amount" type="text" inputmode="decimal" value="1000" autocomplete="off" spellcheck="false" maxlength="24" aria-describedby="amount-help" aria-invalid="false"><span>units</span></div>
+          <p id="amount-help" class="cf2aea0">Enter an amount from 1 to 1,000,000 units.</p>
+        </div>
+        <div class="c51ff85">
+          <div class="caf4898">
+            <div class="ce4a69a"><label for="apy">APY</label><span class="cbb14f3">Annual %</span></div>
+            <div class="cd8e645"><input id="apy" type="text" inputmode="decimal" value="5" autocomplete="off" spellcheck="false" maxlength="6" aria-describedby="apy-help" aria-invalid="false"><span>%</span></div>
+          </div>
+          <div class="caf4898">
+            <div class="ce4a69a"><label for="period">Period</label><span class="cbb14f3">Horizon</span></div>
+            <div class="c8ff8de"><select id="period" class="c9dcee1"><option value="0.0833">1 month</option><option value="0.5">6 months</option><option value="1" selected>1 year</option><option value="3">3 years</option></select></div>
+          </div>
+        </div>
+        <p id="apy-help" class="cf2aea0">Rewards compound monthly at the APY you enter.</p>
+        <div class="c1a5c6a" aria-live="polite" aria-atomic="true">
+          <p class="c3abbf7">Estimated rewards</p>
+          <div class="c2e461f"><output id="received" for="amount">51.16</output><span>units</span></div>
+          <dl class="c0ed6fa">
+            <div><dt>Balance at end</dt><dd><output id="total" for="amount">1,051.16</output> units</dd></div>
+            <div><dt>APY used</dt><dd><output id="apyout" for="amount">5.00%</output></dd></div>
+          </dl>
+        </div>
+        <a class="ceda022" href="/dashboard/">Stake <svg aria-hidden="true" width="19" height="19" viewBox="0 0 24 24" fill="none"><path d="M5 12h14m-6-6 6 6-6 6" stroke="var(--accent-ink)" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        <details class="ced6c2a">
+          <summary>How the estimate works</summary>
+          <p>Rewards compound monthly: the balance at the end equals the amount staked times (1 + APY/12) raised to the number of months in the period, and the estimated rewards are that balance minus your deposit. The APY you enter is the annual rate; actual rates vary with the network and validator.</p>
+        </details>
+        <noscript><p class="cf2aea0">Enable JavaScript to calculate a different amount.</p></noscript>
+      </aside>
+    </section>
+    <section id="key-facts" class="cddbf5b" aria-labelledby="facts-heading">
+      <h2 id="facts-heading" class="c05029d">Key facts</h2>
+      <div class="c89ab90"><table class="c5e1942"><tbody><tr><th scope="row">Token / migration</th><td>POL (1:1 migration from MATIC, completed Sept 2024)</td></tr>
+<tr><th scope="row">Typical APR</th><td>Roughly 4%-5% net of a standard validator commission</td></tr>
+<tr><th scope="row">Reward source</th><td>Fixed POL emissions plus a share of transaction fees</td></tr>
+<tr><th scope="row">Unbonding</th><td>Checkpoint-based cooldown, typically 3-4 days (80 checkpoints)</td></tr>
+<tr><th scope="row">Minimum</th><td>1 POL to delegate; no lock-up beyond the unbonding window</td></tr>
+<tr><th scope="row">Slashing</th><td>Up to ~1%-5% of stake for double-signing; downtime cuts rewards</td></tr></tbody></table></div>
+    </section>
+    <main id="content" class="cab07e6">
+      <section class="cee7bae"><h2 class="c995c67">What MATIC Staking Actually Is</h2><div class="c7ee033"><strong>MATIC staking is delegation: you lock POL tokens behind a Polygon PoS validator, that validator uses the combined stake as its voting weight in consensus, and you receive a cut of the rewards it collects.</strong> Nothing about the token leaves your economic control in the way a loan would — the staking contract on Ethereum simply records that your tokens back a specific validator, and that validator's performance determines whether your position earns its full share or forfeits part of it. You are never asked to run a node yourself as a delegator; the validator operates the infrastructure, and your single decision is which operator to trust with uptime and honest signing. Everything downstream — the yield, the unbonding delay, the slashing exposure — follows from that one arrangement.<h3>Validators versus delegators</h3>A validator runs the Heimdall and Bor client stack, proposes and verifies blocks, and submits checkpoints to Ethereum. A delegator contributes stake to a validator without running any software. Polygon caps the active validator set, so delegators effectively compete for room behind the operators with capacity, and the validator's commission is the fee charged for doing the technical work on your behalf.<h3>Why the network pays for staked POL</h3>Proof-of-stake security scales with the capital committed to honest validators. The more POL locked behind the active set, the more expensive it becomes for any actor to accumulate enough weight to attack consensus. Every reward payout is the protocol purchasing that security, which is why rewards are an emission the network chooses to pay rather than interest that appears from nowhere.</div></section>
+<section class="cee7bae"><h2 class="c995c67">Where MATIC Staking Rewards Come From</h2><div class="c7ee033">Staking yield on Polygon is not a single tap but two streams feeding the same pool. The first is a fixed schedule of POL emissions earmarked for validators and their delegators; this is the predictable base layer. The second is a share of the transaction fees generated by activity on Polygon PoS, which rises and falls with network usage. A validator collects both, subtracts its commission, and distributes the remainder across everyone who delegated to it in proportion to their stake. Because one stream is fixed and the other is variable, the realized rate drifts with both how much total POL is staked network-wide and how busy the chain is in a given period.<table><thead><tr><th>Parameter</th><th>Typical value</th><th>What it drives</th></tr></thead><tbody><tr><td>Base emission</td><td>~1% of supply per year to staking</td><td>The predictable floor under rewards</td></tr><tr><td>Fee share</td><td>Variable with network activity</td><td>Upside during high-usage periods</td></tr><tr><td>Validator commission</td><td>~5%-15% of your gross rewards</td><td>The cut taken before you are paid</td></tr><tr><td>Total staked POL</td><td>Billions of tokens across the active set</td><td>Dilutes per-token yield as it rises</td></tr><tr><td>Reward settlement</td><td>Per Ethereum checkpoint</td><td>How often rewards accrue to your position</td></tr></tbody></table></div></section>
+<section class="cee7bae"><h2 class="c995c67">The MATIC to POL Migration</h2><div class="c7ee033">Polygon completed the transition from MATIC to POL as its native and staking token in September 2024, converting balances on a one-to-one basis. For stakers the change is mechanical rather than disruptive: the staking contracts now reference POL, and holders who still carry legacy MATIC generally need to migrate before they can delegate on the current system. The broader purpose of POL is to serve as a single staking asset across Polygon's expanding set of chains under a shared security model, so the migration is less a rebrand than the groundwork for staking that extends beyond a single network. You can confirm a validator's live stake and the migration contract's activity directly on a network explorer such as <a href="https://polygonscan.com/" rel="nofollow noopener" target="_blank">PolygonScan</a> rather than trusting a third party's summary.<h3>What the migration changes for stakers</h3>In day-to-day terms, almost nothing: the delegation flow, the commission structure and the unbonding mechanics behave as they did under MATIC. The one action required is the migration itself, a one-time conversion per wallet. Once done, every subsequent staking transaction simply uses POL as though it had always been the native asset, and historical MATIC positions carry over at parity.<h3>Why POL exists at all</h3>POL is engineered to be staked once and reused to secure multiple Polygon chains simultaneously, a design the network describes as a hyperproductive token. That ambition does not alter today's single-chain staking math, but it explains why the token was redesigned rather than left as MATIC: the staking contract is meant to anchor a multi-chain ecosystem rather than one PoS network in isolation.</div></section>
+<section class="cee7bae"><h2 class="c995c67">Nominal APR Versus Effective APR</h2><div class="c7ee033">The percentage a platform advertises is rarely the percentage that lands in your wallet. Nominal APR is the gross reward rate before anything is deducted; effective APR is what remains after the validator's commission, any compounding effect, and the dilution that occurs as more POL is staked network-wide. A 5% nominal figure behind a 10% commission is really 4.5% gross of your own costs, and that gap widens whenever total staked supply climbs or network fees thin out. The practical takeaway is to compare the net, compounded number across operators rather than the headline, because the headline is the one figure every operator can quote identically.<ul><li>Commission: a validator taking 5% versus 15% is the single largest controllable drag on your effective rate.</li><li>Total staked supply: as more POL is bonded network-wide, the same emission is split more ways, lowering per-token yield.</li><li>Network fee volume: busy periods lift the fee-share component; quiet periods leave only the emission floor.</li><li>Compounding: whether you re-stake rewards or let them sit changes the annualized outcome meaningfully over a year.</li><li>Checkpoint cadence: rewards settle per checkpoint, so the timing of claims affects how quickly you can compound.</li></ul></div></section>
+<section class="cee7bae"><h2 class="c995c67">Unbonding, Lock Mechanics and Liquidity</h2><div class="c7ee033">Staking POL does not impose a fixed lock-up term, but exiting is not instant either. When you unbond a delegation, Polygon enforces a checkpoint-based cooldown — commonly cited at around 80 checkpoints, or roughly three to four days — before the tokens become transferable again. During that window the stake no longer earns rewards and cannot be moved, which is the cost of the network maintaining an orderly validator set. Liquid staking protocols route around this by minting a tradable receipt token against your staked position, letting you sell exposure on the open market instead of waiting for the cooldown, at the cost of depending on that market's depth and peg.<h3>The checkpoint cooldown</h3>Polygon's security model batches state into checkpoints posted to Ethereum, and unbonding is tied to that cadence rather than a wall-clock timer. In practice this means the exact exit time varies slightly with checkpoint intervals, but the three-to-four-day range is the reliable planning assumption. Rewards stop accruing the moment you initiate the unbond, so there is no benefit to unbonding early and waiting.<h3>Liquid staking as a liquidity workaround</h3>A liquid staking token represents your staked POL and can be traded or deployed elsewhere in DeFi while the underlying stake stays bonded. This restores liquidity but introduces a dependency on the protocol's smart contracts and on the receipt token holding its peg to the underlying asset — an exposure that plain delegation simply does not carry.</div></section>
+<section class="cee7bae"><h2 class="c995c67">The Real Risks of MATIC Staking</h2><div class="c7ee033">Staking is compensated precisely because it carries risk, and the risks differ enough by method that a side-by-side view is more useful than a blanket warning. The headline rate means little without an honest reading of what can reduce or erase it, from a validator's operational failures to the contract risk introduced by liquid staking wrappers.<table><thead><tr><th>Risk type</th><th>How it hits you</th><th>Mitigation</th></tr></thead><tbody><tr><td>Slashing (double-sign)</td><td>A penalty of up to ~1%-5% of stake is shared by delegators</td><td>Pick validators with a clean signing history and robust setup</td></tr><tr><td>Validator downtime</td><td>Missed checkpoints cut rewards, not principal</td><td>Favor operators with long, verifiable uptime records</td></tr><tr><td>Commission changes</td><td>A validator can raise its fee and shrink your net yield</td><td>Monitor commission and re-delegate if it climbs</td></tr><tr><td>Smart-contract risk</td><td>A liquid staking bug or exploit can drain value</td><td>Prefer audited protocols; size exposure accordingly</td></tr><tr><td>Peg / liquidity risk</td><td>A receipt token can trade below the underlying POL</td><td>Check market depth before relying on a quick exit</td></tr></tbody></table><h3>Slashing and downtime are not the same</h3>Slashing is a deliberate penalty for provable misbehavior such as double-signing, and it removes a slice of principal. Downtime is milder: a validator that goes offline misses rewards and may be gradually removed from the active set, but delegators generally lose expected yield rather than staked capital. Conflating the two overstates the day-to-day risk of a well-run validator while understating how important signing integrity is.</div></section>
+<section class="cee7bae"><h2 class="c995c67">Is MATIC Staking Worth It</h2><div class="c7ee033">The case for staking POL rests on the same logic that applies to proof-of-stake chains generally, a model covered in general terms by <a href="https://ethereum.org/en/staking/" rel="nofollow noopener" target="_blank">ethereum.org's staking overview</a>: you are paid for taking on validator and liquidity risk rather than simply holding the asset idle. At a net rate in the low-single-digit percentages after commission, the decision hinges on your conviction in Polygon's roadmap, the commission and track record of the operator you choose, and whether you value the liquidity a receipt token offers over the simplicity of direct delegation. Cross-checking a quoted rate against what comparable protocols actually pay — using an aggregator such as <a href="https://defillama.com/" rel="nofollow noopener" target="_blank">DefiLlama</a> — is a better use of time than chasing the single highest advertised number, since the realized rate depends on variables no advertisement controls.</div></section>
+      <details class="c1b2b1f"><summary class="c6702d7">What is MATIC staking in plain terms?</summary><div class="ccc3502">It is delegating Polygon's native token — now POL after the migration from MATIC — to a validator that uses your stake as consensus weight, in exchange for a proportional share of the emissions and fee rewards that validator earns.</div></details>
+<details class="c1b2b1f"><summary class="c6702d7">Where do MATIC staking rewards actually come from?</summary><div class="ccc3502">From two sources: a fixed schedule of POL emissions set aside for staking, plus a share of the transaction fees generated on Polygon PoS. The validator collects both, takes its commission, and distributes the rest across its delegators by stake.</div></details>
+<details class="c1b2b1f"><summary class="c6702d7">Do I still stake MATIC or is it POL now?</summary><div class="ccc3502">You stake POL. Polygon migrated MATIC to POL one-to-one in September 2024, and the current staking contracts reference POL. Legacy MATIC generally needs to be migrated before it can be delegated.</div></details>
+<details class="c1b2b1f"><summary class="c6702d7">What is a realistic APR for staking POL?</summary><div class="ccc3502">Net rates commonly land in the roughly 4%-5% range after a standard validator commission, though the figure drifts with total staked supply, network fee volume, and the specific commission your validator charges.</div></details>
+<details class="c1b2b1f"><summary class="c6702d7">How long does unbonding take?</summary><div class="ccc3502">Unbonding uses a checkpoint-based cooldown, commonly around 80 checkpoints or roughly three to four days, before the tokens become transferable again. Rewards stop accruing the moment you initiate the unbond.</div></details>
+<details class="c1b2b1f"><summary class="c6702d7">Can I lose my staked POL?</summary><div class="ccc3502">Yes, mainly through slashing if your validator double-signs, which removes a slice of principal, or through a smart-contract or peg failure if you use a liquid staking protocol. Validator downtime typically costs expected rewards rather than principal.</div></details>
+<details class="c1b2b1f"><summary class="c6702d7">What is the difference between nominal and effective APR?</summary><div class="ccc3502">Nominal APR is the gross rate before deductions; effective APR is what remains after commission, compounding, and the dilution from rising total staked supply. Comparing the net, compounded figure across validators is far more informative than the headline.</div></details>
+    </main>
+    <section id="sources" class="c1513b0" aria-labelledby="sources-heading">
+      <h2 id="sources-heading" class="c05029d">Sources</h2>
+      <ul class="c4999e2"><li><a class="c3706a2" href="https://polygon.technology/" rel="nofollow noopener" target="_blank">Polygon</a></li>
+<li><a class="c3706a2" href="https://docs.polygon.technology/" rel="nofollow noopener" target="_blank">Polygon documentation</a></li>
+<li><a class="c3706a2" href="https://staking.polygon.technology/" rel="nofollow noopener" target="_blank">Polygon staking</a></li>
+<li><a class="c3706a2" href="https://polygonscan.com/" rel="nofollow noopener" target="_blank">PolygonScan</a></li>
+<li><a class="c3706a2" href="https://ethereum.org/en/staking/" rel="nofollow noopener" target="_blank">Ethereum staking overview</a></li>
+<li><a class="c3706a2" href="https://defillama.com/" rel="nofollow noopener" target="_blank">DefiLlama</a></li></ul>
+    </section>
+    <footer class="ca19cb5">
+      <span class="cf157bd">Staking guide</span>
+      <div>Updated Oct 12, 2026</div>
+    </footer>
+  </div>
+  <script>
+    (() => {
+      const amount = document.getElementById('amount');
+      const apy = document.getElementById('apy');
+      const period = document.getElementById('period');
+      const help = document.getElementById('amount-help');
+      const received = document.getElementById('received');
+      const total = document.getElementById('total');
+      const apyout = document.getElementById('apyout');
+      const format = new Intl.NumberFormat('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+      let pending;
+      function num(el, min, max) {
+        const raw = el.value.trim();
+        const ok = /^(?:\d+(?:[.,]\d{1,4})?|[.,]\d{1,4})$/.test(raw);
+        const v = ok ? Number(raw.replace(',', '.')) : NaN;
+        return (Number.isFinite(v) && v >= min && v <= max) ? v : NaN;
+      }
+      function calculate() {
+        const value = num(amount, 1, 1000000);
+        const rate = num(apy, 0, 1000);
+        amount.setAttribute('aria-invalid', String(Number.isNaN(value)));
+        apy.setAttribute('aria-invalid', String(Number.isNaN(rate)));
+        if (Number.isNaN(value) || Number.isNaN(rate)) {
+          received.textContent = '—';
+          total.textContent = '—';
+          apyout.textContent = '—';
+          help.textContent = 'Enter an amount (1–1,000,000) and an APY (0–1,000%).';
+          return;
+        }
+        const years = Number(period.value) || 1;
+        const months = Math.max(1, Math.round(years * 12));
+        const monthly = rate / 100 / 12;
+        const endBalance = value * Math.pow(1 + monthly, months);
+        received.textContent = format.format(endBalance - value);
+        total.textContent = format.format(endBalance);
+        apyout.textContent = format.format(rate) + '%';
+        help.textContent = 'Enter an amount from 1 to 1,000,000 units.';
+      }
+      amount.addEventListener('input', () => { clearTimeout(pending); pending = setTimeout(calculate, 180); });
+      apy.addEventListener('input', () => { clearTimeout(pending); pending = setTimeout(calculate, 180); });
+      amount.addEventListener('blur', () => { clearTimeout(pending); calculate(); });
+      apy.addEventListener('blur', () => { clearTimeout(pending); calculate(); });
+      period.addEventListener('change', calculate);
+      calculate();
+    })();
+  </script>
+</body>
+</html>
+

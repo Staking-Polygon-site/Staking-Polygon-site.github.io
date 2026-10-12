@@ -1,0 +1,299 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>How to Stake MATIC — Step-by-Step Delegation Guide</title>
+  <meta name="description" content="How to Stake MATIC in five steps: fund a wallet, pick a validator by commission and uptime, delegate, claim or restake rewards, and unbond in ~3-4 days.">
+  <link rel="canonical" href="https://staking-polygon-site.github.io/how-to-stake-matic/">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="How to Stake MATIC: A Practical Step-by-Step Walkthrough">
+  <meta property="og:description" content="How to Stake MATIC in five steps: fund a wallet, pick a validator by commission and uptime, delegate, claim or restake rewards, and unbond in ~3-4 days.">
+  <meta property="og:url" content="https://staking-polygon-site.github.io/how-to-stake-matic/">
+  <meta property="og:image" content="https://staking-polygon-site.github.io/og.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="How to Stake MATIC: A Practical Step-by-Step Walkthrough">
+  <meta name="twitter:description" content="How to Stake MATIC in five steps: fund a wallet, pick a validator by commission and uptime, delegate, claim or restake rewards, and unbond in ~3-4 days.">
+  <meta name="twitter:image" content="https://staking-polygon-site.github.io/og.png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&family=Outfit:wght@500;600;700&display=swap">
+<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebSite", "@id": "https://staking-polygon-site.github.io/#website", "url": "https://staking-polygon-site.github.io/how-to-stake-matic/", "name": "How to Stake MATIC — Step-by-Step Delegation Guide"}, {"@type": "WebPage", "@id": "https://staking-polygon-site.github.io/#webpage", "url": "https://staking-polygon-site.github.io/how-to-stake-matic/", "name": "How to Stake MATIC — Step-by-Step Delegation Guide", "isPartOf": {"@id": "https://staking-polygon-site.github.io/#website"}, "description": "How to Stake MATIC in five steps: fund a wallet, pick a validator by commission and uptime, delegate, claim or restake rewards, and unbond in ~3-4 days.", "datePublished": "2026-10-12", "dateModified": "2026-10-12"}, {"@type": "SoftwareApplication", "name": "How to Stake MATIC", "applicationCategory": "FinanceApplication", "operatingSystem": "Web", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://staking-polygon-site.github.io/how-to-stake-matic/"}, {"@type": "ListItem", "position": 2, "name": "Staking"}, {"@type": "ListItem", "position": 3, "name": "How to Stake MATIC"}]}, {"@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Do I stake MATIC or POL now?", "acceptedAnswer": {"@type": "Answer", "text": "You stake POL. The network migrated its staking token from MATIC to POL, and the current contracts expect POL, so legacy MATIC holders should migrate first before delegating."}}, {"@type": "Question", "name": "How much MATIC do I need to start staking?", "acceptedAnswer": {"@type": "Answer", "text": "The protocol minimum is as low as 1 POL, but because every action costs Ethereum L1 gas, very small stakes are inefficient — the fees can outweigh the rewards. A stake large enough that rewards clearly exceed claim gas is the practical floor."}}, {"@type": "Question", "name": "Why do I need ETH to stake MATIC?", "acceptedAnswer": {"@type": "Answer", "text": "The staking contracts run on Ethereum mainnet, so delegating, claiming and unbonding are each L1 transactions that cost gas paid in ETH. Keep roughly 0.02-0.05 ETH spare so no step stalls for lack of gas."}}, {"@type": "Question", "name": "How long does unstaking take?", "acceptedAnswer": {"@type": "Answer", "text": "Unbonding triggers a checkpoint-based cooldown of about three to four days (around 80 checkpoints) before you can sign the final withdrawal. The exact wait flexes with network conditions rather than being a fixed timer."}}, {"@type": "Question", "name": "Do staking rewards compound automatically?", "acceptedAnswer": {"@type": "Answer", "text": "No. Rewards accrue as a claimable balance but do not auto-compound. You manually claim them to your wallet or restake them into your delegation, and each action is a separate gas-paying transaction."}}, {"@type": "Question", "name": "How do I pick a good validator?", "acceptedAnswer": {"@type": "Answer", "text": "Check its commission rate, long-term uptime, and checkpoint-signing performance, and favor a named operator with a public track record. Cross-check the dashboard's figures against a block explorer rather than trusting self-reported numbers."}}, {"@type": "Question", "name": "Can I lose my staked MATIC?", "acceptedAnswer": {"@type": "Answer", "text": "Your principal can be eroded if your validator is penalized for extended downtime or misbehavior, and liquid-staking adds smart-contract and peg risk on top. Choosing a high-uptime validator with a solid history sharply reduces the odds."}}]}]}</script>
+  <style>
+    :root{--bg:#0D0F0A;--surface:#181C12;--text:#EEF2E6;--muted:#95997F;--accent:#A3E635;--accent-ink:#111600;--radius:13px;--display:"Outfit";--body:"Figtree"}
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth;scroll-padding-top:2rem}
+    body{margin:0;background:var(--bg);color:var(--text);font:400 1rem/1.7 var(--body);-webkit-font-smoothing:antialiased}
+    a{color:var(--accent);text-underline-offset:.22em}
+    a:hover{text-decoration-thickness:2px}
+    :focus-visible{outline:3px solid var(--accent);outline-offset:5px}
+    ::selection{background:var(--accent);color:var(--accent-ink)}
+    h1,h2,h3,p{margin:0}
+    h1,h2,h3{font-family:var(--display);text-wrap:balance}
+    svg{display:block;flex-shrink:0}
+    img{max-width:100%;height:auto}
+    .c848c2c{width:min(1180px,calc(100% - 64px));margin-inline:auto}
+    .c1dd6a2{position:absolute;top:1rem;left:1rem;z-index:10;transform:translateY(-200%);padding:.7rem 1rem;background:var(--surface);border-radius:var(--radius)}
+    .c1dd6a2:focus{transform:translateY(0)}
+    .cd102e9{min-height:96px;display:flex;align-items:center;justify-content:space-between;gap:2rem;border-bottom:1px solid color-mix(in srgb,var(--text) 10%,transparent)}
+    .cd92083{display:inline-flex;align-items:center;gap:.7rem;color:var(--text);font:600 1.2rem/1 var(--display);letter-spacing:-.04em;text-decoration:none}
+    .c7f3e72{display:grid;place-items:center;width:38px;height:38px;background:var(--accent);color:var(--accent-ink);border-radius:var(--radius)}
+    .c5ff3cc{display:flex;align-items:center;gap:1.8rem}
+    .c5ff3cc>a{font-size:.88rem;font-weight:600;color:var(--text);text-decoration:none}
+    .c5ff3cc>a:hover{color:var(--accent)}
+    .c5ff3cc .cb0bf57{padding:.65rem 1rem;border:1px solid color-mix(in srgb,var(--text) 18%,transparent);border-radius:var(--radius)}
+    .ce550f3{padding-top:1.6rem;font-size:.8rem;color:var(--muted)}
+    .c025501{display:flex;flex-wrap:wrap;align-items:center;gap:.5rem;color:var(--muted)}
+    ol.c025501,ul.c025501,.c025501 ol,.c025501 ul{list-style:none;padding:0;margin:0;display:flex;flex-wrap:wrap;gap:.5rem}
+    .c025501 a{color:var(--muted);text-decoration:none}
+    .c025501 a:hover{color:var(--accent)}
+    .c025501 [aria-current]{color:var(--text)}
+    .c7858ab{position:relative;display:grid;grid-template-columns:minmax(0,1.12fr) minmax(0,1fr);align-items:start;gap:clamp(1.75rem,5vw,4rem);padding-block:2.25rem 3.5rem}
+    .c4fc67b{display:inline-flex;align-items:center;gap:.5rem;margin-bottom:1.35rem;color:var(--accent);font-size:.86rem;font-weight:600}
+    .c4fc67b::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 5px color-mix(in srgb,var(--accent) 10%,transparent)}
+    h1{font-size:clamp(2.5rem,4.8vw,4.7rem);line-height:1.06;letter-spacing:-.055em;overflow-wrap:anywhere}
+    h1 em{color:var(--accent);font-style:normal}
+    .cc823f9{margin-top:1.5rem;max-width:49ch;font-size:1.06rem;line-height:1.85;color:var(--muted)}
+    .c130dbd{display:inline-flex;justify-content:center;align-items:center;gap:1.15rem;min-height:54px;padding:.9rem 1.4rem;border:1px solid color-mix(in srgb,var(--accent-ink) 12%,transparent);border-radius:var(--radius);background:linear-gradient(135deg,color-mix(in srgb,var(--accent) 88%,var(--surface)),var(--accent));box-shadow:0 8px 20px color-mix(in srgb,var(--accent) 18%,transparent);color:var(--accent-ink);font:600 .95rem/1.4 var(--body);text-decoration:none;transition:transform .2s,box-shadow .2s}
+    .c130dbd:hover{transform:translateY(-2px);box-shadow:0 12px 26px color-mix(in srgb,var(--accent) 26%,transparent)}
+    .c37d489>.c130dbd{margin-top:2rem}
+    .c81778e{margin-top:1.1rem;color:var(--muted);font-size:.8rem}
+    .cb57d68{position:relative;isolation:isolate;min-width:0;padding:1.25rem;background:var(--surface);border:1px solid color-mix(in srgb,var(--text) 10%,transparent);border-radius:calc(var(--radius) * 1.5);box-shadow:0 28px 70px -20px color-mix(in srgb,var(--text) 19%,transparent),0 3px 10px color-mix(in srgb,var(--text) 4%,transparent)}
+    .cb57d68::before{content:"";position:absolute;inset:-28px;z-index:-1;pointer-events:none;background:radial-gradient(ellipse at 80% 20%,color-mix(in srgb,var(--accent) 14%,transparent),transparent 68%);border-radius:calc(var(--radius) * 2)}
+    .cf39c8c{display:flex;justify-content:space-between;align-items:center;gap:1rem;margin-bottom:.9rem}
+    .cf39c8c h2{font-size:1.15rem;letter-spacing:-.035em}
+    .cb96e3e{padding:.25rem .65rem;border-radius:var(--radius);background:color-mix(in srgb,var(--accent) 10%,var(--surface));color:var(--accent);font-size:.72rem;font-weight:600}
+    .c007495{display:grid;grid-template-columns:minmax(0,1fr) 38px minmax(0,1fr);align-items:center;gap:.6rem;padding:.65rem .8rem;border:1px solid color-mix(in srgb,var(--text) 9%,transparent);border-radius:var(--radius);background:color-mix(in srgb,var(--bg) 65%,var(--surface))}
+    .c8725e3{min-width:0;display:flex;align-items:center;gap:.7rem}
+    .c8725e3:last-child{justify-content:flex-end}
+    .cdf2336{font-size:.76rem;color:var(--muted)}
+    .cf0d677{min-width:0;display:flex;align-items:center;justify-content:center;max-width:100px;min-height:38px;overflow-wrap:anywhere}
+    .cf0d677 img,.cf0d677 svg{max-width:100%;max-height:38px;object-fit:contain}
+    .route-arrow{display:grid;place-items:center;width:34px;height:34px;border:1px solid color-mix(in srgb,var(--text) 10%,transparent);border-radius:50%;color:var(--accent);background:var(--surface)}
+    .c892991{margin-top:.9rem}
+    .cd69a4f{display:flex;align-items:baseline;justify-content:space-between;gap:1rem;margin-bottom:.55rem}
+    .cd69a4f label{font-size:.85rem;font-weight:600}
+    .c21154f{font-size:.74rem;color:var(--muted)}
+    .c73b750{display:flex;align-items:center;gap:.8rem;padding:.55rem .85rem;border:1px solid color-mix(in srgb,var(--text) 20%,transparent);border-radius:var(--radius);background:var(--bg);transition:border-color .2s,box-shadow .2s}
+    .c73b750:focus-within{border-color:var(--accent);box-shadow:0 0 0 3px color-mix(in srgb,var(--accent) 12%,transparent)}
+    .c73b750:has([aria-invalid="true"]){border-color:var(--accent)}
+    .c73b750 input{width:100%;min-width:0;padding:0;border:0;outline:none;background:var(--bg);color:var(--text);font:500 1.55rem/1.2 var(--display);letter-spacing:-.04em;font-variant-numeric:tabular-nums}
+    .c73b750 input::placeholder{color:var(--muted)}
+    .c73b750>span{font-size:.8rem;color:var(--muted)}
+    .c6d7a65{min-height:1.4em;margin-top:.5rem;font-size:.73rem;color:var(--muted)}
+    .c5b8a2e{display:grid;grid-template-columns:1fr 1fr;gap:.9rem;margin-top:.8rem}
+    .c5b8a2e .c892991{margin-top:0}
+    .cdc1a92{position:relative}
+    .cdc1a92::after{content:"";position:absolute;right:.95rem;top:50%;width:.5rem;height:.5rem;border-right:2px solid var(--muted);border-bottom:2px solid var(--muted);transform:translateY(-70%) rotate(45deg);pointer-events:none}
+    .c640191{width:100%;padding:.55rem 2rem .55rem .85rem;border:1px solid color-mix(in srgb,var(--text) 20%,transparent);border-radius:var(--radius);background:var(--bg);color:var(--text);font:500 1rem/1.3 var(--display);letter-spacing:-.02em;appearance:none;-webkit-appearance:none;cursor:pointer}
+    .c640191:focus-visible{border-color:var(--accent);outline:none;box-shadow:0 0 0 3px color-mix(in srgb,var(--accent) 12%,transparent)}
+    .cb88133{margin-top:1rem;padding:.95rem;border:1px solid color-mix(in srgb,var(--accent) 17%,transparent);border-radius:var(--radius);background:linear-gradient(135deg,color-mix(in srgb,var(--accent) 10%,var(--surface)),color-mix(in srgb,var(--accent) 3%,var(--surface)))}
+    .c6a8bec{font-size:.8rem;color:var(--muted)}
+    .c34dfc2{display:flex;align-items:baseline;flex-wrap:wrap;gap:.5rem;margin:.2rem 0 .7rem}
+    .c34dfc2 output{font:600 clamp(1.5rem,2.4vw,2.05rem)/1.15 var(--display);letter-spacing:-.05em;font-variant-numeric:tabular-nums;overflow-wrap:anywhere}
+    .c34dfc2 span{font-size:.8rem;color:var(--muted)}
+    .c207e61{display:grid;gap:.4rem;margin:0;padding-top:.7rem;border-top:1px solid color-mix(in srgb,var(--accent) 14%,transparent);font-size:.82rem}
+    .c207e61>div{display:flex;justify-content:space-between;gap:1rem}
+    .c207e61 dt{color:var(--muted)}
+    .c207e61 dd{margin:0;font-weight:600;text-align:right;font-variant-numeric:tabular-nums}
+    .cb57d68>.c130dbd{width:100%;margin-top:1.2rem}
+    .cf96122{margin-top:1rem;font-size:.75rem;color:var(--muted)}
+    .cf96122 summary{cursor:pointer;width:fit-content;text-underline-offset:.2em}
+    .cf96122 summary:hover{color:var(--accent)}
+    .cf96122 p{margin-top:.55rem;line-height:1.7}
+    .c5bb1c7{padding:2rem 2.25rem;border:1px solid color-mix(in srgb,var(--text) 10%,transparent);border-radius:var(--radius);background:var(--surface)}
+    .cf45e53{font:600 1.4rem/1.3 var(--display);letter-spacing:-.035em;margin-bottom:1.25rem}
+    .c07a5f0{overflow-x:auto}
+    .c6a7e0b{width:100%;border-collapse:collapse;text-align:left;font-size:.9rem}
+    .c6a7e0b caption{text-align:left;margin-bottom:1rem;color:var(--muted)}
+    .c6a7e0b th,.c6a7e0b td{padding:1rem 1.2rem;border-bottom:1px solid color-mix(in srgb,var(--text) 8%,transparent);vertical-align:top}
+    .c6a7e0b th:first-child,.c6a7e0b td:first-child{padding-left:0}
+    .c6a7e0b th:last-child,.c6a7e0b td:last-child{padding-right:0}
+    .c6a7e0b th{font-weight:600;color:var(--text)}
+    .c6a7e0b td{color:var(--muted)}
+    .c6a7e0b tbody tr:last-child>*{border-bottom:0}
+    .c6a7e0b thead{background:color-mix(in srgb,var(--accent) 5%,var(--surface))}
+    .cb7a45e{max-width:820px;margin:4.5rem auto}
+    .c413909{margin-block:0 3rem;padding-bottom:2.75rem;border-bottom:1px solid color-mix(in srgb,var(--text) 10%,transparent)}
+    .cb2658a{margin:0 0 1.2rem;font:600 clamp(1.65rem,3vw,2.25rem)/1.2 var(--display);letter-spacing:-.04em}
+    .c90a921{color:var(--muted);line-height:1.9;overflow-wrap:anywhere}
+    .c90a921 p+p{margin-top:1.1rem}
+    .c90a921 h3{margin:1.8rem 0 .7rem;font-size:1.25rem;line-height:1.4;color:var(--text)}
+    .c90a921 strong{color:var(--text);font-weight:600}
+    .c90a921 ul,.c90a921 ol{padding-left:1.4rem;margin-block:1.2rem}
+    .c90a921 li+li{margin-top:.55rem}
+    .c90a921 li::marker{color:var(--accent)}
+    .c90a921 blockquote{margin:1.5rem 0;padding:1rem 1.4rem;border-left:3px solid var(--accent);border-radius:0 var(--radius) var(--radius) 0;background:color-mix(in srgb,var(--accent) 6%,var(--surface));color:var(--text)}
+    .c802f7e{margin-block:.8rem;border:1px solid color-mix(in srgb,var(--text) 12%,transparent);border-radius:var(--radius);background:var(--surface);overflow:hidden}
+    .c733c93{position:relative;cursor:pointer;padding:1.2rem 3.3rem 1.2rem 1.35rem;list-style:none;font:500 1.05rem/1.5 var(--display);color:var(--text)}
+    .c733c93::-webkit-details-marker{display:none}
+    .c733c93::after{content:"+";position:absolute;right:1.35rem;top:1.15rem;color:var(--accent);font-size:1.3rem}
+    .c802f7e[open]>.c733c93::after{content:"−"}
+    .c802f7e[open]{border-color:color-mix(in srgb,var(--accent) 35%,transparent)}
+    .c733c93:focus-visible{outline-offset:-5px;border-radius:var(--radius)}
+    .c2e2692{padding:0 1.35rem 1.35rem;color:var(--muted);font-size:.95rem;line-height:1.85;overflow-wrap:anywhere}
+    .c2e2692 p+p{margin-top:.8rem}
+    .c0c22e9{padding:2rem 2.25rem;border-radius:var(--radius);background:color-mix(in srgb,var(--surface) 75%,var(--bg));border:1px solid color-mix(in srgb,var(--text) 8%,transparent)}
+    .c0da940{margin:0;padding-left:1.2rem;color:var(--muted);font-size:.86rem}
+    .c39bf0e{padding:.35rem 0 .35rem .3rem;overflow-wrap:anywhere}
+    .c39bf0e::marker{color:var(--muted)}
+    .c39bf0e a{color:var(--text);text-decoration-color:color-mix(in srgb,var(--accent) 45%,transparent)}
+    .c39bf0e a:hover{color:var(--accent)}
+    .c178616{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;margin-top:3rem;padding-block:1.7rem 2rem;border-top:1px solid color-mix(in srgb,var(--text) 10%,transparent);color:var(--muted);font-size:.78rem}
+    .ce63027{font:600 .95rem/1.4 var(--display);color:var(--text)}
+    @media(min-width:1400px){.c7858ab{padding-block:2.75rem 4rem}}
+    @media(max-width:900px){.c7858ab{gap:2rem;grid-template-columns:minmax(0,1fr) minmax(0,1fr)}.cb57d68{padding:1.25rem}.c007495{padding:.8rem}.c8725e3{flex-direction:column;gap:.25rem}.c8725e3:last-child{flex-direction:column-reverse}h1{font-size:clamp(2.5rem,5.5vw,4rem)}}
+    @media(max-width:720px){.c848c2c{width:calc(100% - 40px)}.cd102e9{min-height:78px;gap:1rem}.c5ff3cc{gap:1rem}.c5ff3cc>.cb2c28c{display:none}.c7858ab{grid-template-columns:minmax(0,1fr);padding-block:2.75rem 3rem;gap:2.5rem}.c37d489{max-width:560px}h1{font-size:clamp(2.6rem,9vw,4rem)}.cc823f9{font-size:1rem}.cb57d68{width:100%;max-width:520px;justify-self:center;padding:1.5rem}.c8725e3,.c8725e3:last-child{flex-direction:row}.c5bb1c7,.c0c22e9{padding:1.5rem}.cb7a45e{margin-block:3rem}.c6a7e0b th,.c6a7e0b td{padding:.85rem .75rem}.c413909{margin-bottom:2rem;padding-bottom:2rem}.c178616{margin-top:2rem}}
+    @media(max-width:380px){.c848c2c{width:calc(100% - 28px)}.cb57d68{padding:1rem}.cd92083{font-size:1.05rem}.c5ff3cc .cb0bf57{padding:.55rem .7rem}.c8725e3,.c8725e3:last-child{flex-direction:column}.c8725e3:last-child{flex-direction:column-reverse}.c5bb1c7,.c0c22e9{padding:1.1rem}.c207e61{font-size:.76rem}}
+    @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{transition:none!important}}
+  </style>
+</head>
+<body>
+  <a class="c1dd6a2" href="#content">Skip to content</a>
+  <div class="c848c2c">
+    <nav class="cd102e9" aria-label="Primary navigation">
+      <a class="cd92083" href="#" aria-label="Staking guide home">
+        <span class="c7f3e72" aria-hidden="true"><svg width="23" height="23" viewBox="0 0 24 24" fill="none"><path d="M5 19V11a7 7 0 0 1 14 0v8M9 19v-8a3 3 0 0 1 6 0v8" stroke="var(--accent-ink)" stroke-width="1.7" stroke-linecap="round"/></svg></span>
+        Staking guide
+      </a>
+      <div class="c5ff3cc">
+        <a class="cb2c28c" href="#key-facts">Key facts</a>
+        <a class="cb2c28c" href="#sources">Sources</a>
+        <a class="cb0bf57" href="/dashboard/">Stake <span aria-hidden="true">↗</span></a>
+      </div>
+    </nav>
+    <div class="ce550f3"><nav class="c025501" aria-label="Breadcrumb"><a href="/dashboard/">Home</a> <span>/</span> <span>Staking</span> <span>/</span> <span>How to Stake MATIC</span></nav></div>
+    <section class="c7858ab" aria-labelledby="hero-heading">
+      <div class="c37d489">
+        <span class="c4fc67b">Staking calculator</span>
+        <h1 id="hero-heading">How to Stake <em>MATIC</em></h1>
+        <p class="cc823f9"><strong>To stake MATIC (now POL), fund a self-custody wallet, connect it to the official Polygon staking dashboard, delegate your tokens to a validator you have vetted on commission and uptime, then claim or restake the rewards it pays out.</strong> The network never takes custody of your coins — it only records that your stake backs a chosen validator's voting power. Running the validator hardware is someone else's job; your job is picking a reliable one and signing two transactions. The one step people rush is the exit: unbonding takes roughly three to four days before your tokens move again.</p>
+        <a class="c130dbd" href="/dashboard/">Stake <svg aria-hidden="true" width="19" height="19" viewBox="0 0 24 24" fill="none"><path d="M5 12h14m-6-6 6 6-6 6" stroke="var(--accent-ink)" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        <p class="c81778e">Set the amount and APY. Pick a period. See the rewards.</p>
+      </div>
+      <aside class="cb57d68" aria-labelledby="calculator-heading">
+        <div class="cf39c8c">
+          <h2 id="calculator-heading">Your staking rewards</h2>
+          <span class="cb96e3e">Rewards</span>
+        </div>
+        <div class="c007495" aria-label="Staked asset">
+          <div class="c8725e3"><span class="cf0d677"></span><span class="cdf2336">Staked asset</span></div>
+        </div>
+        <div class="c892991">
+          <div class="cd69a4f"><label for="amount">Amount staked</label><span class="c21154f">Your deposit</span></div>
+          <div class="c73b750"><input id="amount" type="text" inputmode="decimal" value="1000" autocomplete="off" spellcheck="false" maxlength="24" aria-describedby="amount-help" aria-invalid="false"><span>units</span></div>
+          <p id="amount-help" class="c6d7a65">Enter an amount from 1 to 1,000,000 units.</p>
+        </div>
+        <div class="c5b8a2e">
+          <div class="c892991">
+            <div class="cd69a4f"><label for="apy">APY</label><span class="c21154f">Annual %</span></div>
+            <div class="c73b750"><input id="apy" type="text" inputmode="decimal" value="5" autocomplete="off" spellcheck="false" maxlength="6" aria-describedby="apy-help" aria-invalid="false"><span>%</span></div>
+          </div>
+          <div class="c892991">
+            <div class="cd69a4f"><label for="period">Period</label><span class="c21154f">Horizon</span></div>
+            <div class="cdc1a92"><select id="period" class="c640191"><option value="0.0833">1 month</option><option value="0.5">6 months</option><option value="1" selected>1 year</option><option value="3">3 years</option></select></div>
+          </div>
+        </div>
+        <p id="apy-help" class="c6d7a65">Rewards compound monthly at the APY you enter.</p>
+        <div class="cb88133" aria-live="polite" aria-atomic="true">
+          <p class="c6a8bec">Estimated rewards</p>
+          <div class="c34dfc2"><output id="received" for="amount">51.16</output><span>units</span></div>
+          <dl class="c207e61">
+            <div><dt>Balance at end</dt><dd><output id="total" for="amount">1,051.16</output> units</dd></div>
+            <div><dt>APY used</dt><dd><output id="apyout" for="amount">5.00%</output></dd></div>
+          </dl>
+        </div>
+        <a class="c130dbd" href="/dashboard/">Stake <svg aria-hidden="true" width="19" height="19" viewBox="0 0 24 24" fill="none"><path d="M5 12h14m-6-6 6 6-6 6" stroke="var(--accent-ink)" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        <details class="cf96122">
+          <summary>How the estimate works</summary>
+          <p>Rewards compound monthly: the balance at the end equals the amount staked times (1 + APY/12) raised to the number of months in the period, and the estimated rewards are that balance minus your deposit. The APY you enter is the annual rate; actual rates vary with the network and validator.</p>
+        </details>
+        <noscript><p class="c6d7a65">Enable JavaScript to calculate a different amount.</p></noscript>
+      </aside>
+    </section>
+    <section id="key-facts" class="c5bb1c7" aria-labelledby="facts-heading">
+      <h2 id="facts-heading" class="cf45e53">Key facts</h2>
+      <div class="c07a5f0"><table class="c6a7e0b"><tbody><tr><th scope="row">Token</th><td>POL (migrated from MATIC) on Ethereum mainnet</td></tr>
+<tr><th scope="row">Typical APR</th><td>Roughly 2-5% net of commission, drifts with participation</td></tr>
+<tr><th scope="row">Unbonding</th><td>Checkpoint-based withdraw delay, about 3-4 days (~80 checkpoints)</td></tr>
+<tr><th scope="row">Minimum delegation</th><td>1 POL, though gas makes small stakes inefficient</td></tr>
+<tr><th scope="row">Gas/fees</th><td>Ethereum L1 gas per action plus validator commission (often 5-15%)</td></tr>
+<tr><th scope="row">Reward claim</th><td>Manual — claim to wallet or restake; rewards do not auto-compound</td></tr></tbody></table></div>
+    </section>
+    <main id="content" class="cb7a45e">
+      <section class="c413909"><h2 class="cb2658a">Before You Stake: Wallet and Tokens</h2><div class="c90a921">Staking MATIC happens on Ethereum mainnet, not on the Polygon PoS chain itself, because the staking contracts live on L1. That single fact dictates everything about preparation: you need a self-custody wallet, your tokens as POL rather than legacy MATIC, and enough ETH on hand to cover the gas each staking action costs. Skipping any of the three is the most common reason a first delegation stalls halfway through signing.<h3>Preparing a wallet</h3>Install a self-custody wallet such as <a href="https://metamask.io/" rel="nofollow noopener" target="_blank">MetaMask</a> or pair a hardware device following the <a href="https://www.ledger.com/" rel="nofollow noopener" target="_blank">Ledger</a> setup guide, then make sure it is connected to the Ethereum mainnet network. Back up the recovery phrase offline before funding it. A hardware wallet signing through MetaMask gives you the delegation convenience of a browser extension with keys that never touch the internet.<h3>Getting MATIC or POL</h3>If you hold legacy MATIC, migrate it to POL first — the current staking contracts expect POL. Acquire the token on an exchange and withdraw it to your wallet, or bridge it to Ethereum mainnet if it currently sits on another chain. Keep 0.02-0.05 ETH spare for gas; delegating, claiming and unbonding are each separate on-chain transactions.</div></section>
+<section class="c413909"><h2 class="cb2658a">Choosing a Validator</h2><div class="c90a921">Because most people stake as delegators rather than running infrastructure, the validator you point your stake at is the single decision that matters most. Its commission eats into every reward payout, its uptime determines whether you earn full rewards, and its checkpoint-signing performance affects both. Treat the validator list as a shortlist to research, not a menu to pick the top row from. The table below is the checklist to run against each candidate before you commit a single token.<table><thead><tr><th>What to check</th><th>Good sign</th><th>Why it matters</th></tr></thead><tbody><tr><td>Commission rate</td><td>5-10%, stable over time</td><td>Comes straight off your rewards; a jump signals the operator may hike it again</td></tr><tr><td>Uptime history</td><td>99%+ over several months</td><td>Downtime means missed rewards and, in severe cases, penalties for delegators</td></tr><tr><td>Checkpoint performance</td><td>High signed-checkpoint ratio</td><td>Polygon rewards validators per checkpoint; missed ones reduce the pool you share</td></tr><tr><td>Total stake / saturation</td><td>Healthy but not maxed out</td><td>Over-concentrated validators centralize the network and may cap new delegations</td></tr><tr><td>Track record / identity</td><td>Named operator, public history</td><td>An anonymous operator with no history is harder to hold accountable</td></tr></tbody></table><h3>Reading commission and uptime</h3>A 10% commission on a 4% gross yield leaves you 3.6% net — small differences compound over a year. Cross-check the dashboard's figures against a block explorer so you are reading on-chain reality rather than a self-reported number. A validator advertising 0% commission is often subsidizing growth temporarily and can raise the rate once it has your stake.<h3>Why checkpoint performance matters</h3>Polygon validators submit checkpoints to Ethereum, and rewards are distributed per successfully signed checkpoint. A validator that frequently misses checkpoints earns less for the same stake, which directly shrinks the reward pool its delegators split. Favor operators with a high signed-checkpoint ratio over the entire recent window, not just the last day.</div></section>
+<section class="c413909"><h2 class="cb2658a">Delegating Step by Step</h2><div class="c90a921">With a funded wallet and a chosen validator, the delegation itself is a short, repeatable sequence. Follow it in order — the failures people actually hit come from signing before the amount is confirmed or from running out of ETH for gas mid-flow, not from anything exotic.<ul><li>Open the official Polygon staking dashboard at staking.polygon.technology and connect your wallet.</li><li>Confirm the dashboard sees your POL balance and that you are on Ethereum mainnet.</li><li>Search for your vetted validator by name and open its detail page to re-check commission and uptime.</li><li>Enter the amount of POL to delegate, leaving spare ETH for gas on this and later actions.</li><li>Approve the token-spend transaction, then sign the delegation transaction and wait for both to confirm.</li><li>Verify the new delegation appears under your validator with the correct staked amount.</li></ul><h3>The two-transaction pattern</h3>First delegations usually require two signatures: an approval that lets the staking contract move your POL, and the delegation itself. Each costs L1 gas, so a burst of high network activity can make the second transaction pricier than you planned. If the approval succeeds but you cancel the delegation, your tokens stay in your wallet — no stake is created until the second signature confirms.</div></section>
+<section class="c413909"><h2 class="cb2658a">Where Rewards Come From and How to Claim</h2><div class="c90a921">Staking rewards on Polygon come from protocol emissions and are distributed to validators per checkpoint, which then pass the delegators' share along minus commission. Rewards accrue continuously but do not compound on their own — they sit as a claimable balance until you act. You have two practical choices each cycle, and the table lays out when each one makes sense.<table><thead><tr><th>Action</th><th>What it does</th><th>When it makes sense</th></tr></thead><tbody><tr><td>Claim to wallet</td><td>Moves accrued rewards to your spendable POL balance</td><td>When you want the income now or plan to use the tokens elsewhere</td></tr><tr><td>Restake (compound)</td><td>Adds accrued rewards back to your delegation</td><td>When maximizing long-run yield and gas cost is small relative to the reward</td></tr><tr><td>Let it accrue</td><td>Leaves rewards claimable without a transaction</td><td>When accrued rewards are still smaller than the gas to claim them</td></tr></tbody></table><h3>Claim versus restake</h3>Claiming gives you liquid POL you can spend or sell; restaking folds rewards back into your stake so the next cycle earns on a larger base. Because each action costs gas, restaking a tiny reward can cost more than it adds. A common rhythm is to let rewards build until they comfortably exceed the gas, then restake in one transaction.<h3>Reward cadence</h3>There is no fixed payday — rewards stream in as checkpoints are submitted and you realize them whenever you choose to claim or restake. Many delegators batch this monthly or quarterly to keep gas overhead proportional to the amount being moved rather than paying L1 fees on trivial sums every few days.</div></section>
+<section class="c413909"><h2 class="cb2658a">Unbonding and Withdrawing</h2><div class="c90a921">Exiting is where the only real waiting happens, and it catches people who assume staking is as instant as a swap. Unstaking on Polygon is a two-phase process: you first unbond, which starts a checkpoint-based cooldown of roughly three to four days, and only after that window can you withdraw the tokens back to your wallet. Plan the timing before you commit funds you might need quickly.<h3>Starting the unbond</h3>From the staking dashboard, select your delegation and choose to unstake the amount you want to exit. Signing that transaction removes the stake from the validator and begins the cooldown clock. Your tokens are neither earning rewards nor transferable during this window — they are in limbo until the cooldown completes.<h3>The 3-4 day wait and final withdrawal</h3>Polygon ties the cooldown to checkpoints (roughly 80 checkpoints, about three to four days in practice) rather than a fixed timer, so the exact wait flexes with network conditions. Once it elapses, return to the dashboard and sign a separate withdraw transaction to move the POL back into your spendable balance. If you need liquidity faster than this, a liquid-staking receipt token sold on the open market is the usual workaround — at the cost of market and peg risk.</div></section>
+<section class="c413909"><h2 class="cb2658a">Delegate Directly vs Liquid Stake</h2><div class="c90a921">Direct delegation is the path this guide walks through: you keep control, choose your own validator, and accept the unbonding wait. Liquid staking is the alternative — a protocol stakes on your behalf and mints a receipt token you can trade or use in DeFi while the underlying POL stays locked. Neither is strictly better; they trade control and simplicity against liquidity and extra risk.<table><thead><tr><th>Factor</th><th>Direct delegation</th><th>Liquid staking</th></tr></thead><tbody><tr><td>Custody</td><td>Your own wallet holds the stake</td><td>A smart contract holds it; you hold a receipt token</td></tr><tr><td>Exit speed</td><td>~3-4 day unbonding cooldown</td><td>Sell the receipt token instantly on the market</td></tr><tr><td>Validator choice</td><td>You pick and monitor it</td><td>The protocol chooses the validator set</td></tr><tr><td>Extra risk</td><td>Slashing and validator downtime</td><td>Adds smart-contract and peg/de-peg risk</td></tr><tr><td>Capital use</td><td>Locked until withdrawn</td><td>Receipt token stays usable across DeFi</td></tr></tbody></table><h3>Picking the model for your goals</h3>Choose direct delegation when you want maximum control and are comfortable waiting out the cooldown to exit. Choose liquid staking when ongoing liquidity matters more than avoiding an extra contract layer. The decision is about how much you value an instant exit and composable collateral against keeping the simplest possible risk surface. If you are staking a long-term position you have no plans to touch, the cooldown is a non-issue and direct delegation keeps your risk surface as small as it gets.</div></section>
+<section class="c413909"><h2 class="cb2658a">Fees, Net Yield and Common Mistakes</h2><div class="c90a921">A clean delegation can still disappoint if you only looked at the headline APR. Three costs sit between gross emissions and what actually lands in your wallet: the validator's commission, the Ethereum L1 gas on every action, and the opportunity cost of the unbonding cooldown. Reasoning about net yield rather than advertised yield is what separates a stake that quietly compounds from one that bleeds value to fees. Just as important is sidestepping the handful of avoidable mistakes that trip up first-time delegators, each of which costs either money or time.<ul><li>Delegating a stake so small that claim and restake gas routinely eats the rewards it earns.</li><li>Picking a 0% commission validator without checking whether that rate is a temporary promotion.</li><li>Forgetting to leave spare ETH, so the delegation or withdrawal transaction fails on gas.</li><li>Chasing the single highest advertised APR instead of the best uptime-to-commission balance.</li><li>Starting an unbond right before you need the funds, then being surprised by the 3-4 day wait.</li></ul><h3>Calculating net yield</h3>Start from the gross APR, subtract the commission as a percentage of rewards, then subtract annualized gas for however often you plan to claim or restake. A 4% gross yield under a 10% commission is 3.6% before gas; on a small stake, frequent claiming can push the real figure meaningfully lower. The larger your stake, the less gas matters as a share of rewards, which is why net yield improves with position size.<h3>Keeping records</h3>Note which validator holds each delegation, the commission at the time you staked, and the dates of any claims or restakes. Commissions can change, and a validator that was excellent a year ago may have drifted on uptime. A quick quarterly review against a block explorer catches a deteriorating operator long before it meaningfully dents your returns, and makes the eventual tax or accounting picture far simpler to reconstruct.</div></section>
+      <details class="c802f7e"><summary class="c733c93">Do I stake MATIC or POL now?</summary><div class="c2e2692">You stake POL. The network migrated its staking token from MATIC to POL, and the current contracts expect POL, so legacy MATIC holders should migrate first before delegating.</div></details>
+<details class="c802f7e"><summary class="c733c93">How much MATIC do I need to start staking?</summary><div class="c2e2692">The protocol minimum is as low as 1 POL, but because every action costs Ethereum L1 gas, very small stakes are inefficient — the fees can outweigh the rewards. A stake large enough that rewards clearly exceed claim gas is the practical floor.</div></details>
+<details class="c802f7e"><summary class="c733c93">Why do I need ETH to stake MATIC?</summary><div class="c2e2692">The staking contracts run on Ethereum mainnet, so delegating, claiming and unbonding are each L1 transactions that cost gas paid in ETH. Keep roughly 0.02-0.05 ETH spare so no step stalls for lack of gas.</div></details>
+<details class="c802f7e"><summary class="c733c93">How long does unstaking take?</summary><div class="c2e2692">Unbonding triggers a checkpoint-based cooldown of about three to four days (around 80 checkpoints) before you can sign the final withdrawal. The exact wait flexes with network conditions rather than being a fixed timer.</div></details>
+<details class="c802f7e"><summary class="c733c93">Do staking rewards compound automatically?</summary><div class="c2e2692">No. Rewards accrue as a claimable balance but do not auto-compound. You manually claim them to your wallet or restake them into your delegation, and each action is a separate gas-paying transaction.</div></details>
+<details class="c802f7e"><summary class="c733c93">How do I pick a good validator?</summary><div class="c2e2692">Check its commission rate, long-term uptime, and checkpoint-signing performance, and favor a named operator with a public track record. Cross-check the dashboard's figures against a block explorer rather than trusting self-reported numbers.</div></details>
+<details class="c802f7e"><summary class="c733c93">Can I lose my staked MATIC?</summary><div class="c2e2692">Your principal can be eroded if your validator is penalized for extended downtime or misbehavior, and liquid-staking adds smart-contract and peg risk on top. Choosing a high-uptime validator with a solid history sharply reduces the odds.</div></details>
+    </main>
+    <section id="sources" class="c0c22e9" aria-labelledby="sources-heading">
+      <h2 id="sources-heading" class="cf45e53">Sources</h2>
+      <ul class="c0da940"><li><a class="c39bf0e" href="https://docs.polygon.technology/" rel="nofollow noopener" target="_blank">Polygon documentation</a></li>
+<li><a class="c39bf0e" href="https://staking.polygon.technology/" rel="nofollow noopener" target="_blank">Polygon staking dashboard</a></li>
+<li><a class="c39bf0e" href="https://wallet.polygon.technology/" rel="nofollow noopener" target="_blank">Polygon Wallet</a></li>
+<li><a class="c39bf0e" href="https://metamask.io/" rel="nofollow noopener" target="_blank">MetaMask</a></li>
+<li><a class="c39bf0e" href="https://www.ledger.com/" rel="nofollow noopener" target="_blank">Ledger</a></li>
+<li><a class="c39bf0e" href="https://l2beat.com/" rel="nofollow noopener" target="_blank">L2BEAT</a></li></ul>
+    </section>
+    <footer class="c178616">
+      <span class="ce63027">Staking guide</span>
+      <div>Updated Oct 12, 2026</div>
+    </footer>
+  </div>
+  <script>
+    (() => {
+      const amount = document.getElementById('amount');
+      const apy = document.getElementById('apy');
+      const period = document.getElementById('period');
+      const help = document.getElementById('amount-help');
+      const received = document.getElementById('received');
+      const total = document.getElementById('total');
+      const apyout = document.getElementById('apyout');
+      const format = new Intl.NumberFormat('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+      let pending;
+      function num(el, min, max) {
+        const raw = el.value.trim();
+        const ok = /^(?:\d+(?:[.,]\d{1,4})?|[.,]\d{1,4})$/.test(raw);
+        const v = ok ? Number(raw.replace(',', '.')) : NaN;
+        return (Number.isFinite(v) && v >= min && v <= max) ? v : NaN;
+      }
+      function calculate() {
+        const value = num(amount, 1, 1000000);
+        const rate = num(apy, 0, 1000);
+        amount.setAttribute('aria-invalid', String(Number.isNaN(value)));
+        apy.setAttribute('aria-invalid', String(Number.isNaN(rate)));
+        if (Number.isNaN(value) || Number.isNaN(rate)) {
+          received.textContent = '—';
+          total.textContent = '—';
+          apyout.textContent = '—';
+          help.textContent = 'Enter an amount (1–1,000,000) and an APY (0–1,000%).';
+          return;
+        }
+        const years = Number(period.value) || 1;
+        const months = Math.max(1, Math.round(years * 12));
+        const monthly = rate / 100 / 12;
+        const endBalance = value * Math.pow(1 + monthly, months);
+        received.textContent = format.format(endBalance - value);
+        total.textContent = format.format(endBalance);
+        apyout.textContent = format.format(rate) + '%';
+        help.textContent = 'Enter an amount from 1 to 1,000,000 units.';
+      }
+      amount.addEventListener('input', () => { clearTimeout(pending); pending = setTimeout(calculate, 180); });
+      apy.addEventListener('input', () => { clearTimeout(pending); pending = setTimeout(calculate, 180); });
+      amount.addEventListener('blur', () => { clearTimeout(pending); calculate(); });
+      apy.addEventListener('blur', () => { clearTimeout(pending); calculate(); });
+      period.addEventListener('change', calculate);
+      calculate();
+    })();
+  </script>
+</body>
+</html>
+
