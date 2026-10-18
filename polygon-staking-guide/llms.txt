@@ -1,3 +1,0 @@
-# Polygon Staking Guide
-
-A Polygon Staking Guide to designing your approach: native delegation vs liquid staking vs exchange, validator selection, compounding math, POL migration and profiles.

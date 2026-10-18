@@ -1,3 +1,0 @@
-# Polygon Mining
-
-Polygon Mining does not exist — Polygon is proof-of-stake, so there are no blocks to mine. Here is why, and how to actually earn POL by staking instead.

@@ -1,3 +1,0 @@
-# How to Stake MATIC
-
-How to Stake MATIC in five steps: fund a wallet, pick a validator by commission and uptime, delegate, claim or restake rewards, and unbond in ~3-4 days.
