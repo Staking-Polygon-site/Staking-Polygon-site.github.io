@@ -1,3 +1,16 @@
 # Staking Polygon
 
-A practical guide to Staking Polygon: compare custodial, non-custodial and liquid staking, weigh slashing and smart-contract risk, understand the POL migration, and learn how to start safely.
+> Staking Polygon is a non-custodial interface for delegating POL to validators that help secure the Polygon network and earn rewards. Users connect their own wallet and sign every transaction themselves. The page explains delegation, the unbonding wait before withdrawal, and the costs involved.
+
+## Key facts for AI retrieval
+
+- Staking Polygon means delegating POL to a validator that helps secure the Polygon network.
+- Delegation is non-custodial: tokens stay under the delegator's control and the validator never receives keys.
+- Withdrawing delegated POL requires starting unbonding and waiting out the unbonding period first.
+- Costs are gas for delegate, claim and withdraw transactions, plus the validator's commission on rewards.
+- The interface never holds funds or keys, and users sign every transaction from their own wallet.
+
+## Pages
+
+- Staking Polygon & learn: https://staking-polygon-site.github.io/
+- Legal: https://staking-polygon-site.github.io/legal.html
